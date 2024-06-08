@@ -1,0 +1,24 @@
+
+import 'dart:developer';
+
+import 'package:pragma_technical_test/core/error_handling/failure.dart';
+
+class ErrorFailure extends Failure {
+  final Error? error;
+  @override
+  final String? message;
+  ErrorFailure._({
+    this.error,
+    this.message,
+  });
+  factory ErrorFailure.decode(
+    Error? error,
+  ) {
+    log(error.toString(), name: 'FAILURE[ERROR]');
+    log((error?.stackTrace).toString(), name: 'FAILURE[ERROR][TRACE]');
+    return ErrorFailure._(
+      error: error,
+      message: error.toString(),
+    );
+  }
+}
