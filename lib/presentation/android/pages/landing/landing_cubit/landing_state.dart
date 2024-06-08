@@ -8,3 +8,7 @@ sealed class LandingState extends Equatable {
 }
 
 final class LandingInitial extends LandingState {}
+
+final class LandingInitialLoading extends LandingState {}
+
+final class LandingInitialLoaded extends LandingState {}

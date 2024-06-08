@@ -24,28 +24,51 @@ class _LandingPageState extends State<LandingPage> {
       appBar: AppBar(
         title: const Text('Catbreeds'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 8,
-            ),
-            const TextField(),
-            const SizedBox(
-              height: 8,
-            ),
-            Expanded(
+      body: BlocConsumer<LandingCubit, LandingState>(
+        listener: (BuildContext context, LandingState state) =>
+            context.read<LandingCubit>().listener,
+        buildWhen: (LandingState previous, LandingState current) =>
+            current is LandingInitialLoading || current is LandingInitialLoaded,
+        builder: (BuildContext context, LandingState state) {
+          return const _Body();
+        },
+      ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 8,
+          ),
+          TextField(
+            onChanged: (String value) =>
+                context.read<LandingCubit>().setQuery(value),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: context.read<LandingCubit>().onRefresh,
               child: ListView.builder(
-                itemCount: 100,
+                itemCount: 15,
                 padding: const EdgeInsets.only(bottom: 8),
                 itemBuilder: (BuildContext context, int index) {
                   return const CatBreedCard();
                 },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
