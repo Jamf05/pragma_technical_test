@@ -5,5 +5,8 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get hello => 'Hello';
+  String get catbreeds => 'Catbreeds';
+
+  @override
+  String get errorTitle => 'Oops, something\'s wrong!';
 }

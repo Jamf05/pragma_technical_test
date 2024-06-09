@@ -1,5 +1,5 @@
 import 'package:pragma_technical_test/data/models/weight_model.dart';
-import 'package:pragma_technical_test/domain/entities/breeds_entity.dart';
+import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 
 class BreedModel extends BreedEntity {
   const BreedModel({

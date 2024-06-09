@@ -35,7 +35,7 @@ class _SplashPageState extends State<SplashPage> {
                 children: <Widget>[
                   const Spacer(),
                   Text(
-                    'Catbreeds',
+                    context.l10n.catbreeds,
                     style: FontsFoundation.of(context.brightness).title.h1B36,
                   ),
                   const Spacer(),

@@ -6,10 +6,9 @@ import 'package:pragma_technical_test/core/error_handling/failure.dart';
 class ErrorFailure extends Failure {
   final Error? error;
   @override
-  final String? message;
+  final String message;
   ErrorFailure._({
-    this.error,
-    this.message,
+    required this.message, this.error,
   });
   factory ErrorFailure.decode(
     Error? error,

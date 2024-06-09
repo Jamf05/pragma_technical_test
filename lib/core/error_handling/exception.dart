@@ -6,10 +6,9 @@ import 'package:pragma_technical_test/core/error_handling/failure.dart';
 class ExceptionFailure extends Failure {
   final Exception? error;
   @override
-  final String? message;
+  final String message;
   ExceptionFailure._({
-    this.error,
-    this.message,
+    required this.message, this.error,
   });
   factory ExceptionFailure.decode(Exception? error) {
     log(error.toString(), name: 'FAILURE[EXCEPTION]');
@@ -22,11 +21,11 @@ class ExceptionFailure extends Failure {
 
 class PlatformFailure extends Failure {
   @override
-  final String? message;
+  final String message;
   final PlatformException? error;
 
   PlatformFailure._({
-    this.message,
+    required this.message,
     this.error,
   });
 
@@ -36,7 +35,7 @@ class PlatformFailure extends Failure {
     log((error?.stacktrace).toString(), name: 'Failure[PLATFORM][TRACE]');
     return PlatformFailure._(
       error: error,
-      message: error?.message,
+      message: error?.message ?? '',
     );
   }
 }
@@ -46,12 +45,11 @@ class DioFailure extends Failure {
   final Map<String, dynamic>? data;
   final DioException? error;
   @override
-  final String? message;
+  final String message;
   DioFailure._({
-    this.statusCode,
+    required this.message, this.statusCode,
     this.data,
     this.error,
-    this.message,
   });
   factory DioFailure.decode(
     DioException? error,
@@ -64,7 +62,7 @@ class DioFailure extends Failure {
     return DioFailure._(
       error: error,
       statusCode: error?.response?.statusCode,
-      message: error?.message,
+      message: error?.message ?? '',
       data: error?.response?.data,
     );
   }

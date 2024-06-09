@@ -8,6 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:pragma_technical_test/core/error_handling/exception.dart';
 import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart';
 import 'package:pragma_technical_test/data/models/breed_model.dart';
+import 'package:pragma_technical_test/data/models/image_breed_model.dart';
 import 'package:pragma_technical_test/data/repositories/breed_repository_impl.dart';
 
 import '../../helpers/dummy_data.dart';
@@ -99,7 +100,6 @@ void main() {
       'should return dio failure when a call to remote data source is unsuccessful',
       () async {
         // arrange
-
         when(mockBreedRemoteDataSource.search(
                 query: tQuery, attachImage: tAttachImage))
             .thenThrow(DioFailure.decode(
@@ -118,5 +118,46 @@ void main() {
                 DioException(requestOptions: RequestOptions(path: ''))))));
       },
     );
+  });
+
+  group('Method getImage', () {
+    const String tReferenceImageId = 'vJ3lEYgXr';
+    final Map<String, dynamic> tImageBreedRawData = json.decode(
+      JsonHelpers.readJson(DummyData.imageBreedJson),
+    );
+    final ImageBreedModel tImageBreed =
+        ImageBreedModel.fromJson(tImageBreedRawData);
+
+    test(
+      'should return the image breed when the response code is 200',
+      () async {
+        // arrange
+        when(mockBreedRemoteDataSource.getImage(tReferenceImageId))
+            .thenAnswer((_) async => tImageBreed);
+        // act
+        final result = await repository.getImage(tReferenceImageId);
+        // assert
+        verify(mockBreedRemoteDataSource.getImage(tReferenceImageId));
+        expect(result, isA<Right>());
+        expect(result, Right(tImageBreed));
+      },
+    );
+
+    test('should return a failed response', () async {
+      // arrange
+      when(mockBreedRemoteDataSource.getImage(tReferenceImageId)).thenThrow(
+          DioFailure.decode(
+              DioException(requestOptions: RequestOptions(path: ''))));
+
+      // act
+      final result = await repository.getImage(tReferenceImageId);
+
+      // assert
+      verify(mockBreedRemoteDataSource.getImage(tReferenceImageId));
+      expect(
+          result,
+          equals(Left(DioFailure.decode(
+              DioException(requestOptions: RequestOptions(path: ''))))));
+    });
   });
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pragma_technical_test/core/extensions/build_context.dart';
+import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/widgets/cat_breed_card.dart';
 
@@ -15,7 +17,10 @@ class _LandingPageState extends State<LandingPage> {
   late LandingCubit bloc;
   @override
   void initState() {
-    bloc = context.read<LandingCubit>()..init();
+    bloc = context.read<LandingCubit>()
+      ..init()
+      ..addListener();
+
     super.initState();
   }
 
@@ -23,12 +28,12 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Catbreeds'),
+        title: Text(context.l10n.catbreeds),
       ),
       body: BlocConsumer<LandingCubit, LandingState>(
         bloc: bloc,
-        listener: (BuildContext context, LandingState state) =>
-            context.read<LandingCubit>().listener,
+        listener: (BuildContext context, LandingState state) async =>
+            bloc.listener.call(context, state),
         buildWhen: (LandingState previous, LandingState current) =>
             current is LandingInitialLoading || current is LandingInitialLoaded,
         builder: (BuildContext context, LandingState state) {
@@ -67,10 +72,27 @@ class _Body extends StatelessWidget {
                 child: RefreshIndicator(
                   onRefresh: bloc.onRefresh,
                   child: ListView.builder(
+                    controller: bloc.scrollController,
                     itemCount: bloc.breeds.length,
                     padding: const EdgeInsets.only(bottom: 8),
                     itemBuilder: (BuildContext context, int index) {
-                      return const CatBreedCard();
+                      final breed = bloc.breeds[index];
+                      final imageStream =
+                          bloc.imageStream(breed.referenceImageId);
+                      return StreamBuilder<ImageBreedEntity>(
+                        key: Key(breed.id!),
+                        stream: imageStream,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<ImageBreedEntity> snapshot) {
+                          return CatBreedCard(
+                            key: Key(breed.id!),
+                            breed: breed,
+                            imageUrl: snapshot.hasData
+                                ? snapshot.data?.url ?? '' // TODO: Placeholder
+                                : '', // TODO: Placeholder
+                          );
+                        },
+                      );
                     },
                   ),
                 ),

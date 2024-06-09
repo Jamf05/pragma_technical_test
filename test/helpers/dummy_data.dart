@@ -4,4 +4,5 @@ class DummyData {
   static const String weightJson = 'test/helpers/dummy_data/weight.json';
   static const String breedsSearchJson =
       'test/helpers/dummy_data/breeds_search.json';
+  static const String imageBreedJson = 'test/helpers/dummy_data/image_breed.json';
 }

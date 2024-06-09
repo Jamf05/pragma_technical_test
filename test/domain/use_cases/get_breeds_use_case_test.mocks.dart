@@ -8,8 +8,9 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:pragma_technical_test/core/error_handling/failure.dart' as _i5;
-import 'package:pragma_technical_test/domain/entities/breeds_entity.dart'
-    as _i6;
+import 'package:pragma_technical_test/domain/entities/breed_entity.dart' as _i6;
+import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart'
+    as _i7;
 import 'package:pragma_technical_test/domain/repositories/breed_repository.dart'
     as _i3;
 
@@ -101,4 +102,23 @@ class MockBreedRepository extends _i1.Mock implements _i3.BreedRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.BreedEntity>>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i7.ImageBreedEntity>> getImage(
+          String? referenceImageId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImage,
+          [referenceImageId],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i7.ImageBreedEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i7.ImageBreedEntity>(
+          this,
+          Invocation.method(
+            #getImage,
+            [referenceImageId],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i7.ImageBreedEntity>>);
 }

@@ -93,11 +93,17 @@ abstract class AppLocalizations {
     Locale('es')
   ];
 
-  /// No description provided for @hello.
+  /// No description provided for @catbreeds.
   ///
   /// In es, this message translates to:
-  /// **'Hola'**
-  String get hello;
+  /// **'Catbreeds'**
+  String get catbreeds;
+
+  /// No description provided for @errorTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Ups, algo va mal!'**
+  String get errorTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
