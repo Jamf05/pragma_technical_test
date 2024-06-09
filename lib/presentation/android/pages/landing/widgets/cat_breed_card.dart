@@ -14,7 +14,7 @@ class CatBreedCard extends StatelessWidget {
         minVerticalPadding: 0,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             Text('Item 0'),
             Icon(
               Icons.arrow_forward_ios,

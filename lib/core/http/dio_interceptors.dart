@@ -1,9 +1,13 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:pragma_technical_test/core/env.dart';
 
 class DioInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    options.headers.addAll({
+      'x-api-key': Env.apiKey,
+    });
     log('REQUEST[${options.method}] => PATH: ${options.path}', name: 'DIO');
     super.onRequest(options, handler);
   }

@@ -16,6 +16,7 @@ class Env {
   }
 
   static String get api => dotenv.env['API_URL'] ?? '';
+  static String get apiKey => dotenv.env['API_KEY'] ?? '';
 
   static String get environment => dotenv.env['ENVIRONMENT'] ?? '';
   static bool get bannerEnvironment =>

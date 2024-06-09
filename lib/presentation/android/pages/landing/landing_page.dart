@@ -12,9 +12,10 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  late LandingCubit bloc;
   @override
   void initState() {
-    context.read<LandingCubit>().init();
+    bloc = context.read<LandingCubit>()..init();
     super.initState();
   }
 
@@ -25,6 +26,7 @@ class _LandingPageState extends State<LandingPage> {
         title: const Text('Catbreeds'),
       ),
       body: BlocConsumer<LandingCubit, LandingState>(
+        bloc: bloc,
         listener: (BuildContext context, LandingState state) =>
             context.read<LandingCubit>().listener,
         buildWhen: (LandingState previous, LandingState current) =>
@@ -42,6 +44,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LandingCubit bloc = context.read<LandingCubit>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
@@ -50,23 +53,29 @@ class _Body extends StatelessWidget {
             height: 8,
           ),
           TextField(
-            onChanged: (String value) =>
-                context.read<LandingCubit>().setQuery(value),
+            onChanged: (String value) => bloc.setQuery(value),
           ),
           const SizedBox(
             height: 8,
           ),
-          Expanded(
-            child: RefreshIndicator(
-              onRefresh: context.read<LandingCubit>().onRefresh,
-              child: ListView.builder(
-                itemCount: 15,
-                padding: const EdgeInsets.only(bottom: 8),
-                itemBuilder: (BuildContext context, int index) {
-                  return const CatBreedCard();
-                },
-              ),
-            ),
+          BlocBuilder<LandingCubit, LandingState>(
+            bloc: bloc,
+            buildWhen: (LandingState previous, LandingState current) =>
+                current is LandingInitialLoaded,
+            builder: (context, state) {
+              return Expanded(
+                child: RefreshIndicator(
+                  onRefresh: bloc.onRefresh,
+                  child: ListView.builder(
+                    itemCount: bloc.breeds.length,
+                    padding: const EdgeInsets.only(bottom: 8),
+                    itemBuilder: (BuildContext context, int index) {
+                      return const CatBreedCard();
+                    },
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

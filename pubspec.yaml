@@ -62,6 +62,9 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+  http_mock_adapter: ^0.6.1
+  mockito: ^5.4.4
+  mocktail: ^1.0.3
 
 
 # For information on the generic Dart part of this file, see the
@@ -71,6 +74,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - .env/
     - assets/fonts/
     - assets/color/
     - assets/illustrations/

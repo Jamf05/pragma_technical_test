@@ -8,7 +8,7 @@ import 'package:pragma_technical_test/dependency_injection.dart' as di;
 import 'package:pragma_technical_test/presentation/ios/app.dart';
 
 Future<void> main() async {
-  await Env.load(fileName: AssetsToken.env.aEnvProd);
+  await Env.load(fileName: AssetsToken.env.aEnvDev);
   await di.init();
   runApp(
     Platform.isAndroid ? const AndroidApp() : const IosApp(),

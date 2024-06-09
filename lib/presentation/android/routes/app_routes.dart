@@ -14,7 +14,7 @@ class AppRoutes {
             child: const SplashPage(),
           ),
       LandingPage.route: (BuildContext context) => BlocProvider<LandingCubit>(
-            create: (BuildContext context) => LandingCubit(),
+            create: (BuildContext context) => sl<LandingCubit>(),
             child: const LandingPage(),
           ),
     };
