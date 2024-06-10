@@ -48,6 +48,8 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
   }
 
   final Map<String, StreamController<ImageBreedEntity>> _imageControllers = {};
+  Map<String, StreamController<ImageBreedEntity>> get imageControllers =>
+      _imageControllers;
 
   final ScrollController _scrollController = ScrollController();
   ScrollController get scrollController => _scrollController;
@@ -62,7 +64,9 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
     _debounce.call(onSearch);
     if (value.isEmpty) {
       Future.delayed(const Duration(milliseconds: 500), () {
-        _scrollController.jumpTo(_oldPosition);
+        if (_scrollController.hasClients) {
+          _scrollController.jumpTo(_oldPosition);
+        }
       });
     }
   }
@@ -129,7 +133,9 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
     }, (r) {
       _searchBreeds.clear();
       _searchBreeds.addAll(r);
-      _scrollController.jumpTo(_scrollController.position.minScrollExtent);
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(_scrollController.position.minScrollExtent);
+      }
     });
     emit(LandingInitialLoaded());
   }

@@ -57,6 +57,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
+  bloc_test: ^9.1.7
   build_runner: ^2.4.11
   flutter_gen: ^5.5.0+1
   flutter_gen_runner: ^5.5.0+1
