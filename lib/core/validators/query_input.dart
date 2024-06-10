@@ -4,7 +4,6 @@ enum QueryInputError { empty }
 
 class QueryInput extends FormzInput<String, QueryInputError> {
   const QueryInput.pure() : super.pure('');
-
   const QueryInput.dirty({String value = ''}) : super.dirty(value);
 
   @override

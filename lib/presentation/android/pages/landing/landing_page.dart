@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pragma_technical_test/core/design/design.dart';
+import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/extensions/build_context.dart';
+import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/widgets/cat_breed_card.dart';
@@ -58,8 +61,21 @@ class _Body extends StatelessWidget {
             height: 8,
           ),
           TextField(
-            onChanged: (String value) => bloc.setQuery(value),
-          ),
+              controller: bloc.queryController,
+              onTapOutside: (_) => context.focus.unfocus(),
+              onChanged: (String value) => bloc.setQuery(value),
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  onPressed: () async {
+                    context.focus.unfocus();
+                    await bloc.onSearch();
+                  },
+                  icon: AssetsToken.icons.search.svg(
+                    colorFilter: ColorFilter.mode(
+                        ColorsFoundation.text.grey, BlendMode.srcIn),
+                  ),
+                ),
+              )),
           const SizedBox(
             height: 8,
           ),
@@ -88,8 +104,8 @@ class _Body extends StatelessWidget {
                             key: Key(breed.id!),
                             breed: breed,
                             imageUrl: snapshot.hasData
-                                ? snapshot.data?.url ?? '' // TODO: Placeholder
-                                : '', // TODO: Placeholder
+                                ? snapshot.data?.url
+                                : Env.networkPlaceholder,
                           );
                         },
                       );

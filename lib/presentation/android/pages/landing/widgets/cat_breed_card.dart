@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/error_in_network_image_widget.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
 class CatBreedCard extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final BreedEntity breed;
   const CatBreedCard({required this.breed, required this.imageUrl, super.key});
 
@@ -34,9 +35,9 @@ class CatBreedCard extends StatelessWidget {
                 height: 10,
               ),
               CachedNetworkImage(
-                imageUrl: imageUrl,
+                imageUrl: imageUrl ?? Env.networkPlaceholder,
                 width: double.infinity,
-                height: 200,
+                height: 250,
                 alignment: Alignment.center,
                 fit: BoxFit.fitWidth,
                 placeholder: (BuildContext context, String url) =>

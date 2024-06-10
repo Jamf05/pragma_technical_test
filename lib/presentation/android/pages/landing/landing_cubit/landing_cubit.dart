@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+
 import 'package:pragma_technical_test/core/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/utils/debounce.dart';
 import 'package:pragma_technical_test/core/validators/query_input.dart';
@@ -37,8 +36,14 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
   final Debounce _debounce =
       Debounce(duration: const Duration(milliseconds: 500));
 
-  final List<BreedEntity> _breeds = <BreedEntity>[];
-  List<BreedEntity> get breeds => _breeds;
+  final List<BreedEntity> _originBreeds = <BreedEntity>[];
+  final List<BreedEntity> _searchBreeds = <BreedEntity>[];
+  List<BreedEntity> get breeds {
+    if (query.value.isNotEmpty) {
+      return _searchBreeds;
+    }
+    return _originBreeds;
+  }
 
   final Map<String, StreamController<ImageBreedEntity>> _imageControllers = {};
 
@@ -48,9 +53,11 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
   QueryInput _query = const QueryInput.pure();
   QueryInput get query => _query;
 
+  TextEditingController queryController = TextEditingController();
+
   void setQuery(String value) {
     _query = QueryInput.dirty(value: value);
-    _debounce.call(_onSearch);
+    _debounce.call(onSearch);
   }
 
   void init() async {
@@ -61,16 +68,16 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
     }, (r) {
       if (r.isNotEmpty) {
         _page++;
-        _breeds.addAll(r);
+        _originBreeds.addAll(r);
       }
-      emit(LandingInitialLoaded());
     });
+    emit(LandingInitialLoaded());
   }
 
   Future<void> onRefresh() async {
     _page = 0;
     _query = const QueryInput.pure();
-    _breeds.clear();
+    _originBreeds.clear();
     _hasNextPage = true;
     init();
   }
@@ -93,15 +100,30 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 250) {
-        if (_hasNextPage) {
+        if (_hasNextPage && query.value.isEmpty) {
           _debounce.call(_loadMore);
         }
       }
     });
   }
 
-  Future<void> _onSearch() async {
-    log(_query.value, name: 'QUERY');
+  Future<void> onSearch() async {
+    emit(LandingInitialLoading());
+    final response = await _searchBreedsUseCase.call(query.value, null);
+    response.fold((l) {
+      emit(LandingError(l.message));
+    }, (r) {
+      _searchBreeds.clear();
+      _searchBreeds.addAll(r);
+    });
+    emit(LandingInitialLoaded());
+  }
+
+  void clearInput() async {
+    queryController.clear();
+    _query = const QueryInput.pure();
+    emit(LandingInitialLoading());
+    emit(LandingInitialLoaded());
   }
 
   Stream<ImageBreedEntity> imageStream(String? referenceImageId) {
@@ -132,7 +154,7 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
     }, (r) {
       if (r.isNotEmpty) {
         _page++;
-        _breeds.addAll(r);
+        _originBreeds.addAll(r);
       } else {
         _hasNextPage = false;
       }
