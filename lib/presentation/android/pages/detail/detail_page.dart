@@ -24,6 +24,9 @@ class DetailPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
+            const SizedBox(
+              height: 8.0,
+            ),
             Hero(
               tag: breed.id!,
               child: CachedNetworkImage(
@@ -44,7 +47,8 @@ class DetailPage extends StatelessWidget {
             Expanded(
               child: Scrollbar(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 8.0),
                   child: Column(
                     children: [
                       _ItemText(

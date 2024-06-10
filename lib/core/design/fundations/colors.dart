@@ -25,10 +25,6 @@ class ColorsFoundation {
   static const Color secondaryB = ColorsToken.freshAir;
   static const Color secondaryC = ColorsToken.water;
 
-  // tertiary
-
-  // static const Color tertiary = ColorsToken.white;
-
   static const _Text text = _Text._();
 
   _Icon get icon => _Icon._resolve(brightness);

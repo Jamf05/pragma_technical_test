@@ -12,11 +12,11 @@ class ThemeFoundation {
      * appBarTheme
      */
       appBarTheme: AppBarTheme(
-          elevation: 1,
-          centerTitle: true,
-          foregroundColor: ColorsToken.white,
-          titleTextStyle:
-              FontsFoundation.of(Brightness.light).appBar.pageTitle),
+        elevation: 1,
+        centerTitle: true,
+        titleTextStyle: FontsFoundation.of(Brightness.light).appBar.pageTitle,
+        backgroundColor: ColorsFoundation.primaryC,
+      ),
       /**
      * brightness
      */
@@ -24,7 +24,7 @@ class ThemeFoundation {
       /**
      * primaryColor
      */
-      primaryColor: ColorsFoundation.primaryA,
+      primaryColor: ColorsFoundation.primary,
       /**
      * colorScheme
      */

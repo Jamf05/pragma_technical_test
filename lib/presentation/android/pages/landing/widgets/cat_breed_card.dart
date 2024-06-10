@@ -27,10 +27,13 @@ class CatBreedCard extends StatelessWidget {
               style: FontsFoundation.of(context.brightness).title.h1B16,
             ),
             TextButton(
-              onPressed: () async => context.navigator.pushNamed(
-                DetailPage.route,
-                arguments: (breed, imageUrl),
-              ),
+              onPressed: () async {
+                context.focus.requestFocus(FocusNode());
+                await context.navigator.pushNamed(
+                  DetailPage.route,
+                  arguments: (breed, imageUrl),
+                );
+              },
               child: Text('${context.l10n.more}...'),
             ),
           ],
@@ -53,8 +56,9 @@ class CatBreedCard extends StatelessWidget {
                   fit: BoxFit.cover,
                   placeholder: (BuildContext context, String url) =>
                       const PlaceholderNetworkImageWidget(),
-                  errorWidget: (BuildContext context, String url, Object error) =>
-                      const ErrorInNetworkImageWidget(),
+                  errorWidget:
+                      (BuildContext context, String url, Object error) =>
+                          const ErrorInNetworkImageWidget(),
                 ),
               ),
               const SizedBox(

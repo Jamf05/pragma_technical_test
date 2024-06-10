@@ -4,9 +4,11 @@ import 'package:pragma_technical_test/core/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
+import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/widgets/cat_breed_card.dart';
+import 'package:pragma_technical_test/presentation/shared/provider/theme_provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -27,11 +29,31 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
   }
 
+  List<Widget> get actions => [
+        IconButton(
+            onPressed: () {
+              sl<ThemeProvider>().setTheme(
+                context.isBrightnessDark
+                    ? ThemeFoundation.light
+                    : ThemeFoundation.dark,
+              );
+            },
+            icon: Icon(
+              context.isBrightnessDark
+                  ? Icons.wb_sunny_outlined
+                  : Icons.nightlight_round,
+              color: context.isBrightnessDark
+                  ? ColorsFoundation.background.white
+                  : ColorsFoundation.background.black,
+            ))
+      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.catbreeds),
+        actions: actions,
       ),
       body: BlocConsumer<LandingCubit, LandingState>(
         bloc: bloc,
