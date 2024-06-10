@@ -68,21 +68,27 @@ abstract class _AppBar {
 class _AppBarLight implements _AppBar {
   _AppBarLight._();
   @override
-  final TextStyle homeTitle = FontsToken.poppinsSb24.copyWith(color: ColorsToken.white);
+  final TextStyle homeTitle =
+      FontsToken.poppinsSb24.copyWith(color: ColorsToken.white);
   @override
-  final TextStyle pageTitle = FontsToken.poppinsSb20.copyWith(color: ColorsToken.black);
+  final TextStyle pageTitle =
+      FontsToken.poppinsSb20.copyWith(color: ColorsToken.black);
   @override
-  final TextStyle homeSubtitle = FontsToken.poppinsM12.copyWith(color: ColorsToken.white);
+  final TextStyle homeSubtitle =
+      FontsToken.poppinsM12.copyWith(color: ColorsToken.white);
 }
 
 class _AppBarDark implements _AppBar {
   _AppBarDark._();
   @override
-  final TextStyle homeTitle = FontsToken.poppinsSb24.copyWith(color: ColorsToken.white);
+  final TextStyle homeTitle =
+      FontsToken.poppinsSb24.copyWith(color: ColorsToken.white);
   @override
-  final TextStyle pageTitle = FontsToken.poppinsSb20.copyWith(color: ColorsToken.white);
+  final TextStyle pageTitle =
+      FontsToken.poppinsSb20.copyWith(color: ColorsToken.white);
   @override
-  final TextStyle homeSubtitle = FontsToken.poppinsM12.copyWith(color: ColorsToken.white);
+  final TextStyle homeSubtitle =
+      FontsToken.poppinsM12.copyWith(color: ColorsToken.white);
 }
 
 // _Title

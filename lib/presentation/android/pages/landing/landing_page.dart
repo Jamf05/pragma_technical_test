@@ -63,7 +63,7 @@ class _Body extends StatelessWidget {
           TextField(
               controller: bloc.queryController,
               onTapOutside: (_) => context.focus.unfocus(),
-              onChanged: (String value) => bloc.setQuery(value),
+              onChanged: (String value) => bloc.setQuery(value.trim()),
               decoration: InputDecoration(
                 suffixIcon: IconButton(
                   onPressed: () async {

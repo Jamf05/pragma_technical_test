@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
+import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
+import 'package:pragma_technical_test/presentation/android/pages/detail/detail_page.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/landing_page.dart';
 import 'package:pragma_technical_test/presentation/shared/page/splash_cubit/splash_cubit.dart';
@@ -22,6 +24,15 @@ class AppRoutes {
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case DetailPage.route:
+        (BreedEntity, String?) record =
+            settings.arguments as (BreedEntity, String?);
+        return MaterialPageRoute<dynamic>(
+          builder: (BuildContext context) => DetailPage(
+            breed: record.$1,
+            imageUrl: record.$2,
+          ),
+        );
       default:
         return MaterialPageRoute<dynamic>(
           builder: (BuildContext context) => Scaffold(

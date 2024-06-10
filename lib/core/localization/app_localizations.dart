@@ -104,6 +104,108 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'¡Ups, algo va mal!'**
   String get errorTitle;
+
+  /// No description provided for @more.
+  ///
+  /// In es, this message translates to:
+  /// **'Más'**
+  String get more;
+
+  /// No description provided for @origin.
+  ///
+  /// In es, this message translates to:
+  /// **'Origen'**
+  String get origin;
+
+  /// No description provided for @intelligence.
+  ///
+  /// In es, this message translates to:
+  /// **'Inteligencia'**
+  String get intelligence;
+
+  /// No description provided for @adaptability.
+  ///
+  /// In es, this message translates to:
+  /// **'Adaptabilidad'**
+  String get adaptability;
+
+  /// No description provided for @temperament.
+  ///
+  /// In es, this message translates to:
+  /// **'Temperamento'**
+  String get temperament;
+
+  /// No description provided for @lifeSpan.
+  ///
+  /// In es, this message translates to:
+  /// **'Esperanza de vida'**
+  String get lifeSpan;
+
+  /// No description provided for @affectionLevel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nivel de afecto'**
+  String get affectionLevel;
+
+  /// No description provided for @childFriendly.
+  ///
+  /// In es, this message translates to:
+  /// **'Niño amigable'**
+  String get childFriendly;
+
+  /// No description provided for @dogFriendly.
+  ///
+  /// In es, this message translates to:
+  /// **'Se admiten perros'**
+  String get dogFriendly;
+
+  /// No description provided for @energyLevel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nivel de energía'**
+  String get energyLevel;
+
+  /// No description provided for @grooming.
+  ///
+  /// In es, this message translates to:
+  /// **'Aseo'**
+  String get grooming;
+
+  /// No description provided for @healthIssues.
+  ///
+  /// In es, this message translates to:
+  /// **'Problemas de salud'**
+  String get healthIssues;
+
+  /// No description provided for @sheddingLevel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nivel de derramamiento'**
+  String get sheddingLevel;
+
+  /// No description provided for @socialNeeds.
+  ///
+  /// In es, this message translates to:
+  /// **'Necesidades sociales'**
+  String get socialNeeds;
+
+  /// No description provided for @strangerFriendly.
+  ///
+  /// In es, this message translates to:
+  /// **'Amigable con los extraños'**
+  String get strangerFriendly;
+
+  /// No description provided for @vocalisation.
+  ///
+  /// In es, this message translates to:
+  /// **'Vocalización'**
+  String get vocalisation;
+
+  /// No description provided for @description.
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción'**
+  String get description;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

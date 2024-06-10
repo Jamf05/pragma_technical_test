@@ -1,4 +1,21 @@
 {
   "catbreeds": "Catbreeds",
-  "errorTitle": "¡Ups, algo va mal!"
+  "errorTitle": "¡Ups, algo va mal!",
+  "more": "Más",
+  "origin": "Origen",
+  "intelligence": "Inteligencia",
+  "adaptability": "Adaptabilidad",
+  "temperament": "Temperamento",
+  "lifeSpan": "Esperanza de vida",
+  "affectionLevel": "Nivel de afecto",
+  "childFriendly": "Niño amigable",
+  "dogFriendly": "Se admiten perros",
+  "energyLevel": "Nivel de energía",
+  "grooming": "Aseo",
+  "healthIssues": "Problemas de salud",
+  "sheddingLevel": "Nivel de derramamiento",
+  "socialNeeds": "Necesidades sociales",
+  "strangerFriendly": "Amigable con los extraños",
+  "vocalisation": "Vocalización",
+  "description": "Descripción"
 }

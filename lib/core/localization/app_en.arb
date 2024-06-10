@@ -1,4 +1,21 @@
 {
   "catbreeds": "Catbreeds",
-  "errorTitle": "Oops, something's wrong!"
+  "errorTitle": "Oops, something's wrong!",
+  "more": "More",
+  "origin": "Origin",
+  "intelligence": "Intelligence",
+  "adaptability": "Adaptability",
+  "temperament": "Temperament",
+  "lifeSpan": "Life Span",
+  "affectionLevel": "Affection Level",
+  "childFriendly": "Child Friendly",
+  "dogFriendly": "Dog Friendly",
+  "energyLevel": "Energy Level",
+  "grooming": "Grooming",
+  "healthIssues": "Health Issues",
+  "sheddingLevel": "Shedding Level",
+  "socialNeeds": "Social Needs",
+  "strangerFriendly": "Stranger Friendly",
+  "vocalisation": "Vocalisation",
+  "description": "Description"
 }

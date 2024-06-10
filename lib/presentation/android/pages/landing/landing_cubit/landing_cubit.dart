@@ -33,6 +33,8 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
   final int _limit = 10;
   bool _hasNextPage = true;
 
+  double _oldPosition = 0.0;
+
   final Debounce _debounce =
       Debounce(duration: const Duration(milliseconds: 500));
 
@@ -58,6 +60,11 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
   void setQuery(String value) {
     _query = QueryInput.dirty(value: value);
     _debounce.call(onSearch);
+    if (value.isEmpty) {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _scrollController.jumpTo(_oldPosition);
+      });
+    }
   }
 
   void init() async {
@@ -98,6 +105,9 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
 
   void addListener() {
     _scrollController.addListener(() {
+      if (_query.value.isEmpty) {
+        _oldPosition = _scrollController.position.pixels;
+      }
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 250) {
         if (_hasNextPage && query.value.isEmpty) {
@@ -109,12 +119,17 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
 
   Future<void> onSearch() async {
     emit(LandingInitialLoading());
+    if (query.value.isEmpty) {
+      emit(LandingInitialLoaded());
+      return;
+    }
     final response = await _searchBreedsUseCase.call(query.value, null);
     response.fold((l) {
       emit(LandingError(l.message));
     }, (r) {
       _searchBreeds.clear();
       _searchBreeds.addAll(r);
+      _scrollController.jumpTo(_scrollController.position.minScrollExtent);
     });
     emit(LandingInitialLoaded());
   }

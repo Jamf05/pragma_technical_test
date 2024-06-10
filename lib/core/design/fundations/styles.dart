@@ -143,7 +143,7 @@ class StylesFoundation {
       foregroundColor:
           FontsFoundation.of(brightness).textButton.whiteAndBlack.color,
       disabledForegroundColor: ColorsFoundation.action.disabledTransparent,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+      padding: const EdgeInsets.all(5.0),
       backgroundColor: Colors.transparent,
       textStyle: FontsFoundation.of(brightness).textButton.whiteAndBlack,
       shape: RoundedRectangleBorder(
