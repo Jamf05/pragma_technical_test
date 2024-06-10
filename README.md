@@ -14,7 +14,8 @@ To download this app, click here to see the [codemagic](https://codemagic.io/app
 - Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
 - A little knowledge of Dart and Flutter
 - Version summary:
-    ```
+
+    ```plain
     Flutter 3.22.1 • channel stable • https://github.com/flutter/flutter.git
     Framework • revision a14f74ff3a (hace 3 semanas) • 2024-05-22 11:08:21 -0500
     Engine • revision 55eae6864b
