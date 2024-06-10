@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:get_it/get_it.dart';
 import 'package:pragma_technical_test/core/http/dio_http_client.dart';
 import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart';

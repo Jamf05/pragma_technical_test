@@ -62,7 +62,19 @@ class _LandingPageState extends State<LandingPage> {
         buildWhen: (LandingState previous, LandingState current) =>
             current is LandingInitialLoading || current is LandingInitialLoaded,
         builder: (BuildContext context, LandingState state) {
-          return const _Body();
+          return Stack(
+            children: [
+              const _Body(),
+              if (state is LandingInitialLoading)
+                const Positioned.fill(
+                  bottom: 10.0,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: CircularProgressIndicator()
+                  ),
+                ),
+            ],
+          );
         },
       ),
     );
