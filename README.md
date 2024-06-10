@@ -1,10 +1,10 @@
-# Pragma Technical Test App [![Codemagic build status](https://api.codemagic.io/apps/637a5c08444d38c6a4423669/637a5c08444d38c6a4423668/status_badge.svg)](https://codemagic.io/apps/637a5c08444d38c6a4423669/637a5c08444d38c6a4423668/latest_build)
+# Pragma Technical Test App [![Codemagic build status](https://api.codemagic.io/apps/66671f8977f25d5306ab0e7f/66671f8977f25d5306ab0e7e/status_badge.svg)](https://codemagic.io/apps/66671f8977f25d5306ab0e7f/66671f8977f25d5306ab0e7e/latest_build)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jorgemogotocoro/) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/MogotocoroJorge) [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jorgemogotocoro05@outlook.es)
 
 A simple Flutter application.
 
-To download this app, click here to see the [codemagic](https://codemagic.io/app/637a5c08444d38c6a4423669/build/637b913e444d3860da9f0187) builds. You can choose to install the apk or the ipa(ios).
+To download this app, click here to see the [codemagic builds](https://codemagic.io/app/66671f8977f25d5306ab0e7f/build/66672896b3bd3d4a1c058326). You can choose to install the apk or the ipa(ios).
 
 > Please star ⭐ the repo if you like what you see 😉.
 
