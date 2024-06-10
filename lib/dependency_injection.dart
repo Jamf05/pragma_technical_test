@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
 import 'package:pragma_technical_test/core/http/dio_http_client.dart';
 import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart';
@@ -6,9 +8,12 @@ import 'package:pragma_technical_test/domain/repositories/breed_repository.dart'
 import 'package:pragma_technical_test/domain/use_cases/get_breeds_use_case.dart';
 import 'package:pragma_technical_test/domain/use_cases/get_image_breed_use_case.dart';
 import 'package:pragma_technical_test/domain/use_cases/search_breeds_use_case.dart';
-import 'package:pragma_technical_test/presentation/android/pages/landing/landing_cubit/landing_cubit.dart';
-import 'package:pragma_technical_test/presentation/shared/page/splash_cubit/splash_cubit.dart';
-import 'package:pragma_technical_test/presentation/shared/provider/theme_provider.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart'
+    as android;
+import 'package:pragma_technical_test/presentation/ios/provider/theme_provider.dart'
+    as ios;
 
 final GetIt sl = GetIt.instance;
 
@@ -54,5 +59,10 @@ Future<void> init() async {
    * Externals
    */
 
-  sl.registerLazySingleton(() => ThemeProvider());
+  sl.registerLazySingleton(
+    () => android.ThemeProvider(),
+  );
+  sl.registerLazySingleton(
+    () => ios.ThemeProvider(),
+  );
 }

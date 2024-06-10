@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/presentation/android/routes/app_routes.dart';
-import 'package:pragma_technical_test/presentation/shared/provider/theme_provider.dart';
+import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart';
 
 class AndroidApp extends StatefulWidget {
   const AndroidApp({super.key});
@@ -24,7 +23,6 @@ class _AppState extends State<AndroidApp> {
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
-              DefaultCupertinoLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
               DefaultWidgetsLocalizations.delegate,
             ],

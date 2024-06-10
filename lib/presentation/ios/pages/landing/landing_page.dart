@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pragma_technical_test/presentation/android/design/design.dart';
+import 'package:pragma_technical_test/presentation/ios/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
-import 'package:pragma_technical_test/presentation/android/extensions/build_context.dart';
-import 'package:pragma_technical_test/core/gen/assets.gen.dart';
+import 'package:pragma_technical_test/presentation/ios/extensions/build_context.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
-import 'package:pragma_technical_test/presentation/android/pages/landing/widgets/cat_breed_card.dart';
-import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart';
+import 'package:pragma_technical_test/presentation/ios/pages/landing/widgets/cat_breed_card.dart';
+import 'package:pragma_technical_test/presentation/ios/provider/theme_provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -29,40 +29,39 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
   }
 
-  List<Widget> get actions => [
-        IconButton(
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(context.l10n.catbreeds),
+        leading: CupertinoButton(
             onPressed: () {
               sl<ThemeProvider>().setTheme(
-                context.isBrightnessDark
+                CupertinoTheme.brightnessOf(context) == Brightness.dark
                     ? ThemeFoundation.light
                     : ThemeFoundation.dark,
               );
             },
-            icon: Icon(
-              context.isBrightnessDark
-                  ? Icons.wb_sunny_outlined
-                  : Icons.nightlight_round,
-              color: context.isBrightnessDark
+            child: Icon(
+              CupertinoTheme.brightnessOf(context) == Brightness.dark
+                  ? CupertinoIcons.sun_min
+                  : CupertinoIcons.moon,
+              color: CupertinoTheme.brightnessOf(context) == Brightness.dark
                   ? ColorsFoundation.background.white
                   : ColorsFoundation.background.black,
-            ))
-      ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.catbreeds),
-        actions: actions,
+            )),
       ),
-      body: BlocConsumer<LandingCubit, LandingState>(
+      child: BlocConsumer<LandingCubit, LandingState>(
         bloc: bloc,
         listener: (BuildContext context, LandingState state) async =>
             bloc.listener.call(context, state),
         buildWhen: (LandingState previous, LandingState current) =>
             current is LandingInitialLoading || current is LandingInitialLoaded,
         builder: (BuildContext context, LandingState state) {
-          return const _Body();
+          return const SafeArea(
+            bottom: false,
+            child: _Body(),
+          );
         },
       ),
     );
@@ -82,22 +81,10 @@ class _Body extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          TextField(
-              controller: bloc.queryController,
-              onTapOutside: (_) => context.focus.unfocus(),
-              onChanged: (String value) => bloc.setQuery(value.trim()),
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () async {
-                    context.focus.unfocus();
-                    await bloc.onSearch();
-                  },
-                  icon: AssetsToken.icons.search.svg(
-                    colorFilter: ColorFilter.mode(
-                        ColorsFoundation.text.grey, BlendMode.srcIn),
-                  ),
-                ),
-              )),
+          CupertinoSearchTextField(
+            controller: bloc.queryController,
+            onChanged: (String value) => bloc.setQuery(value.trim()),
+          ),
           const SizedBox(
             height: 8,
           ),
@@ -107,12 +94,17 @@ class _Body extends StatelessWidget {
                 current is LandingInitialLoaded,
             builder: (context, state) {
               return Expanded(
-                child: RefreshIndicator(
+                child: material.RefreshIndicator.adaptive(
                   onRefresh: bloc.onRefresh,
-                  child: ListView.builder(
+                  child: ListView.separated(
                     controller: bloc.scrollController,
                     itemCount: bloc.breeds.length,
                     padding: const EdgeInsets.only(bottom: 8),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const material.Divider(
+                      height: 0,
+                      thickness: 0.25,
+                    ),
                     itemBuilder: (BuildContext context, int index) {
                       final breed = bloc.breeds[index];
                       final imageStream =

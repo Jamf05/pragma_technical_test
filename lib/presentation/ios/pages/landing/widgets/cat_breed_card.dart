@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:pragma_technical_test/presentation/android/design/design.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:pragma_technical_test/presentation/ios/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
-import 'package:pragma_technical_test/presentation/android/extensions/build_context.dart';
+import 'package:pragma_technical_test/presentation/ios/extensions/build_context.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
-import 'package:pragma_technical_test/presentation/android/pages/detail/detail_page.dart';
+import 'package:pragma_technical_test/presentation/ios/pages/detail/detail_page.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/error_in_network_image_widget.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
@@ -15,10 +15,14 @@ class CatBreedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(16),
-        minVerticalPadding: 0,
+    return Container(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      decoration: BoxDecoration(
+        color: context.isBrightnessDark
+            ? CupertinoColors.black
+            : CupertinoColors.white,
+      ),
+      child: CupertinoListTile(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -26,7 +30,7 @@ class CatBreedCard extends StatelessWidget {
               breed.name ?? '',
               style: FontsFoundation.of(context.brightness).title.h1B16,
             ),
-            TextButton(
+            CupertinoButton(
               onPressed: () async {
                 context.focus.requestFocus(FocusNode());
                 await context.navigator.pushNamed(
@@ -83,6 +87,7 @@ class CatBreedCard extends StatelessWidget {
                       style: FontsFoundation.of(context.brightness)
                           .paragraph
                           .b1R12,
+                      maxLines: 3,
                     ),
                   ),
                 ],

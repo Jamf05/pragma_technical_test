@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:pragma_technical_test/core/design/design.dart';
+import 'package:pragma_technical_test/presentation/android/design/design.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeData _selected =
