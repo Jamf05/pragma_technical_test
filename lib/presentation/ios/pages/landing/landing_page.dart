@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/core/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
@@ -29,8 +30,12 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
   }
 
-  List<Widget> get actions => [
-        IconButton(
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(context.l10n.catbreeds),
+        leading: CupertinoButton(
             onPressed: () {
               sl<ThemeProvider>().setTheme(
                 context.isBrightnessDark
@@ -38,24 +43,16 @@ class _LandingPageState extends State<LandingPage> {
                     : ThemeFoundation.dark,
               );
             },
-            icon: Icon(
+            child: Icon(
               context.isBrightnessDark
-                  ? Icons.wb_sunny_outlined
-                  : Icons.nightlight_round,
+                  ? CupertinoIcons.sun_min
+                  : CupertinoIcons.moon,
               color: context.isBrightnessDark
                   ? ColorsFoundation.background.white
                   : ColorsFoundation.background.black,
-            ))
-      ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.catbreeds),
-        actions: actions,
+            )),
       ),
-      body: BlocConsumer<LandingCubit, LandingState>(
+      child: BlocConsumer<LandingCubit, LandingState>(
         bloc: bloc,
         listener: (BuildContext context, LandingState state) async =>
             bloc.listener.call(context, state),
@@ -82,22 +79,21 @@ class _Body extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          TextField(
-              controller: bloc.queryController,
-              onTapOutside: (_) => context.focus.unfocus(),
-              onChanged: (String value) => bloc.setQuery(value.trim()),
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () async {
-                    context.focus.unfocus();
-                    await bloc.onSearch();
-                  },
-                  icon: AssetsToken.icons.search.svg(
-                    colorFilter: ColorFilter.mode(
-                        ColorsFoundation.text.grey, BlendMode.srcIn),
-                  ),
-                ),
-              )),
+          CupertinoSearchTextField(
+            controller: bloc.queryController,
+            // onTapOutside: (_) => context.focus.unfocus(),
+            onChanged: (String value) => bloc.setQuery(value.trim()),
+            // suffix: CupertinoButton(
+            //   onPressed: () async {
+            //     context.focus.unfocus();
+            //     await bloc.onSearch();
+            //   },
+            //   child: AssetsToken.icons.search.svg(
+            //     colorFilter: ColorFilter.mode(
+            //         ColorsFoundation.text.grey, BlendMode.srcIn),
+            //   ),
+            // ),
+          ),
           const SizedBox(
             height: 8,
           ),
@@ -107,7 +103,7 @@ class _Body extends StatelessWidget {
                 current is LandingInitialLoaded,
             builder: (context, state) {
               return Expanded(
-                child: RefreshIndicator(
+                child: material.RefreshIndicator.adaptive(
                   onRefresh: bloc.onRefresh,
                   child: ListView.builder(
                     controller: bloc.scrollController,

@@ -16,6 +16,6 @@ Future<void> main() async {
   Bloc.observer = CustomBlocObserver();
   await SystemChannels.textInput.invokeMethod('TextInput.hide');
   runApp(
-    Platform.isAndroid ? const AndroidApp() : const IosApp(),
+    const IosApp(),
   );
 }
