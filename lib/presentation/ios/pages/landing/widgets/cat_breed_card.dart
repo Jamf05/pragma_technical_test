@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pragma_technical_test/core/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/extensions/build_context.dart';
@@ -15,10 +15,12 @@ class CatBreedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(16),
-        minVerticalPadding: 0,
+    return Container(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      decoration: const BoxDecoration(
+        color: CupertinoColors.white,
+      ),
+      child: CupertinoListTile(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -26,7 +28,7 @@ class CatBreedCard extends StatelessWidget {
               breed.name ?? '',
               style: FontsFoundation.of(context.brightness).title.h1B16,
             ),
-            TextButton(
+            CupertinoButton(
               onPressed: () async {
                 context.focus.requestFocus(FocusNode());
                 await context.navigator.pushNamed(
@@ -83,6 +85,7 @@ class CatBreedCard extends StatelessWidget {
                       style: FontsFoundation.of(context.brightness)
                           .paragraph
                           .b1R12,
+                      maxLines: 3,
                     ),
                   ),
                 ],

@@ -17,110 +17,115 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.lightBackgroundGray,
       navigationBar: CupertinoNavigationBar(
         middle: Text(breed.name ?? context.l10n.catbreeds),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 8.0,
-            ),
-            Hero(
-              tag: breed.id!,
-              child: CachedNetworkImage(
-                imageUrl: imageUrl ?? Env.networkPlaceholder,
-                width: double.infinity,
-                height: 250,
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
-                placeholder: (BuildContext context, String url) =>
-                    const PlaceholderNetworkImageWidget(),
-                errorWidget: (BuildContext context, String url, Object error) =>
-                    const ErrorInNetworkImageWidget(),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 8.0,
               ),
-            ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            Expanded(
-              child: CupertinoScrollbar(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 8.0),
-                  child: Column(
-                    children: [
-                      _ItemText(
-                        title: context.l10n.origin,
-                        value: breed.origin,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.intelligence,
-                        value: breed.intelligence,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.adaptability,
-                        value: breed.adaptability,
-                      ),
-                      _ItemText(
-                        title: context.l10n.temperament,
-                        value: breed.temperament,
-                      ),
-                      _ItemText(
-                        title: context.l10n.lifeSpan,
-                        value: breed.lifeSpan,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.affectionLevel,
-                        value: breed.affectionLevel,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.childFriendly,
-                        value: breed.childFriendly,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.dogFriendly,
-                        value: breed.dogFriendly,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.energyLevel,
-                        value: breed.energyLevel,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.grooming,
-                        value: breed.grooming,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.healthIssues,
-                        value: breed.healthIssues,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.sheddingLevel,
-                        value: breed.sheddingLevel,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.socialNeeds,
-                        value: breed.socialNeeds,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.strangerFriendly,
-                        value: breed.strangerFriendly,
-                      ),
-                      _ItemRating(
-                        title: context.l10n.vocalisation,
-                        value: breed.vocalisation,
-                      ),
-                      _ItemText(
-                        title: context.l10n.description,
-                        value: breed.description,
-                      ),
-                    ],
-                  ),
+              Hero(
+                tag: breed.id!,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl ?? Env.networkPlaceholder,
+                  width: double.infinity,
+                  height: 250,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                  placeholder: (BuildContext context, String url) =>
+                      const PlaceholderNetworkImageWidget(),
+                  errorWidget:
+                      (BuildContext context, String url, Object error) =>
+                          const ErrorInNetworkImageWidget(),
                 ),
               ),
-            )
-          ],
+              const SizedBox(
+                height: 8.0,
+              ),
+              Expanded(
+                child: CupertinoScrollbar(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 8.0),
+                    child: CupertinoListSection(
+                      topMargin: 0,
+                      children: [
+                        _ItemText(
+                          title: context.l10n.origin,
+                          value: breed.origin,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.intelligence,
+                          value: breed.intelligence,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.adaptability,
+                          value: breed.adaptability,
+                        ),
+                        _ItemText(
+                          title: context.l10n.temperament,
+                          value: breed.temperament,
+                        ),
+                        _ItemText(
+                          title: context.l10n.lifeSpan,
+                          value: breed.lifeSpan,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.affectionLevel,
+                          value: breed.affectionLevel,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.childFriendly,
+                          value: breed.childFriendly,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.dogFriendly,
+                          value: breed.dogFriendly,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.energyLevel,
+                          value: breed.energyLevel,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.grooming,
+                          value: breed.grooming,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.healthIssues,
+                          value: breed.healthIssues,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.sheddingLevel,
+                          value: breed.sheddingLevel,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.socialNeeds,
+                          value: breed.socialNeeds,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.strangerFriendly,
+                          value: breed.strangerFriendly,
+                        ),
+                        _ItemRating(
+                          title: context.l10n.vocalisation,
+                          value: breed.vocalisation,
+                        ),
+                        _ItemText(
+                          title: context.l10n.description,
+                          value: breed.description,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -135,27 +140,22 @@ class _ItemText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: constraints.maxWidth * 0.45,
-            child: Text(
-              title,
-              style: FontsFoundation.of(context.brightness).paragraph.b1M14,
-            ),
+      return CupertinoListTile(
+        title: SizedBox(
+          width: constraints.maxWidth * 0.45,
+          child: Text(
+            title,
+            style: FontsFoundation.of(context.brightness).paragraph.b1M14,
           ),
-          Container(
-            width: constraints.maxWidth * 0.45,
-            alignment: Alignment.centerRight,
-            child: Text(
-              value ?? '',
-              textAlign: TextAlign.start,
-              style: FontsFoundation.of(context.brightness).paragraph.b2R14,
-            ),
+        ),
+        additionalInfo: SizedBox(
+          width: constraints.maxWidth * 0.45,
+          child: Text(
+            value ?? '',
+            textAlign: TextAlign.end,
+            style: FontsFoundation.of(context.brightness).paragraph.b2R14,
           ),
-        ],
+        ),
       );
     });
   }
@@ -169,21 +169,17 @@ class _ItemRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: constraints.maxWidth * 0.45,
-            child: Text(
-              title,
-              style: FontsFoundation.of(context.brightness).paragraph.b1M14,
-            ),
+      return CupertinoListTile(
+        title: SizedBox(
+          width: constraints.maxWidth * 0.45,
+          child: Text(
+            title,
+            style: FontsFoundation.of(context.brightness).paragraph.b1M14,
           ),
-          IntegerRatingBarWidget(
-            initialRating: value ?? 0,
-          ),
-        ],
+        ),
+        additionalInfo: IntegerRatingBarWidget(
+          initialRating: value ?? 0,
+        ),
       );
     });
   }

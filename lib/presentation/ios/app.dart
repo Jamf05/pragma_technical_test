@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
-import 'package:pragma_technical_test/presentation/ios/app_routes.dart';
+import 'package:pragma_technical_test/presentation/ios/routes/app_routes.dart';
 import 'package:pragma_technical_test/presentation/shared/provider/theme_provider.dart';
 
 class IosApp extends StatefulWidget {
@@ -34,7 +34,6 @@ class _AppState extends State<IosApp> {
             debugShowCheckedModeBanner: false,
             routes: AppRoutes.of(context),
             onGenerateRoute: AppRoutes.onGenerateRoute,
-            theme: const CupertinoThemeData(),
           );
         });
   }
