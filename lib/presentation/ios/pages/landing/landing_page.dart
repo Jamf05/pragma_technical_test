@@ -58,7 +58,10 @@ class _LandingPageState extends State<LandingPage> {
         buildWhen: (LandingState previous, LandingState current) =>
             current is LandingInitialLoading || current is LandingInitialLoaded,
         builder: (BuildContext context, LandingState state) {
-          return const SafeArea(child: _Body());
+          return const SafeArea(
+            bottom: false,
+            child: _Body(),
+          );
         },
       ),
     );
@@ -100,7 +103,7 @@ class _Body extends StatelessWidget {
                     separatorBuilder: (BuildContext context, int index) =>
                         const material.Divider(
                       height: 0,
-                      thickness: 0.5,
+                      thickness: 0.25,
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       final breed = bloc.breeds[index];

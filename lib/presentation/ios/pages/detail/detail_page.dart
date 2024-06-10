@@ -153,6 +153,8 @@ class _ItemText extends StatelessWidget {
             value ?? '',
             textAlign: TextAlign.end,
             style: FontsFoundation.of(context.brightness).paragraph.b2R14,
+            maxLines: 10,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       );
