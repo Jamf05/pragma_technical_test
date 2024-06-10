@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pragma_technical_test/core/design/design.dart';
+import 'package:pragma_technical_test/presentation/android/design/design.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 
 class PlaceholderNetworkImageWidget extends StatelessWidget {

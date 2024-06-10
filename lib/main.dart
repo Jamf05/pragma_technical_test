@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/core/bloc/bloc_observer.dart';
 import 'package:pragma_technical_test/core/env.dart';
@@ -13,6 +14,7 @@ Future<void> main() async {
   await Env.load(fileName: AssetsToken.env.aEnvProd);
   await di.init();
   Bloc.observer = CustomBlocObserver();
+  await SystemChannels.textInput.invokeMethod('TextInput.hide');
   runApp(
     Platform.isAndroid ? const AndroidApp() : const IosApp(),
   );

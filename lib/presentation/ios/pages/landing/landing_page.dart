@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pragma_technical_test/core/design/design.dart';
+import 'package:pragma_technical_test/presentation/ios/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
-import 'package:pragma_technical_test/core/extensions/build_context.dart';
+import 'package:pragma_technical_test/presentation/ios/extensions/build_context.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/ios/pages/landing/widgets/cat_breed_card.dart';
-import 'package:pragma_technical_test/presentation/shared/provider/theme_provider.dart';
+import 'package:pragma_technical_test/presentation/ios/provider/theme_provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -32,22 +32,21 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.lightBackgroundGray,
       navigationBar: CupertinoNavigationBar(
         middle: Text(context.l10n.catbreeds),
         leading: CupertinoButton(
             onPressed: () {
               sl<ThemeProvider>().setTheme(
-                context.isBrightnessDark
+                CupertinoTheme.brightnessOf(context) == Brightness.dark
                     ? ThemeFoundation.light
                     : ThemeFoundation.dark,
               );
             },
             child: Icon(
-              context.isBrightnessDark
+              CupertinoTheme.brightnessOf(context) == Brightness.dark
                   ? CupertinoIcons.sun_min
                   : CupertinoIcons.moon,
-              color: context.isBrightnessDark
+              color: CupertinoTheme.brightnessOf(context) == Brightness.dark
                   ? ColorsFoundation.background.white
                   : ColorsFoundation.background.black,
             )),
@@ -99,7 +98,10 @@ class _Body extends StatelessWidget {
                     itemCount: bloc.breeds.length,
                     padding: const EdgeInsets.only(bottom: 8),
                     separatorBuilder: (BuildContext context, int index) =>
-                        const material.Divider(height: 0, thickness: 0.5,),
+                        const material.Divider(
+                      height: 0,
+                      thickness: 0.5,
+                    ),
                     itemBuilder: (BuildContext context, int index) {
                       final breed = bloc.breeds[index];
                       final imageStream =

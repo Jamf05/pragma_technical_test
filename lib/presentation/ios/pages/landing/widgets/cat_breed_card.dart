@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pragma_technical_test/core/design/design.dart';
+import 'package:pragma_technical_test/presentation/ios/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
-import 'package:pragma_technical_test/core/extensions/build_context.dart';
+import 'package:pragma_technical_test/presentation/ios/extensions/build_context.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
-import 'package:pragma_technical_test/presentation/android/pages/detail/detail_page.dart';
+import 'package:pragma_technical_test/presentation/ios/pages/detail/detail_page.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/error_in_network_image_widget.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
@@ -17,8 +17,10 @@ class CatBreedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: 8.0),
-      decoration: const BoxDecoration(
-        color: CupertinoColors.white,
+      decoration: BoxDecoration(
+        color: context.isBrightnessDark
+            ? CupertinoColors.black
+            : CupertinoColors.white,
       ),
       child: CupertinoListTile(
         title: Row(

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pragma_technical_test/core/design/design.dart';
+import 'package:pragma_technical_test/presentation/ios/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
-import 'package:pragma_technical_test/core/extensions/build_context.dart';
+import 'package:pragma_technical_test/presentation/ios/extensions/build_context.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/error_in_network_image_widget.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/integer_rating_bar_widget.dart';
@@ -17,7 +17,6 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.lightBackgroundGray,
       navigationBar: CupertinoNavigationBar(
         middle: Text(breed.name ?? context.l10n.catbreeds),
       ),

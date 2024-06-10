@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 
-import 'package:pragma_technical_test/core/extensions/build_context.dart';
+import 'package:pragma_technical_test/presentation/android/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/utils/debounce.dart';
 import 'package:pragma_technical_test/core/validators/query_input.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
