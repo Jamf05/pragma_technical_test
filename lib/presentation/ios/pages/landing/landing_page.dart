@@ -102,6 +102,7 @@ class _Body extends StatelessWidget {
           BlocBuilder<LandingCubit, LandingState>(
             bloc: bloc,
             buildWhen: (LandingState previous, LandingState current) =>
+                current is LandingInitialLoading ||
                 current is LandingInitialLoaded,
             builder: (context, state) {
               return Expanded(
