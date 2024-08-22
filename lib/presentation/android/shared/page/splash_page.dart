@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/presentation/android/design/design.dart';
 import 'package:pragma_technical_test/presentation/android/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/shared/cubits/splash_cubit/splash_cubit.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

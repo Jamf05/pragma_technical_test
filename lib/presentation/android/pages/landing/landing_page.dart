@@ -6,7 +6,7 @@ import 'package:pragma_technical_test/presentation/android/extensions/build_cont
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/widgets/cat_breed_card.dart';
 import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart';
 

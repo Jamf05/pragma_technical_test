@@ -5,14 +5,14 @@ import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/presentation/android/routes/app_routes.dart';
 import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart';
 
-class AndroidApp extends StatefulWidget {
-  const AndroidApp({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  State<AndroidApp> createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
-class _AppState extends State<AndroidApp> {
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(

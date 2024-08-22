@@ -6,12 +6,9 @@ import 'package:pragma_technical_test/domain/repositories/breed_repository.dart'
 import 'package:pragma_technical_test/domain/use_cases/get_breeds_use_case.dart';
 import 'package:pragma_technical_test/domain/use_cases/get_image_breed_use_case.dart';
 import 'package:pragma_technical_test/domain/use_cases/search_breeds_use_case.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
-import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart'
-    as android;
-import 'package:pragma_technical_test/presentation/ios/provider/theme_provider.dart'
-    as ios;
+import 'package:pragma_technical_test/presentation/android/shared/cubits/landing_cubit/landing_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/shared/cubits/splash_cubit/splash_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/provider/theme_provider.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -58,9 +55,6 @@ Future<void> init() async {
    */
 
   sl.registerLazySingleton(
-    () => android.ThemeProvider(),
-  );
-  sl.registerLazySingleton(
-    () => ios.ThemeProvider(),
+    () => ThemeProvider(),
   );
 }

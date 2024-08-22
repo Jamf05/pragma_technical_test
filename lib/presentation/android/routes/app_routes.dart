@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/presentation/android/pages/detail/detail_page.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/android/pages/landing/landing_page.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
-import 'package:pragma_technical_test/presentation/shared/page/splash_page.dart';
+import 'package:pragma_technical_test/presentation/android/shared/cubits/splash_cubit/splash_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/shared/page/splash_page.dart';
 
 class AppRoutes {
   static Map<String, Widget Function(BuildContext)> of(BuildContext context) {

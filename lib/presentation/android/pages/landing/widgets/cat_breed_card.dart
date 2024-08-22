@@ -5,8 +5,8 @@ import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/android/extensions/build_context.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/presentation/android/pages/detail/detail_page.dart';
-import 'package:pragma_technical_test/presentation/shared/widgets/error_in_network_image_widget.dart';
-import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
+import 'package:pragma_technical_test/presentation/android/shared/widgets/error_in_network_image_widget.dart';
+import 'package:pragma_technical_test/presentation/android/shared/widgets/placeholder_network_image_widget.dart';
 
 class CatBreedCard extends StatelessWidget {
   final String? imageUrl;

@@ -16,7 +16,7 @@ import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/domain/use_cases/get_breeds_use_case.dart';
 import 'package:pragma_technical_test/domain/use_cases/get_image_breed_use_case.dart';
 import 'package:pragma_technical_test/domain/use_cases/search_breeds_use_case.dart';
-import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
+import 'package:pragma_technical_test/presentation/android/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../helpers/dummy_data.dart';
