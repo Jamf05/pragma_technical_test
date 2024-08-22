@@ -25,9 +25,14 @@ class BreedRemoteDataSourceImpl implements BreedRemoteDataSource {
           'limit': limit,
         },
       );
-      return ((response.data ?? []) as List)
-          .map((e) => BreedModel.fromJson(e))
-          .toList();
+
+      if (response.data is List) {
+        return (response.data as List)
+            .map((e) => BreedModel.fromJson(e))
+            .toList();
+      } else {
+        throw const FormatException('Data is not a List');
+      }
     } on DioException catch (error) {
       throw DioFailure.decode(error);
     } on Error catch (error) {
@@ -48,9 +53,14 @@ class BreedRemoteDataSourceImpl implements BreedRemoteDataSource {
           'attach_image': attachImage,
         },
       );
-      return ((response.data ?? []) as List)
-          .map((e) => BreedModel.fromJson(e))
-          .toList();
+
+      if (response.data is List) {
+        return (response.data as List)
+            .map((e) => BreedModel.fromJson(e))
+            .toList();
+      } else {
+        throw const FormatException('Data is not a List');
+      }
     } on DioException catch (error) {
       throw DioFailure.decode(error);
     } on Error catch (error) {
@@ -64,7 +74,11 @@ class BreedRemoteDataSourceImpl implements BreedRemoteDataSource {
   Future<ImageBreedModel> getImage(String referenceImageId) async {
     try {
       final response = await client.get('/images/$referenceImageId');
-      return ImageBreedModel.fromJson(response.data ?? {});
+      if (response.data is Map) {
+        return ImageBreedModel.fromJson(response.data);
+      } else {
+        throw const FormatException('Data is not a Map');
+      }
     } on DioException catch (error) {
       throw DioFailure.decode(error);
     } on Error catch (error) {

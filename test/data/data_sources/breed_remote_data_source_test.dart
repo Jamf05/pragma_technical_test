@@ -82,6 +82,34 @@ void main() {
       // assert
       expect(actual, equals(DioFailure.decode(tResult)));
     });
+
+    test('should return error because the data is not a List', () async {
+      const tExceptionMessage = 'FormatException: Data is not a List';
+      mockDioClient.onGet(
+        '/breeds',
+        (server) => server.reply(
+          200,
+          {},
+          delay: const Duration(seconds: 1),
+        ),
+        queryParameters: {
+          'page': tPage,
+          'limit': tLimit,
+        },
+      );
+
+      // act
+      Object? actual;
+      try {
+        await dataSource.getBreeds(page: tPage, limit: tLimit);
+      } catch (e) {
+        actual = e;
+      }
+      // assert
+      expect(actual, isA<ExceptionFailure>());
+      expect((actual as ExceptionFailure).error, isA<FormatException>());
+      expect(actual.message, equals(tExceptionMessage));
+    });
   });
 
   group('Method search', () {
@@ -140,6 +168,34 @@ void main() {
       // assert
       expect(actual, equals(DioFailure.decode(tResult)));
     });
+
+    test('should return error because the data is not a List', () async {
+      const tExceptionMessage = 'FormatException: Data is not a List';
+      mockDioClient.onGet(
+        '/breeds/search',
+        (server) => server.reply(
+          200,
+          {},
+          delay: const Duration(seconds: 1),
+        ),
+        queryParameters: {
+          'q': tQuery,
+          'attach_image': tAttachImage,
+        },
+      );
+
+      // act
+      Object? actual;
+      try {
+        await dataSource.search(query: tQuery, attachImage: tAttachImage);
+      } catch (e) {
+        actual = e;
+      }
+      // assert
+      expect(actual, isA<ExceptionFailure>());
+      expect((actual as ExceptionFailure).error, isA<FormatException>());
+      expect(actual.message, equals(tExceptionMessage));
+    });
   });
 
   group('Method getImage', () {
@@ -187,6 +243,30 @@ void main() {
       }
       // assert
       expect(actual, equals(DioFailure.decode(tResult)));
+    });
+
+    test('should return error because the data is not a Map', () async {
+      const tExceptionMessage = 'FormatException: Data is not a Map';
+      mockDioClient.onGet(
+        '/images/$tReferenceImageId',
+        (server) => server.reply(
+          200,
+          [],
+          delay: const Duration(seconds: 1),
+        ),
+      );
+
+      // act
+      Object? actual;
+      try {
+        await dataSource.getImage(tReferenceImageId);
+      } catch (e) {
+        actual = e;
+      }
+      // assert
+      expect(actual, isA<ExceptionFailure>());
+      expect((actual as ExceptionFailure).error, isA<FormatException>());
+      expect(actual.message, equals(tExceptionMessage));
     });
   });
 }
