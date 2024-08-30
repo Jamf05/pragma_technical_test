@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/core/bloc/bloc_observer.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
-import 'package:pragma_technical_test/presentation/android/app.dart';
+import 'package:pragma_technical_test/presentation/app.dart';
 import 'package:pragma_technical_test/dependency_injection.dart' as di;
 
 Future<void> main() async {
