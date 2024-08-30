@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
+import 'package:pragma_technical_test/presentation/pages/landing/landing_page.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return BlocListener<SplashCubit, SplashState>(
       listener: (BuildContext context, SplashState state) async =>
-          context.read<SplashCubit>().listener(context, state),
+          listener(context, state),
       child: Scaffold(
         body: Row(
           children: <Widget>[
@@ -51,5 +52,11 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ),
     );
+  }
+
+  Future<void> listener(BuildContext context, SplashState state) async {
+    if (state is SplashLoaded) {
+      await context.navigator.pushReplacementNamed(LandingPage.route);
+    }
   }
 }

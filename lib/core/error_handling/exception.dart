@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
+
 import 'package:pragma_technical_test/core/error_handling/failure.dart';
 
 class ExceptionFailure extends Failure {
@@ -15,27 +15,6 @@ class ExceptionFailure extends Failure {
     return ExceptionFailure._(
       error: error,
       message: error.toString(),
-    );
-  }
-}
-
-class PlatformFailure extends Failure {
-  @override
-  final String message;
-  final PlatformException? error;
-
-  PlatformFailure._({
-    required this.message,
-    this.error,
-  });
-
-  factory PlatformFailure.decode(PlatformException? error) {
-    log((error).toString(), name: 'FAILURE[PLATFORM][ERROR]');
-    log((error?.message).toString(), name: 'Failure[PLATFORM][MESSAGE]');
-    log((error?.stacktrace).toString(), name: 'Failure[PLATFORM][TRACE]');
-    return PlatformFailure._(
-      error: error,
-      message: error?.message ?? '',
     );
   }
 }
