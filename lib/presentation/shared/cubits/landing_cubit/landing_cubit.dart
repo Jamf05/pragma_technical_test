@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 
-import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/utils/debounce.dart';
 import 'package:pragma_technical_test/core/validators/query_input.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
@@ -92,21 +91,6 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
     _hasNextPage = true;
     init();
   }
-
-  Future<void> listener(BuildContext context, LandingState state) async {
-    if (state is LandingError) {
-      await context.overlay.showFlushbar(
-        title: context.l10n.errorTitle,
-        message: state.message,
-        icon: Icon(
-          Icons.info_outline,
-          size: 28.0,
-          color: Colors.blue[300],
-        ),
-      );
-    }
-  }
-
   void addListener() {
     _scrollController.addListener(() {
       if (_query.value.isEmpty) {

@@ -29,6 +29,20 @@ class _LandingPageState extends State<LandingPage> {
     super.initState();
   }
 
+  Future<void> listener(BuildContext context, LandingState state) async {
+    if (state is LandingError) {
+      await context.overlay.showFlushbar(
+        title: context.l10n.errorTitle,
+        message: state.message,
+        icon: Icon(
+          Icons.info_outline,
+          size: 28.0,
+          color: Colors.blue[300],
+        ),
+      );
+    }
+  }
+
   List<Widget> get actions => [
         IconButton(
             onPressed: () {
@@ -52,13 +66,14 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        key: const Key('ptt_landing_app_bar_key'),
         title: Text(context.l10n.catbreeds),
         actions: actions,
       ),
       body: BlocConsumer<LandingCubit, LandingState>(
         bloc: bloc,
         listener: (BuildContext context, LandingState state) async =>
-            bloc.listener.call(context, state),
+            listener.call(context, state),
         buildWhen: (LandingState previous, LandingState current) =>
             current is LandingInitialLoading || current is LandingInitialLoaded,
         builder: (BuildContext context, LandingState state) {
@@ -70,7 +85,9 @@ class _LandingPageState extends State<LandingPage> {
                   bottom: 10.0,
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: CircularProgressIndicator()
+                    child: CircularProgressIndicator(
+                      key: Key('ptt_landing_loading_key'),
+                    ),
                   ),
                 ),
             ],
@@ -95,21 +112,22 @@ class _Body extends StatelessWidget {
             height: 8,
           ),
           TextField(
-              controller: bloc.queryController,
-              onTapOutside: (_) => context.focus.unfocus(),
-              onChanged: (String value) => bloc.setQuery(value.trim()),
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () async {
-                    context.focus.unfocus();
-                    await bloc.onSearch();
-                  },
-                  icon: AssetsToken.icons.search.svg(
-                    colorFilter: ColorFilter.mode(
-                        ColorsFoundation.text.grey, BlendMode.srcIn),
-                  ),
+            controller: bloc.queryController,
+            onTapOutside: (_) => context.focus.unfocus(),
+            onChanged: (String value) => bloc.setQuery(value.trim()),
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                onPressed: () async {
+                  context.focus.unfocus();
+                  await bloc.onSearch();
+                },
+                icon: AssetsToken.icons.search.svg(
+                  colorFilter: ColorFilter.mode(
+                      ColorsFoundation.text.grey, BlendMode.srcIn),
                 ),
-              )),
+              ),
+            ),
+          ),
           const SizedBox(
             height: 8,
           ),

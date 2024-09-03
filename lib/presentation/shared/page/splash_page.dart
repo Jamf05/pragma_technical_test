@@ -20,6 +20,12 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
   }
 
+  Future<void> listener(BuildContext context, SplashState state) async {
+    if (state is SplashLoaded) {
+      await context.navigator.pushReplacementNamed(LandingPage.route);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SplashCubit, SplashState>(
@@ -36,11 +42,13 @@ class _SplashPageState extends State<SplashPage> {
                 children: <Widget>[
                   const Spacer(),
                   Text(
+                    key: const Key('ptt_splash_catbreeds_key'),
                     context.l10n.catbreeds,
                     style: FontsFoundation.of(context.brightness).title.h1B36,
                   ),
                   const Spacer(),
                   AssetsToken.illustrations.cat.svg(
+                    key: const Key('ptt_splash_cat_illustration_key'),
                     width: 200,
                     height: 200,
                   ),
@@ -52,11 +60,5 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ),
     );
-  }
-
-  Future<void> listener(BuildContext context, SplashState state) async {
-    if (state is SplashLoaded) {
-      await context.navigator.pushReplacementNamed(LandingPage.route);
-    }
   }
 }
