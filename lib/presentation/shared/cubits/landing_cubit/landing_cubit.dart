@@ -19,6 +19,7 @@ class LandingCubit extends Cubit<LandingState> with FormzMixin {
   final GetBreedsUseCase _getBreedsUseCase;
   final SearchBreedsUseCase _searchBreedsUseCase;
   final GetImageBreedUseCase _getImageBreedUseCase;
+  
   LandingCubit({
     required GetBreedsUseCase getBreedsUseCase,
     required SearchBreedsUseCase searchBreedsUseCase,

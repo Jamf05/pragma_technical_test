@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-09-02 22:21:54</td>
+            <td class="headerValue">2024-09-04 22:18:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -64,7 +64,7 @@
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:pragma_technical_test/domain/entities/breed_entity.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : </a>
 <a name="4"><span class="lineNum">       4 </span>            : class BreedModel extends BreedEntity {</a>
-<a name="5"><span class="lineNum">       5 </span><span class="lineCov">         10 :   const BreedModel({</span></a>
+<a name="5"><span class="lineNum">       5 </span><span class="lineCov">         11 :   const BreedModel({</span></a>
 <a name="6"><span class="lineNum">       6 </span>            :     WeightModel? super.weight,</a>
 <a name="7"><span class="lineNum">       7 </span>            :     super.id,</a>
 <a name="8"><span class="lineNum">       8 </span>            :     super.name,</a>
@@ -104,44 +104,44 @@
 <a name="42"><span class="lineNum">      42 </span>            :     super.referenceImageId,</a>
 <a name="43"><span class="lineNum">      43 </span>            :   });</a>
 <a name="44"><span class="lineNum">      44 </span>            : </a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         16 :   factory BreedModel.fromJson(Map&lt;String, dynamic&gt; json) =&gt; BreedModel(</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">         16 :         weight: WeightModel.fromJson(json['weight']),</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          8 :         id: json['id'],</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          8 :         name: json['name'],</span></a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          8 :         cfaUrl: json['cfa_url'],</span></a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">          8 :         vetstreetUrl: json['vetstreet_url'],</span></a>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          8 :         vcahospitalsUrl: json['vcahospitals_url'],</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          8 :         temperament: json['temperament'],</span></a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          8 :         origin: json['origin'],</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          8 :         countryCodes: json['country_codes'],</span></a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">          8 :         countryCode: json['country_code'],</span></a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          8 :         description: json['description'],</span></a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          8 :         lifeSpan: json['life_span'],</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          8 :         indoor: json['indoor'],</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          8 :         lap: json['lap'],</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          8 :         altNames: json['alt_names'],</span></a>
-<a name="61"><span class="lineNum">      61 </span><span class="lineCov">          8 :         adaptability: json['adaptability'],</span></a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          8 :         affectionLevel: json['affection_level'],</span></a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          8 :         childFriendly: json['child_friendly'],</span></a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">          8 :         dogFriendly: json['dog_friendly'],</span></a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          8 :         energyLevel: json['energy_level'],</span></a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          8 :         grooming: json['grooming'],</span></a>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          8 :         healthIssues: json['health_issues'],</span></a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          8 :         intelligence: json['intelligence'],</span></a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          8 :         sheddingLevel: json['shedding_level'],</span></a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          8 :         socialNeeds: json['social_needs'],</span></a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          8 :         strangerFriendly: json['stranger_friendly'],</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          8 :         vocalisation: json['vocalisation'],</span></a>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          8 :         experimental: json['experimental'],</span></a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          8 :         hairless: json['hairless'],</span></a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          8 :         natural: json['natural'],</span></a>
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          8 :         rare: json['rare'],</span></a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          8 :         rex: json['rex'],</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          8 :         suppressedTail: json['suppressed_tail'],</span></a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          8 :         shortLegs: json['short_legs'],</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          8 :         wikipediaUrl: json['wikipedia_url'],</span></a>
-<a name="81"><span class="lineNum">      81 </span><span class="lineCov">          8 :         hypoallergenic: json['hypoallergenic'],</span></a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          8 :         referenceImageId: json['reference_image_id'],</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         18 :   factory BreedModel.fromJson(Map&lt;String, dynamic&gt; json) =&gt; BreedModel(</span></a>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">         18 :         weight: WeightModel.fromJson(json['weight']),</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          9 :         id: json['id'],</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">          9 :         name: json['name'],</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          9 :         cfaUrl: json['cfa_url'],</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">          9 :         vetstreetUrl: json['vetstreet_url'],</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">          9 :         vcahospitalsUrl: json['vcahospitals_url'],</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          9 :         temperament: json['temperament'],</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">          9 :         origin: json['origin'],</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          9 :         countryCodes: json['country_codes'],</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">          9 :         countryCode: json['country_code'],</span></a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          9 :         description: json['description'],</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          9 :         lifeSpan: json['life_span'],</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          9 :         indoor: json['indoor'],</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          9 :         lap: json['lap'],</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          9 :         altNames: json['alt_names'],</span></a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">          9 :         adaptability: json['adaptability'],</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          9 :         affectionLevel: json['affection_level'],</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          9 :         childFriendly: json['child_friendly'],</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">          9 :         dogFriendly: json['dog_friendly'],</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          9 :         energyLevel: json['energy_level'],</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          9 :         grooming: json['grooming'],</span></a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          9 :         healthIssues: json['health_issues'],</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          9 :         intelligence: json['intelligence'],</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          9 :         sheddingLevel: json['shedding_level'],</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          9 :         socialNeeds: json['social_needs'],</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          9 :         strangerFriendly: json['stranger_friendly'],</span></a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          9 :         vocalisation: json['vocalisation'],</span></a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          9 :         experimental: json['experimental'],</span></a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          9 :         hairless: json['hairless'],</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          9 :         natural: json['natural'],</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          9 :         rare: json['rare'],</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          9 :         rex: json['rex'],</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          9 :         suppressedTail: json['suppressed_tail'],</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          9 :         shortLegs: json['short_legs'],</span></a>
+<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          9 :         wikipediaUrl: json['wikipedia_url'],</span></a>
+<a name="81"><span class="lineNum">      81 </span><span class="lineCov">          9 :         hypoallergenic: json['hypoallergenic'],</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          9 :         referenceImageId: json['reference_image_id'],</span></a>
 <a name="83"><span class="lineNum">      83 </span>            :       );</a>
 <a name="84"><span class="lineNum">      84 </span>            : }</a>
 </pre>

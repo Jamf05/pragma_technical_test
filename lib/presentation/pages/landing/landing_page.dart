@@ -32,6 +32,7 @@ class _LandingPageState extends State<LandingPage> {
   Future<void> listener(BuildContext context, LandingState state) async {
     if (state is LandingError) {
       await context.overlay.showFlushbar(
+        key: const Key('ptt_landing_error_key'),
         title: context.l10n.errorTitle,
         message: state.message,
         icon: Icon(
@@ -148,12 +149,12 @@ class _Body extends StatelessWidget {
                       final imageStream =
                           bloc.imageStream(breed.referenceImageId);
                       return StreamBuilder<ImageBreedEntity>(
-                        key: Key(breed.id!),
+                        key: Key('ptt_stream_builder_${breed.id!}_key'),
                         stream: imageStream,
                         builder: (BuildContext context,
                             AsyncSnapshot<ImageBreedEntity> snapshot) {
                           return CatBreedCard(
-                            key: Key(breed.id!),
+                            key: Key('ptt_item_cat_breed_card_${breed.id!}_key'),
                             breed: breed,
                             imageUrl: snapshot.hasData
                                 ? snapshot.data?.url
