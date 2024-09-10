@@ -34,6 +34,9 @@ void main() {
   const tLandingAppBarKey = Key('ptt_landing_app_bar_key');
   const tLandingLoadingKey = Key('ptt_landing_loading_key');
   const landingErrorKey = Key('ptt_landing_error_key');
+  const tListViewKey = Key('ptt_list_view_key');
+
+  final Map<String, StreamController<ImageBreedEntity>> tImageControllers = {};
 
   setUp(() async {
     await Env.load(fileName: AssetsToken.env.aEnvDev);
@@ -41,6 +44,30 @@ void main() {
     mockCubit = MockLandingCubit();
     tQueryController = TextEditingController();
     tScrollController = ScrollController();
+  });
+
+  List<Stream<ImageBreedEntity>> buildImageStreamList(List<BreedModel> breeds,
+      Map<String, StreamController<ImageBreedEntity>> controllers) {
+    return breeds.map((breed) {
+      // ignore: close_sinks
+      final StreamController<ImageBreedEntity> controller = BehaviorSubject();
+      controllers[breed.referenceImageId!] = controller;
+      return controller.stream;
+    }).toList();
+  }
+
+  Future<void> disposeImageStreamList(
+      Map<String, StreamController<ImageBreedEntity>> controllers) async {
+    for (final controller in controllers.values) {
+      await controller.close();
+    }
+    controllers.clear();
+  }
+
+  tearDown(() async {
+    tQueryController.dispose();
+    tScrollController.dispose();
+    await disposeImageStreamList(tImageControllers);
   });
 
   testWidgets('LandingPage when cubit state is LandingInitial', (tester) async {
@@ -85,7 +112,8 @@ void main() {
     expect(find.byKey(tLandingLoadingKey), findsOneWidget);
   });
 
-  testWidgets('LandingPage when cubit state is LandingInitialLoaded and one element in list',
+  testWidgets(
+      'LandingPage when cubit state is LandingInitialLoaded and one element in list',
       (tester) async {
     // arrange
     final tApp = _BuildMaterialApp(
@@ -97,30 +125,36 @@ void main() {
       JsonHelpers.readJson(DummyData.breedsJson),
     );
     final List<BreedModel> tBreedList =
-        tBreedRawData.map((e) => BreedModel.fromJson(e)).toList().sublist(0, 1);
+        tBreedRawData.map((e) => BreedModel.fromJson(e)).toList();
+
     final BreedModel tFrist = tBreedList.first;
+    final BreedModel tLast = tBreedList.last;
+
     final ImageBreedModel tImageBreedModel = ImageBreedModel(
       id: tFrist.id,
       url: 'https://cdn2.thecatapi.com/images/${tFrist.id}.jpg',
     );
 
-    final tStreamBuilderFristKey = Key('ptt_stream_builder_${tFrist.id!}_key');
+    final tStreamBuilderFristKey = Key('ptt_item_cat_breed_card_${tFrist.id!}_key');
+    final tStreamBuilderLastKey = Key('ptt_item_cat_breed_card_${tLast.id!}_key');
     final tItemCatBreedCardKey =
         Key('ptt_item_cat_breed_card_${tFrist.id!}_key');
 
-    final StreamController<ImageBreedEntity> tStreamController =
-        BehaviorSubject();
-    final Map<String, StreamController<ImageBreedEntity>> tImageControllers = {
-      tFrist.referenceImageId!: tStreamController
-    };
+    final tImageStreamList =
+        buildImageStreamList(tBreedList, tImageControllers);
 
     when(() => mockCubit.queryController).thenReturn(tQueryController);
     when(() => mockCubit.scrollController).thenReturn(tScrollController);
     when(() => mockCubit.breeds).thenReturn(tBreedList);
 
-    when(() => mockCubit.imageStream(tFrist.referenceImageId)).thenAnswer((_) {
-      return tStreamController.stream;
-    });
+    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+
+    for (int i = 0; i < tBreedList.length; i++) {
+      when(() => mockCubit.imageStream(tBreedList[i].referenceImageId))
+          .thenAnswer((_) {
+        return tImageStreamList[i];
+      });
+    }
 
     when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
 
@@ -137,7 +171,18 @@ void main() {
     expect(find.byKey(tStreamBuilderFristKey), findsOneWidget);
     expect(find.byKey(tItemCatBreedCardKey), findsOneWidget);
 
-    await tStreamController.close();
+    // act
+    final listFinder = find.byKey(tListViewKey);
+    final itemFinder = find.byKey(tStreamBuilderLastKey);
+
+    await tester.dragUntilVisible(
+      itemFinder,
+      listFinder,
+      const Offset(0, -800),
+    );
+
+    // assert
+    expect(itemFinder, findsOneWidget);
   });
 
   testWidgets('LandingPage when cubit state is LandingError', (tester) async {

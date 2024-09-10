@@ -141,6 +141,7 @@ class _Body extends StatelessWidget {
                 child: RefreshIndicator(
                   onRefresh: bloc.onRefresh,
                   child: ListView.builder(
+                    key: const Key('ptt_list_view_key'),
                     controller: bloc.scrollController,
                     itemCount: bloc.breeds.length,
                     padding: const EdgeInsets.only(bottom: 8),
@@ -149,7 +150,6 @@ class _Body extends StatelessWidget {
                       final imageStream =
                           bloc.imageStream(breed.referenceImageId);
                       return StreamBuilder<ImageBreedEntity>(
-                        key: Key('ptt_stream_builder_${breed.id!}_key'),
                         stream: imageStream,
                         builder: (BuildContext context,
                             AsyncSnapshot<ImageBreedEntity> snapshot) {
