@@ -46,6 +46,7 @@ class _LandingPageState extends State<LandingPage> {
 
   List<Widget> get actions => [
         IconButton(
+          key: const Key('ptt_landing_theme_button_key'),
             onPressed: () {
               sl<ThemeProvider>().setTheme(
                 context.isBrightnessDark

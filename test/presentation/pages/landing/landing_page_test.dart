@@ -18,6 +18,7 @@ import 'package:pragma_technical_test/presentation/pages/landing/landing_page.da
 import 'package:pragma_technical_test/presentation/provider/theme_provider.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:pragma_technical_test/dependency_injection.dart' as di;
 
 import '../../../helpers/dummy_data.dart';
 import '../../../helpers/json_reader.dart';
@@ -40,6 +41,7 @@ void main() {
 
   setUp(() async {
     await Env.load(fileName: AssetsToken.env.aEnvDev);
+    await di.init();
     tThemeProvider = ThemeProvider();
     mockCubit = MockLandingCubit();
     tQueryController = TextEditingController();
@@ -135,10 +137,10 @@ void main() {
       url: 'https://cdn2.thecatapi.com/images/${tFrist.id}.jpg',
     );
 
-    final tStreamBuilderFristKey = Key('ptt_item_cat_breed_card_${tFrist.id!}_key');
-    final tStreamBuilderLastKey = Key('ptt_item_cat_breed_card_${tLast.id!}_key');
-    final tItemCatBreedCardKey =
+    final tItemCatBreedCardFirstKey =
         Key('ptt_item_cat_breed_card_${tFrist.id!}_key');
+    final tItemCatBreedCardLastKey =
+        Key('ptt_item_cat_breed_card_${tLast.id!}_key');
 
     final tImageStreamList =
         buildImageStreamList(tBreedList, tImageControllers);
@@ -168,12 +170,11 @@ void main() {
     expect(find.byKey(tLandingLoadingKey), findsNothing);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(RefreshIndicator), findsOneWidget);
-    expect(find.byKey(tStreamBuilderFristKey), findsOneWidget);
-    expect(find.byKey(tItemCatBreedCardKey), findsOneWidget);
+    expect(find.byKey(tItemCatBreedCardFirstKey), findsOneWidget);
 
     // act
     final listFinder = find.byKey(tListViewKey);
-    final itemFinder = find.byKey(tStreamBuilderLastKey);
+    final itemFinder = find.byKey(tItemCatBreedCardLastKey);
 
     await tester.dragUntilVisible(
       itemFinder,
@@ -214,6 +215,40 @@ void main() {
     expect(find.byKey(tLandingLoadingKey), findsOneWidget);
     expect(find.byKey(landingErrorKey), findsOneWidget);
     expect(find.text('Error'), findsOneWidget);
+  });
+
+  testWidgets('Should be able to change the theme icon', (tester) async {
+    // arrance
+    const tLandingThemeButtonKey = Key('ptt_landing_theme_button_key');
+
+    final tApp = _BuildMaterialApp(
+      mockCubit: mockCubit,
+      tThemeProvider: tThemeProvider,
+    );
+
+    when(() => mockCubit.queryController).thenReturn(tQueryController);
+    when(() => mockCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockCubit.breeds).thenReturn(const []);
+
+    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+
+    // act
+    await tester.pumpWidget(tApp);
+    await tester.pump();
+
+    // assert
+    expect(find.byKey(tLandingThemeButtonKey), findsOneWidget);
+    expect(find.byIcon(Icons.nightlight_round), findsOneWidget);
+
+    /// act
+    final themeButtonFinder = find.byKey(tLandingThemeButtonKey);
+
+    await tester.tap(themeButtonFinder);
+    await tester.pumpAndSettle();
+
+    // assert
+    expect(themeButtonFinder, findsOneWidget);
+    expect(find.byIcon(Icons.wb_sunny_outlined), findsOneWidget);
   });
 }
 
