@@ -15,8 +15,8 @@ import 'package:pragma_technical_test/data/models/breed_model.dart';
 import 'package:pragma_technical_test/data/models/image_breed_model.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/pages/landing/landing_page.dart';
-import 'package:pragma_technical_test/presentation/provider/theme_provider.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:pragma_technical_test/dependency_injection.dart' as di;
 
@@ -27,7 +27,7 @@ class MockLandingCubit extends MockCubit<LandingState>
     implements LandingCubit {}
 
 void main() {
-  late ThemeProvider tThemeProvider;
+  late ThemeCubit tThemeCubit;
   late LandingCubit mockCubit;
   late TextEditingController tQueryController;
   late ScrollController tScrollController;
@@ -39,10 +39,10 @@ void main() {
 
   final Map<String, StreamController<ImageBreedEntity>> tImageControllers = {};
 
-  setUp(() async {
+  setUpAll(() async {
     await Env.load(fileName: AssetsToken.env.aEnvDev);
     await di.init();
-    tThemeProvider = ThemeProvider();
+    tThemeCubit = ThemeCubit();
     mockCubit = MockLandingCubit();
     tQueryController = TextEditingController();
     tScrollController = ScrollController();
@@ -66,7 +66,7 @@ void main() {
     controllers.clear();
   }
 
-  tearDown(() async {
+  tearDownAll(() async {
     tQueryController.dispose();
     tScrollController.dispose();
     await disposeImageStreamList(tImageControllers);
@@ -76,7 +76,7 @@ void main() {
     // arrange
     final tApp = _BuildMaterialApp(
       mockCubit: mockCubit,
-      tThemeProvider: tThemeProvider,
+      tThemeCubit: tThemeCubit,
     );
 
     when(() => mockCubit.queryController).thenReturn(tQueryController);
@@ -97,7 +97,7 @@ void main() {
     // arrange
     final tApp = _BuildMaterialApp(
       mockCubit: mockCubit,
-      tThemeProvider: tThemeProvider,
+      tThemeCubit: tThemeCubit,
     );
 
     when(() => mockCubit.queryController).thenReturn(tQueryController);
@@ -120,7 +120,7 @@ void main() {
     // arrange
     final tApp = _BuildMaterialApp(
       mockCubit: mockCubit,
-      tThemeProvider: tThemeProvider,
+      tThemeCubit: tThemeCubit,
     );
 
     final List tBreedRawData = json.decode(
@@ -190,7 +190,7 @@ void main() {
     // arrange
     final tApp = _BuildMaterialApp(
       mockCubit: mockCubit,
-      tThemeProvider: tThemeProvider,
+      tThemeCubit: tThemeCubit,
     );
 
     const tLandingError = LandingError('Error');
@@ -221,9 +221,12 @@ void main() {
     // arrance
     const tLandingThemeButtonKey = Key('ptt_landing_theme_button_key');
 
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeProvider: tThemeProvider,
+    final tApp = BlocProvider<ThemeCubit>(
+      create: (BuildContext context) => tThemeCubit,
+      child: _BuildMaterialApp(
+        mockCubit: mockCubit,
+        tThemeCubit: tThemeCubit,
+      ),
     );
 
     when(() => mockCubit.queryController).thenReturn(tQueryController);
@@ -249,37 +252,50 @@ void main() {
     // assert
     expect(themeButtonFinder, findsOneWidget);
     expect(find.byIcon(Icons.wb_sunny_outlined), findsOneWidget);
+
+    /// act
+    await tester.tap(themeButtonFinder);
+    await tester.pumpAndSettle();
+
+    // assert
+    expect(themeButtonFinder, findsOneWidget);
+    expect(find.byIcon(Icons.nightlight_round), findsOneWidget);
   });
 }
 
 class _BuildMaterialApp extends StatelessWidget {
   const _BuildMaterialApp({
     required this.mockCubit,
-    required this.tThemeProvider,
+    required this.tThemeCubit,
   });
 
   final LandingCubit mockCubit;
-  final ThemeProvider tThemeProvider;
+  final ThemeCubit tThemeCubit;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        DefaultWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const <Locale>[
-        Locale('es'),
-        Locale('en'),
-      ],
-      home: BlocProvider<LandingCubit>(
-        create: (BuildContext context) => mockCubit,
-        child: const LandingPage(),
-      ),
-      theme: tThemeProvider.selected,
+    return BlocBuilder<ThemeCubit, ThemeData>(
+      bloc: tThemeCubit,
+      builder: (context, state) {
+        return MaterialApp(
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const <Locale>[
+            Locale('es'),
+            Locale('en'),
+          ],
+          home: BlocProvider<LandingCubit>(
+            create: (BuildContext context) => mockCubit,
+            child: const LandingPage(),
+          ),
+          theme: state,
+        );
+      },
     );
   }
 }

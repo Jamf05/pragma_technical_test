@@ -4,11 +4,10 @@ import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
-import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/pages/landing/widgets/cat_breed_card.dart';
-import 'package:pragma_technical_test/presentation/provider/theme_provider.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -46,13 +45,13 @@ class _LandingPageState extends State<LandingPage> {
 
   List<Widget> get actions => [
         IconButton(
-          key: const Key('ptt_landing_theme_button_key'),
+            key: const Key('ptt_landing_theme_button_key'),
             onPressed: () {
-              sl<ThemeProvider>().setTheme(
-                context.isBrightnessDark
-                    ? ThemeFoundation.light
-                    : ThemeFoundation.dark,
-              );
+              context.read<ThemeCubit>().setTheme(
+                    context.isBrightnessDark
+                        ? ThemeFoundation.light
+                        : ThemeFoundation.dark,
+                  );
             },
             icon: Icon(
               context.isBrightnessDark
@@ -155,7 +154,8 @@ class _Body extends StatelessWidget {
                         builder: (BuildContext context,
                             AsyncSnapshot<ImageBreedEntity> snapshot) {
                           return CatBreedCard(
-                            key: Key('ptt_item_cat_breed_card_${breed.id!}_key'),
+                            key:
+                                Key('ptt_item_cat_breed_card_${breed.id!}_key'),
                             breed: breed,
                             imageUrl: snapshot.hasData
                                 ? snapshot.data?.url

@@ -6,8 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
+import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/presentation/pages/landing/landing_page.dart';
-import 'package:pragma_technical_test/presentation/provider/theme_provider.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/page/splash_page.dart';
@@ -18,7 +18,6 @@ class MockLandingCubit extends MockCubit<LandingState>
     implements LandingCubit {}
 
 void main() {
-  late ThemeProvider tThemeProvider;
   late SplashCubit mockCubit;
 
   late LandingCubit mockLandingCubit;
@@ -28,7 +27,6 @@ void main() {
   const tSplashCatbreedsKey = Key('ptt_splash_catbreeds_key');
 
   setUp(() async {
-    tThemeProvider = ThemeProvider();
     mockCubit = MockSplashCubit();
 
     mockLandingCubit = MockLandingCubit();
@@ -42,7 +40,6 @@ void main() {
     final tApp = _BuildMaterialApp(
       mockCubit: mockCubit,
       mockLandingCubit: mockLandingCubit,
-      tThemeProvider: tThemeProvider,
     );
 
     when(() => mockCubit.state).thenReturn(SplashInitial());
@@ -60,7 +57,6 @@ void main() {
     final tApp = _BuildMaterialApp(
       mockCubit: mockCubit,
       mockLandingCubit: mockLandingCubit,
-      tThemeProvider: tThemeProvider,
     );
 
     whenListen<SplashState>(
@@ -91,12 +87,10 @@ class _BuildMaterialApp extends StatelessWidget {
   const _BuildMaterialApp({
     required this.mockCubit,
     required this.mockLandingCubit,
-    required this.tThemeProvider,
   });
 
   final SplashCubit mockCubit;
   final LandingCubit mockLandingCubit;
-  final ThemeProvider tThemeProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +116,7 @@ class _BuildMaterialApp extends StatelessWidget {
               child: const LandingPage(),
             ),
       },
-      theme: tThemeProvider.selected,
+      theme: ThemeFoundation.light,
     );
   }
 }

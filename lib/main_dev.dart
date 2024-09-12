@@ -6,11 +6,17 @@ import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 import 'package:pragma_technical_test/presentation/app.dart';
 import 'package:pragma_technical_test/dependency_injection.dart' as di;
+import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 
 Future<void> main() async {
   await Env.load(fileName: AssetsToken.env.aEnvDev);
   await di.init();
   Bloc.observer = CustomBlocObserver();
   await SystemChannels.textInput.invokeMethod('TextInput.hide');
-  runApp(const App());
+  runApp(
+    BlocProvider<ThemeCubit>(
+      create: (BuildContext context) => ThemeCubit(),
+      child: const App(),
+    ),
+  );
 }
