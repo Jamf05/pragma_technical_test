@@ -118,6 +118,7 @@ class _Body extends StatelessWidget {
             onChanged: (String value) => bloc.setQuery(value.trim()),
             decoration: InputDecoration(
               suffixIcon: IconButton(
+                key: const Key('ptt_search_button_key'),
                 onPressed: () async {
                   context.focus.unfocus();
                   await bloc.onSearch();

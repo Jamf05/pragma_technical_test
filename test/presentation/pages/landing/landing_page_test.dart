@@ -36,6 +36,8 @@ void main() {
   const tLandingLoadingKey = Key('ptt_landing_loading_key');
   const landingErrorKey = Key('ptt_landing_error_key');
   const tListViewKey = Key('ptt_list_view_key');
+  const tLandingThemeButtonKey = Key('ptt_landing_theme_button_key');
+  const tSearchButtonKey = Key('ptt_search_button_key');
 
   final Map<String, StreamController<ImageBreedEntity>> tImageControllers = {};
 
@@ -219,7 +221,6 @@ void main() {
 
   testWidgets('Should be able to change the theme icon', (tester) async {
     // arrance
-    const tLandingThemeButtonKey = Key('ptt_landing_theme_button_key');
 
     final tApp = BlocProvider<ThemeCubit>(
       create: (BuildContext context) => tThemeCubit,
@@ -260,6 +261,90 @@ void main() {
     // assert
     expect(themeButtonFinder, findsOneWidget);
     expect(find.byIcon(Icons.nightlight_round), findsOneWidget);
+  });
+
+  testWidgets('Should be called onTapOutside', (tester) async {
+    // arrange
+    final tApp = _BuildMaterialApp(
+      mockCubit: mockCubit,
+      tThemeCubit: tThemeCubit,
+    );
+
+    when(() => mockCubit.queryController).thenReturn(tQueryController);
+    when(() => mockCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockCubit.breeds).thenReturn(const []);
+
+    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+
+    // act
+    await tester.pumpWidget(tApp);
+    await tester.pump();
+
+    await tester.tap(find.byType(TextField));
+    await tester.pump();
+    await tester.tap(find.byKey(tLandingAppBarKey));
+    await tester.pump();
+
+    // assert
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.byKey(tLandingAppBarKey), findsOneWidget);
+  });
+
+  testWidgets('Should be called setQuery', (tester) async {
+    // arrange
+    final tApp = _BuildMaterialApp(
+      mockCubit: mockCubit,
+      tThemeCubit: tThemeCubit,
+    );
+
+    when(() => mockCubit.queryController).thenReturn(tQueryController);
+    when(() => mockCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockCubit.setQuery('test1')).thenReturn(null);
+
+    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+
+    // act.
+    await tester.pumpWidget(tApp);
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'test1');
+    await tester.pump();
+
+    // assert
+    expect(find.byType(TextField), findsOneWidget);
+    verify(() => mockCubit.setQuery('test1')).called(1);
+  });
+
+  testWidgets('Should be called search button', (tester) async {
+    // arrange
+    final tApp = _BuildMaterialApp(
+      mockCubit: mockCubit,
+      tThemeCubit: tThemeCubit,
+    );
+
+    when(() => mockCubit.queryController).thenReturn(tQueryController);
+    when(() => mockCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockCubit.setQuery('test2')).thenReturn(null);
+    when(() => mockCubit.onSearch()).thenAnswer((_) async {});
+
+    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+
+    // act
+    await tester.pumpWidget(tApp);
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'test2');
+    await tester.pump();
+    await tester.tap(find.byKey(tSearchButtonKey));
+    await tester.pump();
+
+    // assert
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.byKey(tSearchButtonKey), findsOneWidget);
+    verify(() => mockCubit.setQuery('test2')).called(1);
+    verify(() => mockCubit.onSearch()).called(1);
   });
 }
 
