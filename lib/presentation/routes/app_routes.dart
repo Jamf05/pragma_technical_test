@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:pragma_technical_test/dependency_injection.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/presentation/pages/detail/detail_page.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
           builder: (BuildContext context) => DetailPage(
             breed: record.$1,
             imageUrl: record.$2,
+            cacheManager: DefaultCacheManager(),
           ),
         );
       default:

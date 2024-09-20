@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
@@ -9,9 +11,14 @@ import 'package:pragma_technical_test/presentation/shared/widgets/integer_rating
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
 class DetailPage extends StatelessWidget {
+  final BaseCacheManager cacheManager;
   final BreedEntity breed;
   final String? imageUrl;
-  const DetailPage({required this.breed, required this.imageUrl, super.key});
+  const DetailPage({
+    required this.breed,
+    required this.imageUrl,
+    required this.cacheManager, super.key,
+  });
   static const String route = '/detail';
 
   @override
@@ -30,6 +37,7 @@ class DetailPage extends StatelessWidget {
             Hero(
               tag: breed.id!,
               child: CachedNetworkImage(
+                cacheManager: cacheManager,
                 imageUrl: imageUrl ?? Env.networkPlaceholder,
                 width: double.infinity,
                 height: 250,
