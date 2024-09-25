@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
@@ -9,9 +10,16 @@ import 'package:pragma_technical_test/presentation/shared/widgets/error_in_netwo
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
 class CatBreedCard extends StatelessWidget {
+  final BaseCacheManager cacheManager;
   final String? imageUrl;
   final BreedEntity breed;
-  const CatBreedCard({required this.breed, required this.imageUrl, super.key});
+
+  const CatBreedCard({
+    required this.breed,
+    required this.imageUrl,
+    required this.cacheManager,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +57,7 @@ class CatBreedCard extends StatelessWidget {
               Hero(
                 tag: breed.id!,
                 child: CachedNetworkImage(
+                  cacheManager: cacheManager,
                   imageUrl: imageUrl ?? Env.networkPlaceholder,
                   width: double.infinity,
                   height: 250,

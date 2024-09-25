@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
@@ -10,7 +11,13 @@ import 'package:pragma_technical_test/presentation/pages/landing/widgets/cat_bre
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({super.key});
+  final BaseCacheManager cacheManager;
+
+  const LandingPage({
+    required this.cacheManager,
+    super.key,
+  });
+
   static const String route = '/landing';
 
   @override
@@ -19,6 +26,7 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   late LandingCubit bloc;
+
   @override
   void initState() {
     bloc = context.read<LandingCubit>()
@@ -80,7 +88,9 @@ class _LandingPageState extends State<LandingPage> {
         builder: (BuildContext context, LandingState state) {
           return Stack(
             children: [
-              const _Body(),
+              _Body(
+                cacheManager: widget.cacheManager,
+              ),
               if (state is LandingInitialLoading)
                 const Positioned.fill(
                   bottom: 10.0,
@@ -100,7 +110,11 @@ class _LandingPageState extends State<LandingPage> {
 }
 
 class _Body extends StatelessWidget {
-  const _Body();
+  final BaseCacheManager cacheManager;
+
+  const _Body({
+    required this.cacheManager,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +171,7 @@ class _Body extends StatelessWidget {
                           return CatBreedCard(
                             key:
                                 Key('ptt_item_cat_breed_card_${breed.id!}_key'),
+                            cacheManager: cacheManager,
                             breed: breed,
                             imageUrl: snapshot.hasData
                                 ? snapshot.data?.url

@@ -18,7 +18,9 @@ class AppRoutes {
           ),
       LandingPage.route: (BuildContext context) => BlocProvider<LandingCubit>(
             create: (BuildContext context) => sl<LandingCubit>(),
-            child: const LandingPage(),
+            child: LandingPage(
+              cacheManager: DefaultCacheManager(),
+            ),
           ),
     };
   }

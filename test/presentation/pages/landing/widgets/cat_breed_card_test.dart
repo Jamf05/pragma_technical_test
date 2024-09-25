@@ -23,86 +23,69 @@ void main() {
     await Env.load(fileName: AssetsToken.env.aEnvDev);
   });
 
-  Future<void> configureScreenSize(WidgetTester tester) async {
-    const size = Size(414.0, 896.0);
-    await tester.binding.setSurfaceSize(size);
-    tester.view.physicalSize = size;
-    tester.view.devicePixelRatio = 1;
-  }
-
   testWidgets('CatBreedCard', (WidgetTester tester) async {
-    await configureScreenSize(tester);
-    await HttpOverrides.runZoned(
-      () async {
-        // arrange
-        final Map<String, dynamic> jsonMap = json.decode(
-          JsonHelpers.readJson(DummyData.breedJson),
-        );
-
-        final BreedEntity tBreed = BreedModel.fromJson(jsonMap);
-        const tImage = 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg';
-
-        final Widget widget = _BuildMaterialApp(
-          breed: tBreed,
-          imageUrl: tImage,
-        );
-
-        await tester.pumpWidget(widget);
-        await tester.pumpAndSettle();
-
-        // act
-        final titleFinder = find.text(tBreed.name!);
-        final moreFinder = find.text('More...');
-        final textButtonFinder = find.byType(TextButton);
-        final imageFinder = find.byType(CachedNetworkImage);
-        final originFinder = find.text(tBreed.origin!);
-        final temperamentFinder = find.text(tBreed.temperament!);
-
-        // assert
-
-        expect(titleFinder, findsOneWidget);
-        expect(moreFinder, findsOneWidget);
-        expect(textButtonFinder, findsOneWidget);
-        expect(imageFinder, findsOneWidget);
-        expect(originFinder, findsOneWidget);
-        expect(temperamentFinder, findsOneWidget);
-      },
-      createHttpClient: (_) => HttpClient(),
+    // arrange
+    final Map<String, dynamic> jsonMap = json.decode(
+      JsonHelpers.readJson(DummyData.breedJson),
     );
+
+    final BreedEntity tBreed = BreedModel.fromJson(jsonMap);
+    const tImage = 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg';
+
+    final Widget widget = _BuildMaterialApp(
+      breed: tBreed,
+      imageUrl: tImage,
+    );
+
+    await tester.pumpWidget(widget);
+    await tester.pump();
+
+    // act
+    final titleFinder = find.text(tBreed.name!);
+    final moreFinder = find.text('More...');
+    final textButtonFinder = find.byType(TextButton);
+    final imageFinder = find.byType(CachedNetworkImage);
+    final originFinder = find.text(tBreed.origin!);
+    final temperamentFinder = find.text(tBreed.temperament!);
+
+    // assert
+
+    expect(titleFinder, findsOneWidget);
+    expect(moreFinder, findsOneWidget);
+    expect(textButtonFinder, findsOneWidget);
+    expect(imageFinder, findsOneWidget);
+    expect(originFinder, findsOneWidget);
+    expect(temperamentFinder, findsOneWidget);
   });
 
-  testWidgets('CatBreedCard methoed onPressed', (WidgetTester tester) async {
-    await configureScreenSize(tester);
-    await HttpOverrides.runZoned(
-      () async {
-        await tester.runAsync(() async {
-          // arrange
-          final Map<String, dynamic> jsonMap = json.decode(
-            JsonHelpers.readJson(DummyData.breedJson),
-          );
+  testWidgets('CatBreedCard method onPressed', (WidgetTester tester) async {
+    await tester.runAsync(() async {
+      // arrange
+      final Map<String, dynamic> jsonMap = json.decode(
+        JsonHelpers.readJson(DummyData.breedJson),
+      );
 
-          final BreedEntity tBreed = BreedModel.fromJson(jsonMap);
-          const tImage = 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg';
+      final BreedEntity tBreed = BreedModel.fromJson(jsonMap);
+      const tImage = 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg';
 
-          final Widget widget = _BuildMaterialApp(
-            breed: tBreed,
-            imageUrl: tImage,
-          );
+      final Widget widget = _BuildMaterialApp(
+        breed: tBreed,
+        imageUrl: tImage,
+      );
 
-          await tester.pumpWidget(widget);
-          await tester.pumpAndSettle();
+      await tester.pumpWidget(widget);
+      await tester.pump();
 
-          // act
-          final textButtonFinder = find.byType(TextButton);
-          await tester.tap(textButtonFinder);
-          await tester.pumpAndSettle();
-
-          // assert
-          expect(find.byType(DetailPage), findsOneWidget);
-        });
-      },
-      createHttpClient: (_) => HttpClient(),
-    );
+      // act
+      final textButtonFinder = find.byType(TextButton);
+      await tester.tap(textButtonFinder);
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(seconds: 1));
+      }
+      // assert
+      final detailPageFinder = find.byType(DetailPage);
+      expect(detailPageFinder, findsOneWidget);
+    });
   });
 }
 
@@ -130,9 +113,17 @@ class _BuildMaterialApp extends StatelessWidget {
         Locale('en'),
       ],
       home: Scaffold(
-        body: CatBreedCard(
-          breed: breed,
-          imageUrl: imageUrl,
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CatBreedCard(
+              cacheManager: MockCacheManager(),
+              breed: breed,
+              imageUrl: imageUrl,
+            ),
+          ],
         ),
       ),
       theme: ThemeFoundation.light,

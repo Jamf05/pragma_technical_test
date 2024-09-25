@@ -17,7 +17,8 @@ class DetailPage extends StatelessWidget {
   const DetailPage({
     required this.breed,
     required this.imageUrl,
-    required this.cacheManager, super.key,
+    required this.cacheManager,
+    super.key,
   });
   static const String route = '/detail';
 

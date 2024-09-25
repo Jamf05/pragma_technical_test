@@ -12,6 +12,8 @@ import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/l
 import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/page/splash_page.dart';
 
+import '../../../mocks/mock_cache_manager.dart';
+
 class MockSplashCubit extends MockCubit<SplashState> implements SplashCubit {}
 
 class MockLandingCubit extends MockCubit<LandingState>
@@ -113,7 +115,9 @@ class _BuildMaterialApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         LandingPage.route: (BuildContext context) => BlocProvider<LandingCubit>(
               create: (BuildContext context) => mockLandingCubit,
-              child: const LandingPage(),
+              child: LandingPage(
+                cacheManager: MockCacheManager(),
+              ),
             ),
       },
       theme: ThemeFoundation.light,

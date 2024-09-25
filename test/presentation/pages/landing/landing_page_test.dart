@@ -22,6 +22,7 @@ import 'package:pragma_technical_test/dependency_injection.dart' as di;
 
 import '../../../helpers/dummy_data.dart';
 import '../../../helpers/json_reader.dart';
+import '../../../mocks/mock_cache_manager.dart';
 
 class MockLandingCubit extends MockCubit<LandingState>
     implements LandingCubit {}
@@ -376,7 +377,9 @@ class _BuildMaterialApp extends StatelessWidget {
           ],
           home: BlocProvider<LandingCubit>(
             create: (BuildContext context) => mockCubit,
-            child: const LandingPage(),
+            child: LandingPage(
+              cacheManager: MockCacheManager(),
+            ),
           ),
           theme: state,
         );
