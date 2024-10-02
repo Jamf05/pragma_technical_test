@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-09-24 22:56:25</td>
+            <td class="headerValue">2024-10-01 22:01:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -66,19 +66,19 @@
 <a name="4"><span class="lineNum">       4 </span>            : </a>
 <a name="5"><span class="lineNum">       5 </span>            : class FontsFoundation {</a>
 <a name="6"><span class="lineNum">       6 </span>            :   final Brightness brightness;</a>
-<a name="7"><span class="lineNum">       7 </span><span class="lineCov">          3 :   static FontsFoundation of(Brightness brightness) =&gt;</span></a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          3 :       FontsFoundation._internal(brightness);</span></a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          3 :   FontsFoundation._internal(this.brightness);</span></a>
+<a name="7"><span class="lineNum">       7 </span><span class="lineCov">          4 :   static FontsFoundation of(Brightness brightness) =&gt;</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          4 :       FontsFoundation._internal(brightness);</span></a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          4 :   FontsFoundation._internal(this.brightness);</span></a>
 <a name="10"><span class="lineNum">      10 </span>            : </a>
 <a name="11"><span class="lineNum">      11 </span><span class="lineNoCov">          0 :   _Poppins get poppins =&gt; _Poppins._resolve(brightness);</span></a>
-<a name="12"><span class="lineNum">      12 </span><span class="lineCov">          9 :   _AppBar get appBar =&gt; _AppBar._resolve(brightness);</span></a>
+<a name="12"><span class="lineNum">      12 </span><span class="lineCov">         12 :   _AppBar get appBar =&gt; _AppBar._resolve(brightness);</span></a>
 <a name="13"><span class="lineNum">      13 </span><span class="lineCov">          9 :   _Title get title =&gt; _Title._resolve(brightness);</span></a>
 <a name="14"><span class="lineNum">      14 </span><span class="lineNoCov">          0 :   _Subtitle get subtitle =&gt; _Subtitle._resolve(brightness);</span></a>
 <a name="15"><span class="lineNum">      15 </span><span class="lineCov">          6 :   _Paragraph get paragraph =&gt; _Paragraph._resolve(brightness);</span></a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          9 :   _TextButton get textButton =&gt; _TextButton._resolve(brightness);</span></a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          9 :   _ElevatedButton get elevatedButton =&gt; _ElevatedButton._resolve(brightness);</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          9 :   _OutlinedButton get outlinedButton =&gt; _OutlinedButton._resolve(brightness);</span></a>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          9 :   _InputDecoration get inputDecoration =&gt; _InputDecoration._resolve(brightness);</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">         12 :   _TextButton get textButton =&gt; _TextButton._resolve(brightness);</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">         12 :   _ElevatedButton get elevatedButton =&gt; _ElevatedButton._resolve(brightness);</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">         12 :   _OutlinedButton get outlinedButton =&gt; _OutlinedButton._resolve(brightness);</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">         12 :   _InputDecoration get inputDecoration =&gt; _InputDecoration._resolve(brightness);</span></a>
 <a name="20"><span class="lineNum">      20 </span>            : }</a>
 <a name="21"><span class="lineNum">      21 </span>            : </a>
 <a name="22"><span class="lineNum">      22 </span>            : // _Poppins</a>
@@ -117,12 +117,12 @@
 <a name="55"><span class="lineNum">      55 </span>            :   final TextStyle homeSubtitle;</a>
 <a name="56"><span class="lineNum">      56 </span><span class="lineNoCov">          0 :   _AppBar(this.homeTitle, this.pageTitle, this.homeSubtitle);</span></a>
 <a name="57"><span class="lineNum">      57 </span>            : </a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          3 :   static _AppBar _resolve(Brightness brightness) {</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          4 :   static _AppBar _resolve(Brightness brightness) {</span></a>
 <a name="59"><span class="lineNum">      59 </span>            :     switch (brightness) {</a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          3 :       case Brightness.light:</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          4 :       case Brightness.light:</span></a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineCov">          3 :         return _AppBarLight._();</span></a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          1 :       case Brightness.dark:</span></a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          1 :         return _AppBarDark._();</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          2 :       case Brightness.dark:</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          2 :         return _AppBarDark._();</span></a>
 <a name="64"><span class="lineNum">      64 </span>            :     }</a>
 <a name="65"><span class="lineNum">      65 </span>            :   }</a>
 <a name="66"><span class="lineNum">      66 </span>            : }</a>
@@ -141,7 +141,7 @@
 <a name="79"><span class="lineNum">      79 </span>            : }</a>
 <a name="80"><span class="lineNum">      80 </span>            : </a>
 <a name="81"><span class="lineNum">      81 </span>            : class _AppBarDark implements _AppBar {</a>
-<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          1 :   _AppBarDark._();</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          2 :   _AppBarDark._();</span></a>
 <a name="83"><span class="lineNum">      83 </span>            :   @override</a>
 <a name="84"><span class="lineNum">      84 </span>            :   final TextStyle homeTitle =</a>
 <a name="85"><span class="lineNum">      85 </span>            :       FontsToken.poppinsSb24.copyWith(color: ColorsToken.white);</a>
@@ -428,12 +428,12 @@
 <a name="366"><span class="lineNum">     366 </span>            : </a>
 <a name="367"><span class="lineNum">     367 </span><span class="lineNoCov">          0 :   _ElevatedButton(this.primary, this.primaryA, this.primaryB, this.negative);</span></a>
 <a name="368"><span class="lineNum">     368 </span>            : </a>
-<a name="369"><span class="lineNum">     369 </span><span class="lineCov">          3 :   static _ElevatedButton _resolve(Brightness brightness) {</span></a>
+<a name="369"><span class="lineNum">     369 </span><span class="lineCov">          4 :   static _ElevatedButton _resolve(Brightness brightness) {</span></a>
 <a name="370"><span class="lineNum">     370 </span>            :     switch (brightness) {</a>
-<a name="371"><span class="lineNum">     371 </span><span class="lineCov">          3 :       case Brightness.light:</span></a>
+<a name="371"><span class="lineNum">     371 </span><span class="lineCov">          4 :       case Brightness.light:</span></a>
 <a name="372"><span class="lineNum">     372 </span><span class="lineCov">          3 :         return _ElevatedButtonLight._();</span></a>
-<a name="373"><span class="lineNum">     373 </span><span class="lineCov">          1 :       case Brightness.dark:</span></a>
-<a name="374"><span class="lineNum">     374 </span><span class="lineCov">          1 :         return _ElevatedButtonDark._();</span></a>
+<a name="373"><span class="lineNum">     373 </span><span class="lineCov">          2 :       case Brightness.dark:</span></a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">          2 :         return _ElevatedButtonDark._();</span></a>
 <a name="375"><span class="lineNum">     375 </span>            :     }</a>
 <a name="376"><span class="lineNum">     376 </span>            :   }</a>
 <a name="377"><span class="lineNum">     377 </span>            : }</a>
@@ -469,7 +469,7 @@
 <a name="407"><span class="lineNum">     407 </span>            :   final TextStyle negative =</a>
 <a name="408"><span class="lineNum">     408 </span>            :       FontsToken.poppinsM16.copyWith(color: ColorsFoundation.text.black);</a>
 <a name="409"><span class="lineNum">     409 </span>            : </a>
-<a name="410"><span class="lineNum">     410 </span><span class="lineCov">          1 :   _ElevatedButtonDark._();</span></a>
+<a name="410"><span class="lineNum">     410 </span><span class="lineCov">          2 :   _ElevatedButtonDark._();</span></a>
 <a name="411"><span class="lineNum">     411 </span>            : }</a>
 <a name="412"><span class="lineNum">     412 </span>            : </a>
 <a name="413"><span class="lineNum">     413 </span>            : abstract class _TextButton {</a>
@@ -479,12 +479,12 @@
 <a name="417"><span class="lineNum">     417 </span>            : </a>
 <a name="418"><span class="lineNum">     418 </span><span class="lineNoCov">          0 :   _TextButton(this.whiteAndBlack, this.positive, this.negative);</span></a>
 <a name="419"><span class="lineNum">     419 </span>            : </a>
-<a name="420"><span class="lineNum">     420 </span><span class="lineCov">          3 :   static _TextButton _resolve(Brightness brightness) {</span></a>
+<a name="420"><span class="lineNum">     420 </span><span class="lineCov">          4 :   static _TextButton _resolve(Brightness brightness) {</span></a>
 <a name="421"><span class="lineNum">     421 </span>            :     switch (brightness) {</a>
-<a name="422"><span class="lineNum">     422 </span><span class="lineCov">          3 :       case Brightness.light:</span></a>
+<a name="422"><span class="lineNum">     422 </span><span class="lineCov">          4 :       case Brightness.light:</span></a>
 <a name="423"><span class="lineNum">     423 </span><span class="lineCov">          3 :         return _TextButtonLight._();</span></a>
-<a name="424"><span class="lineNum">     424 </span><span class="lineCov">          1 :       case Brightness.dark:</span></a>
-<a name="425"><span class="lineNum">     425 </span><span class="lineCov">          1 :         return _TextButtonDark._();</span></a>
+<a name="424"><span class="lineNum">     424 </span><span class="lineCov">          2 :       case Brightness.dark:</span></a>
+<a name="425"><span class="lineNum">     425 </span><span class="lineCov">          2 :         return _TextButtonDark._();</span></a>
 <a name="426"><span class="lineNum">     426 </span>            :     }</a>
 <a name="427"><span class="lineNum">     427 </span>            :   }</a>
 <a name="428"><span class="lineNum">     428 </span>            : }</a>
@@ -512,7 +512,7 @@
 <a name="450"><span class="lineNum">     450 </span>            :   @override</a>
 <a name="451"><span class="lineNum">     451 </span>            :   final TextStyle negative =</a>
 <a name="452"><span class="lineNum">     452 </span>            :       FontsToken.poppinsM16.copyWith(color: ColorsFoundation.action.negative);</a>
-<a name="453"><span class="lineNum">     453 </span><span class="lineCov">          1 :   _TextButtonDark._();</span></a>
+<a name="453"><span class="lineNum">     453 </span><span class="lineCov">          2 :   _TextButtonDark._();</span></a>
 <a name="454"><span class="lineNum">     454 </span>            : }</a>
 <a name="455"><span class="lineNum">     455 </span>            : </a>
 <a name="456"><span class="lineNum">     456 </span>            : abstract class _OutlinedButton {</a>
@@ -521,12 +521,12 @@
 <a name="459"><span class="lineNum">     459 </span>            : </a>
 <a name="460"><span class="lineNum">     460 </span><span class="lineNoCov">          0 :   _OutlinedButton(this.primary, this.primaryB);</span></a>
 <a name="461"><span class="lineNum">     461 </span>            : </a>
-<a name="462"><span class="lineNum">     462 </span><span class="lineCov">          3 :   static _OutlinedButton _resolve(Brightness brightness) {</span></a>
+<a name="462"><span class="lineNum">     462 </span><span class="lineCov">          4 :   static _OutlinedButton _resolve(Brightness brightness) {</span></a>
 <a name="463"><span class="lineNum">     463 </span>            :     switch (brightness) {</a>
-<a name="464"><span class="lineNum">     464 </span><span class="lineCov">          3 :       case Brightness.light:</span></a>
+<a name="464"><span class="lineNum">     464 </span><span class="lineCov">          4 :       case Brightness.light:</span></a>
 <a name="465"><span class="lineNum">     465 </span><span class="lineCov">          3 :         return _OutlinedButtonLight._();</span></a>
-<a name="466"><span class="lineNum">     466 </span><span class="lineCov">          1 :       case Brightness.dark:</span></a>
-<a name="467"><span class="lineNum">     467 </span><span class="lineCov">          1 :         return _OutlinedButtonDark._();</span></a>
+<a name="466"><span class="lineNum">     466 </span><span class="lineCov">          2 :       case Brightness.dark:</span></a>
+<a name="467"><span class="lineNum">     467 </span><span class="lineCov">          2 :         return _OutlinedButtonDark._();</span></a>
 <a name="468"><span class="lineNum">     468 </span>            :     }</a>
 <a name="469"><span class="lineNum">     469 </span>            :   }</a>
 <a name="470"><span class="lineNum">     470 </span>            : }</a>
@@ -550,7 +550,7 @@
 <a name="488"><span class="lineNum">     488 </span>            :   final TextStyle primaryB =</a>
 <a name="489"><span class="lineNum">     489 </span>            :       FontsToken.poppinsM16.copyWith(color: ColorsFoundation.primaryB);</a>
 <a name="490"><span class="lineNum">     490 </span>            : </a>
-<a name="491"><span class="lineNum">     491 </span><span class="lineCov">          1 :   _OutlinedButtonDark._();</span></a>
+<a name="491"><span class="lineNum">     491 </span><span class="lineCov">          2 :   _OutlinedButtonDark._();</span></a>
 <a name="492"><span class="lineNum">     492 </span>            : }</a>
 <a name="493"><span class="lineNum">     493 </span>            : </a>
 <a name="494"><span class="lineNum">     494 </span>            : abstract class _InputDecoration {</a>
@@ -562,12 +562,12 @@
 <a name="500"><span class="lineNum">     500 </span><span class="lineNoCov">          0 :   _InputDecoration(</span></a>
 <a name="501"><span class="lineNum">     501 </span>            :       this.style, this.hintStyle, this.labelStyle, this.errorStyle);</a>
 <a name="502"><span class="lineNum">     502 </span>            : </a>
-<a name="503"><span class="lineNum">     503 </span><span class="lineCov">          3 :   static _InputDecoration _resolve(Brightness brightness) {</span></a>
+<a name="503"><span class="lineNum">     503 </span><span class="lineCov">          4 :   static _InputDecoration _resolve(Brightness brightness) {</span></a>
 <a name="504"><span class="lineNum">     504 </span>            :     switch (brightness) {</a>
-<a name="505"><span class="lineNum">     505 </span><span class="lineCov">          3 :       case Brightness.light:</span></a>
+<a name="505"><span class="lineNum">     505 </span><span class="lineCov">          4 :       case Brightness.light:</span></a>
 <a name="506"><span class="lineNum">     506 </span><span class="lineCov">          3 :         return _InputDecorationLight._();</span></a>
-<a name="507"><span class="lineNum">     507 </span><span class="lineCov">          1 :       case Brightness.dark:</span></a>
-<a name="508"><span class="lineNum">     508 </span><span class="lineCov">          1 :         return _InputDecorationDark._();</span></a>
+<a name="507"><span class="lineNum">     507 </span><span class="lineCov">          2 :       case Brightness.dark:</span></a>
+<a name="508"><span class="lineNum">     508 </span><span class="lineCov">          2 :         return _InputDecorationDark._();</span></a>
 <a name="509"><span class="lineNum">     509 </span>            :     }</a>
 <a name="510"><span class="lineNum">     510 </span>            :   }</a>
 <a name="511"><span class="lineNum">     511 </span>            : }</a>
@@ -603,7 +603,7 @@
 <a name="541"><span class="lineNum">     541 </span>            :   final TextStyle errorStyle =</a>
 <a name="542"><span class="lineNum">     542 </span>            :       FontsToken.poppinsR11.copyWith(color: ColorsFoundation.action.negative);</a>
 <a name="543"><span class="lineNum">     543 </span>            : </a>
-<a name="544"><span class="lineNum">     544 </span><span class="lineCov">          1 :   _InputDecorationDark._();</span></a>
+<a name="544"><span class="lineNum">     544 </span><span class="lineCov">          2 :   _InputDecorationDark._();</span></a>
 <a name="545"><span class="lineNum">     545 </span>            : }</a>
 </pre>
       </td>

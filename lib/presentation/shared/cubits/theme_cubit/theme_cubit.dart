@@ -7,7 +7,8 @@ class ThemeCubit extends Cubit<ThemeData> {
   ThemeCubit() : super(_initial);
 
   static final ThemeData _initial =
-      PlatformDispatcher.instance.platformBrightness == Brightness.light
+      WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+              Brightness.light
           ? ThemeFoundation.light
           : ThemeFoundation.dark;
 
