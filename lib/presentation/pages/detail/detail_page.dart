@@ -11,12 +11,14 @@ import 'package:pragma_technical_test/presentation/shared/widgets/integer_rating
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
 class DetailPage extends StatelessWidget {
+  @Deprecated('A centralized instance should be used')
   final BaseCacheManager cacheManager;
   final BreedEntity breed;
   final String? imageUrl;
   const DetailPage({
     required this.breed,
     required this.imageUrl,
+    @Deprecated('A centralized instance should be used')
     required this.cacheManager,
     super.key,
   });

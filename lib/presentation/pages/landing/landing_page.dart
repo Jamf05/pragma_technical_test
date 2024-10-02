@@ -11,9 +11,11 @@ import 'package:pragma_technical_test/presentation/pages/landing/widgets/cat_bre
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 
 class LandingPage extends StatefulWidget {
+  @Deprecated('A centralized instance should be used')
   final BaseCacheManager cacheManager;
 
   const LandingPage({
+    @Deprecated('A centralized instance should be used')
     required this.cacheManager,
     super.key,
   });
@@ -110,9 +112,11 @@ class _LandingPageState extends State<LandingPage> {
 }
 
 class _Body extends StatelessWidget {
+  @Deprecated('A centralized instance should be used')
   final BaseCacheManager cacheManager;
 
   const _Body({
+    @Deprecated('A centralized instance should be used')
     required this.cacheManager,
   });
 

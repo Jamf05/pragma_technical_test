@@ -10,6 +10,7 @@ import 'package:pragma_technical_test/presentation/shared/widgets/error_in_netwo
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
 class CatBreedCard extends StatelessWidget {
+  @Deprecated('A centralized instance should be used')
   final BaseCacheManager cacheManager;
   final String? imageUrl;
   final BreedEntity breed;
@@ -17,6 +18,7 @@ class CatBreedCard extends StatelessWidget {
   const CatBreedCard({
     required this.breed,
     required this.imageUrl,
+    @Deprecated('A centralized instance should be used')
     required this.cacheManager,
     super.key,
   });
