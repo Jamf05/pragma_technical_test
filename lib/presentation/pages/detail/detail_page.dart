@@ -1,27 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/cache_manager_cubit/cache_manager_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/error_in_network_image_widget.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/integer_rating_bar_widget.dart';
 import 'package:pragma_technical_test/presentation/shared/widgets/placeholder_network_image_widget.dart';
 
 class DetailPage extends StatelessWidget {
-  @Deprecated('A centralized instance should be used')
-  final BaseCacheManager cacheManager;
   final BreedEntity breed;
   final String? imageUrl;
+
   const DetailPage({
     required this.breed,
     required this.imageUrl,
-    @Deprecated('A centralized instance should be used')
-    required this.cacheManager,
     super.key,
   });
+
   static const String route = '/detail';
 
   @override
@@ -40,7 +39,7 @@ class DetailPage extends StatelessWidget {
             Hero(
               tag: breed.id!,
               child: CachedNetworkImage(
-                cacheManager: cacheManager,
+                cacheManager: context.read<CacheManagerCubit>().state,
                 imageUrl: imageUrl ?? Env.networkPlaceholder,
                 width: double.infinity,
                 height: 250,
@@ -141,6 +140,7 @@ class DetailPage extends StatelessWidget {
 class _ItemText extends StatelessWidget {
   final String title;
   final String? value;
+
   const _ItemText({required this.title, required this.value});
 
   @override
@@ -175,6 +175,7 @@ class _ItemText extends StatelessWidget {
 class _ItemRating extends StatelessWidget {
   final String title;
   final int? value;
+
   const _ItemRating({required this.title, required this.value});
 
   @override

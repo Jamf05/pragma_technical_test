@@ -1,8 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pragma_technical_test/core/env.dart';
@@ -13,14 +15,25 @@ import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/presentation/pages/detail/detail_page.dart';
 import 'package:pragma_technical_test/presentation/pages/landing/widgets/cat_breed_card.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/cache_manager_cubit/cache_manager_cubit.dart';
 
 import '../../../../helpers/dummy_data.dart';
 import '../../../../helpers/json_reader.dart';
 import '../../../../mocks/mock_cache_manager.dart';
 
+class MockCacheManagerCubit extends MockCubit<BaseCacheManager>
+    implements CacheManagerCubit {
+  MockCacheManagerCubit() : super();
+
+  @override
+  BaseCacheManager state = MockCacheManager();
+}
+
 void main() {
-  setUp(() async {
+  late CacheManagerCubit mockCacheManagerCubit;
+  setUpAll(() async {
     await Env.load(fileName: AssetsToken.env.aEnvDev);
+    mockCacheManagerCubit = MockCacheManagerCubit();
   });
 
   testWidgets('CatBreedCard', (WidgetTester tester) async {
@@ -32,9 +45,12 @@ void main() {
     final BreedEntity tBreed = BreedModel.fromJson(jsonMap);
     const tImage = 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg';
 
-    final Widget widget = _BuildMaterialApp(
-      breed: tBreed,
-      imageUrl: tImage,
+    final Widget widget = _BuildApp(
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: _BuildMaterialApp(
+        breed: tBreed,
+        imageUrl: tImage,
+      ),
     );
 
     await tester.pumpWidget(widget);
@@ -68,9 +84,12 @@ void main() {
       final BreedEntity tBreed = BreedModel.fromJson(jsonMap);
       const tImage = 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg';
 
-      final Widget widget = _BuildMaterialApp(
-        breed: tBreed,
-        imageUrl: tImage,
+      final Widget widget = _BuildApp(
+        mockCacheManagerCubit: mockCacheManagerCubit,
+        child: _BuildMaterialApp(
+          breed: tBreed,
+          imageUrl: tImage,
+        ),
       );
 
       await tester.pumpWidget(widget);
@@ -87,6 +106,28 @@ void main() {
       expect(detailPageFinder, findsOneWidget);
     });
   });
+}
+
+class _BuildApp extends StatelessWidget {
+  final CacheManagerCubit mockCacheManagerCubit;
+  final Widget child;
+
+  const _BuildApp({
+    required this.child,
+    required this.mockCacheManagerCubit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CacheManagerCubit>(
+          create: (BuildContext context) => mockCacheManagerCubit,
+        ),
+      ],
+      child: child,
+    );
+  }
 }
 
 class _BuildMaterialApp extends StatelessWidget {
@@ -119,7 +160,6 @@ class _BuildMaterialApp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CatBreedCard(
-              cacheManager: MockCacheManager(),
               breed: breed,
               imageUrl: imageUrl,
             ),
@@ -131,7 +171,6 @@ class _BuildMaterialApp extends StatelessWidget {
         DetailPage.route: (BuildContext context) => DetailPage(
               breed: breed,
               imageUrl: imageUrl,
-              cacheManager: MockCacheManager(),
             ),
       },
     );

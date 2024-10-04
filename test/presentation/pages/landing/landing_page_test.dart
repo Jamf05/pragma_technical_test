@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,6 +16,7 @@ import 'package:pragma_technical_test/data/models/breed_model.dart';
 import 'package:pragma_technical_test/data/models/image_breed_model.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/pages/landing/landing_page.dart';
+import 'package:pragma_technical_test/presentation/shared/cubits/cache_manager_cubit/cache_manager_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 import 'package:rxdart/rxdart.dart';
@@ -27,9 +29,18 @@ import '../../../mocks/mock_cache_manager.dart';
 class MockLandingCubit extends MockCubit<LandingState>
     implements LandingCubit {}
 
+class MockCacheManagerCubit extends MockCubit<BaseCacheManager>
+    implements CacheManagerCubit {
+  MockCacheManagerCubit() : super();
+
+  @override
+  BaseCacheManager state = MockCacheManager();
+}
+
 void main() {
   late ThemeCubit tThemeCubit;
-  late LandingCubit mockCubit;
+  late LandingCubit mockLandingCubit;
+  late CacheManagerCubit mockCacheManagerCubit;
   late TextEditingController tQueryController;
   late ScrollController tScrollController;
 
@@ -46,7 +57,8 @@ void main() {
     await Env.load(fileName: AssetsToken.env.aEnvDev);
     await di.init();
     tThemeCubit = ThemeCubit();
-    mockCubit = MockLandingCubit();
+    mockLandingCubit = MockLandingCubit();
+    mockCacheManagerCubit = MockCacheManagerCubit();
     tQueryController = TextEditingController();
     tScrollController = ScrollController();
   });
@@ -77,16 +89,18 @@ void main() {
 
   testWidgets('LandingPage when cubit state is LandingInitial', (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
 
-    when(() => mockCubit.state).thenReturn(LandingInitial());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitial());
 
     // act
     await tester.pumpWidget(tApp);
@@ -98,16 +112,18 @@ void main() {
   testWidgets('LandingPage when cubit state is LandingInitialLoading',
       (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoading());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoading());
 
     // act
     await tester.pumpWidget(tApp);
@@ -121,9 +137,11 @@ void main() {
       'LandingPage when cubit state is LandingInitialLoaded and one element in list',
       (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
     final List tBreedRawData = json.decode(
@@ -148,20 +166,20 @@ void main() {
     final tImageStreamList =
         buildImageStreamList(tBreedList, tImageControllers);
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(tBreedList);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(tBreedList);
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoaded());
 
     for (int i = 0; i < tBreedList.length; i++) {
-      when(() => mockCubit.imageStream(tBreedList[i].referenceImageId))
+      when(() => mockLandingCubit.imageStream(tBreedList[i].referenceImageId))
           .thenAnswer((_) {
         return tImageStreamList[i];
       });
     }
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoaded());
 
     // act
     await tester.pumpWidget(tApp);
@@ -191,19 +209,21 @@ void main() {
 
   testWidgets('LandingPage when cubit state is LandingError', (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
     const tLandingError = LandingError('Error');
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
 
     whenListen<LandingState>(
-      mockCubit,
+      mockLandingCubit,
       Stream<LandingState>.fromIterable(
           [LandingInitial(), LandingInitialLoading(), tLandingError]),
       initialState: LandingInitial(),
@@ -223,23 +243,22 @@ void main() {
   testWidgets('Should be able to change the theme icon', (tester) async {
     // arrance
 
-    final tApp = BlocProvider<ThemeCubit>(
-      create: (BuildContext context) => tThemeCubit,
-      child: _BuildMaterialApp(
-        mockCubit: mockCubit,
-        tThemeCubit: tThemeCubit,
-      ),
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoaded());
 
     // act
     await tester.pumpWidget(tApp);
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // assert
     expect(find.byKey(tLandingThemeButtonKey), findsOneWidget);
@@ -266,16 +285,18 @@ void main() {
 
   testWidgets('Should be called onTapOutside', (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoaded());
 
     // act
     await tester.pumpWidget(tApp);
@@ -293,17 +314,19 @@ void main() {
 
   testWidgets('Should be called setQuery', (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
-    when(() => mockCubit.setQuery('test1')).thenReturn(null);
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.setQuery('test1')).thenReturn(null);
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoaded());
 
     // act.
     await tester.pumpWidget(tApp);
@@ -314,23 +337,25 @@ void main() {
 
     // assert
     expect(find.byType(TextField), findsOneWidget);
-    verify(() => mockCubit.setQuery('test1')).called(1);
+    verify(() => mockLandingCubit.setQuery('test1')).called(1);
   });
 
   testWidgets('Should be called search button', (tester) async {
     // arrange
-    final tApp = _BuildMaterialApp(
-      mockCubit: mockCubit,
-      tThemeCubit: tThemeCubit,
+    final tApp = _BuildApp(
+      mockLandingCubit: mockLandingCubit,
+      mockThemeCubit: tThemeCubit,
+      mockCacheManagerCubit: mockCacheManagerCubit,
+      child: const _BuildMaterialApp(),
     );
 
-    when(() => mockCubit.queryController).thenReturn(tQueryController);
-    when(() => mockCubit.scrollController).thenReturn(tScrollController);
-    when(() => mockCubit.breeds).thenReturn(const []);
-    when(() => mockCubit.setQuery('test2')).thenReturn(null);
-    when(() => mockCubit.onSearch()).thenAnswer((_) async {});
+    when(() => mockLandingCubit.queryController).thenReturn(tQueryController);
+    when(() => mockLandingCubit.scrollController).thenReturn(tScrollController);
+    when(() => mockLandingCubit.breeds).thenReturn(const []);
+    when(() => mockLandingCubit.setQuery('test2')).thenReturn(null);
+    when(() => mockLandingCubit.onSearch()).thenAnswer((_) async {});
 
-    when(() => mockCubit.state).thenReturn(LandingInitialLoaded());
+    when(() => mockLandingCubit.state).thenReturn(LandingInitialLoaded());
 
     // act
     await tester.pumpWidget(tApp);
@@ -344,24 +369,50 @@ void main() {
     // assert
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byKey(tSearchButtonKey), findsOneWidget);
-    verify(() => mockCubit.setQuery('test2')).called(1);
-    verify(() => mockCubit.onSearch()).called(1);
+    verify(() => mockLandingCubit.setQuery('test2')).called(1);
+    verify(() => mockLandingCubit.onSearch()).called(1);
   });
 }
 
-class _BuildMaterialApp extends StatelessWidget {
-  const _BuildMaterialApp({
-    required this.mockCubit,
-    required this.tThemeCubit,
+class _BuildApp extends StatelessWidget {
+  final CacheManagerCubit mockCacheManagerCubit;
+  final LandingCubit mockLandingCubit;
+  final ThemeCubit mockThemeCubit;
+  final Widget child;
+
+  const _BuildApp({
+    required this.child,
+    required this.mockCacheManagerCubit,
+    required this.mockLandingCubit,
+    required this.mockThemeCubit,
   });
 
-  final LandingCubit mockCubit;
-  final ThemeCubit tThemeCubit;
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CacheManagerCubit>(
+          create: (BuildContext context) => mockCacheManagerCubit,
+        ),
+        BlocProvider<LandingCubit>(
+          create: (BuildContext context) => mockLandingCubit,
+        ),
+        BlocProvider<ThemeCubit>.value(
+          value: mockThemeCubit,
+        ),
+      ],
+      child: child,
+    );
+  }
+}
+
+class _BuildMaterialApp extends StatelessWidget {
+  const _BuildMaterialApp();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeData>(
-      bloc: tThemeCubit,
+      bloc: context.read<ThemeCubit>(),
       builder: (context, state) {
         return MaterialApp(
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
@@ -375,12 +426,7 @@ class _BuildMaterialApp extends StatelessWidget {
             Locale('es'),
             Locale('en'),
           ],
-          home: BlocProvider<LandingCubit>(
-            create: (BuildContext context) => mockCubit,
-            child: LandingPage(
-              cacheManager: MockCacheManager(),
-            ),
-          ),
+          home: const LandingPage(),
           theme: state,
         );
       },

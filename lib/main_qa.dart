@@ -6,6 +6,7 @@ import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 import 'package:pragma_technical_test/presentation/app.dart';
 import 'package:pragma_technical_test/dependency_injection.dart' as di;
+import 'package:pragma_technical_test/presentation/shared/cubits/cache_manager_cubit/cache_manager_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 
 Future<void> main() async {
@@ -14,8 +15,15 @@ Future<void> main() async {
   Bloc.observer = CustomBlocObserver();
   await SystemChannels.textInput.invokeMethod('TextInput.hide');
   runApp(
-    BlocProvider<ThemeCubit>(
-      create: (BuildContext context) => ThemeCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<CacheManagerCubit>(
+          create: (BuildContext context) => CacheManagerCubit(),
+        ),
+        BlocProvider<ThemeCubit>(
+          create: (BuildContext context) => ThemeCubit(),
+        ),
+      ],
       child: const App(),
     ),
   );
