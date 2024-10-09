@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-10-03 22:14:07</td>
+            <td class="headerValue">2024-10-08 21:06:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -124,12 +124,12 @@
 <a name="62"><span class="lineNum">      62 </span>            : /// be consistent with the languages listed in the AppLocalizations.supportedLocales</a>
 <a name="63"><span class="lineNum">      63 </span>            : /// property.</a>
 <a name="64"><span class="lineNum">      64 </span>            : abstract class AppLocalizations {</a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          9 :   AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">         12 :   AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : </a>
 <a name="67"><span class="lineNum">      67 </span>            :   final String localeName;</a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          3 :   static AppLocalizations of(BuildContext context) {</span></a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          3 :     return Localizations.of&lt;AppLocalizations&gt;(context, AppLocalizations)!;</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          4 :   static AppLocalizations of(BuildContext context) {</span></a>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          4 :     return Localizations.of&lt;AppLocalizations&gt;(context, AppLocalizations)!;</span></a>
 <a name="71"><span class="lineNum">      71 </span>            :   }</a>
 <a name="72"><span class="lineNum">      72 </span>            : </a>
 <a name="73"><span class="lineNum">      73 </span>            :   static const LocalizationsDelegate&lt;AppLocalizations&gt; delegate = _AppLocalizationsDelegate();</a>
@@ -273,26 +273,26 @@
 <a name="211"><span class="lineNum">     211 </span>            : }</a>
 <a name="212"><span class="lineNum">     212 </span>            : </a>
 <a name="213"><span class="lineNum">     213 </span>            : class _AppLocalizationsDelegate extends LocalizationsDelegate&lt;AppLocalizations&gt; {</a>
-<a name="214"><span class="lineNum">     214 </span><span class="lineCov">         17 :   const _AppLocalizationsDelegate();</span></a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">          7 :   const _AppLocalizationsDelegate();</span></a>
 <a name="215"><span class="lineNum">     215 </span>            : </a>
-<a name="216"><span class="lineNum">     216 </span><span class="lineCov">          3 :   @override</span></a>
+<a name="216"><span class="lineNum">     216 </span><span class="lineCov">          4 :   @override</span></a>
 <a name="217"><span class="lineNum">     217 </span>            :   Future&lt;AppLocalizations&gt; load(Locale locale) {</a>
-<a name="218"><span class="lineNum">     218 </span><span class="lineCov">          6 :     return SynchronousFuture&lt;AppLocalizations&gt;(lookupAppLocalizations(locale));</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">          8 :     return SynchronousFuture&lt;AppLocalizations&gt;(lookupAppLocalizations(locale));</span></a>
 <a name="219"><span class="lineNum">     219 </span>            :   }</a>
 <a name="220"><span class="lineNum">     220 </span>            : </a>
-<a name="221"><span class="lineNum">     221 </span><span class="lineCov">          3 :   @override</span></a>
-<a name="222"><span class="lineNum">     222 </span><span class="lineCov">          9 :   bool isSupported(Locale locale) =&gt; &lt;String&gt;['en', 'es'].contains(locale.languageCode);</span></a>
+<a name="221"><span class="lineNum">     221 </span><span class="lineCov">          4 :   @override</span></a>
+<a name="222"><span class="lineNum">     222 </span><span class="lineCov">         12 :   bool isSupported(Locale locale) =&gt; &lt;String&gt;['en', 'es'].contains(locale.languageCode);</span></a>
 <a name="223"><span class="lineNum">     223 </span>            : </a>
 <a name="224"><span class="lineNum">     224 </span><span class="lineCov">          1 :   @override</span></a>
 <a name="225"><span class="lineNum">     225 </span>            :   bool shouldReload(_AppLocalizationsDelegate old) =&gt; false;</a>
 <a name="226"><span class="lineNum">     226 </span>            : }</a>
 <a name="227"><span class="lineNum">     227 </span>            : </a>
-<a name="228"><span class="lineNum">     228 </span><span class="lineCov">          3 : AppLocalizations lookupAppLocalizations(Locale locale) {</span></a>
+<a name="228"><span class="lineNum">     228 </span><span class="lineCov">          4 : AppLocalizations lookupAppLocalizations(Locale locale) {</span></a>
 <a name="229"><span class="lineNum">     229 </span>            : </a>
 <a name="230"><span class="lineNum">     230 </span>            : </a>
 <a name="231"><span class="lineNum">     231 </span>            :   // Lookup logic when only language code is specified.</a>
-<a name="232"><span class="lineNum">     232 </span><span class="lineCov">          3 :   switch (locale.languageCode) {</span></a>
-<a name="233"><span class="lineNum">     233 </span><span class="lineCov">          6 :     case 'en': return AppLocalizationsEn();</span></a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineCov">          4 :   switch (locale.languageCode) {</span></a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">          8 :     case 'en': return AppLocalizationsEn();</span></a>
 <a name="234"><span class="lineNum">     234 </span><span class="lineNoCov">          0 :     case 'es': return AppLocalizationsEs();</span></a>
 <a name="235"><span class="lineNum">     235 </span>            :   }</a>
 <a name="236"><span class="lineNum">     236 </span>            : </a>

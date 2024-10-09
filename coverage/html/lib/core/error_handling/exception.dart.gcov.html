@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-10-03 22:14:07</td>
+            <td class="headerValue">2024-10-08 22:01:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -69,14 +69,14 @@
 <a name="7"><span class="lineNum">       7 </span>            :   final Exception? error;</a>
 <a name="8"><span class="lineNum">       8 </span>            :   @override</a>
 <a name="9"><span class="lineNum">       9 </span>            :   final String message;</a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          1 :   ExceptionFailure._({</span></a>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          2 :   ExceptionFailure._({</span></a>
 <a name="11"><span class="lineNum">      11 </span>            :     required this.message, this.error,</a>
 <a name="12"><span class="lineNum">      12 </span>            :   });</a>
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          1 :   factory ExceptionFailure.decode(Exception? error) {</span></a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          2 :     log(error.toString(), name: 'FAILURE[EXCEPTION]');</span></a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          1 :     return ExceptionFailure._(</span></a>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          2 :   factory ExceptionFailure.decode(Exception? error) {</span></a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          4 :     log(error.toString(), name: 'FAILURE[EXCEPTION]');</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          2 :     return ExceptionFailure._(</span></a>
 <a name="16"><span class="lineNum">      16 </span>            :       error: error,</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          1 :       message: error.toString(),</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          2 :       message: error.toString(),</span></a>
 <a name="18"><span class="lineNum">      18 </span>            :     );</a>
 <a name="19"><span class="lineNum">      19 </span>            :   }</a>
 <a name="20"><span class="lineNum">      20 </span>            : }</a>

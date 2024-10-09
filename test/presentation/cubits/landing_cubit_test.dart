@@ -5,9 +5,11 @@ import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:pragma_technical_test/core/error_handling/exception.dart';
 
 import 'package:pragma_technical_test/core/validators/query_input.dart';
 import 'package:pragma_technical_test/data/models/breed_model.dart';
@@ -74,11 +76,31 @@ void main() {
         expect(cubit.breeds, tBreedList);
       },
     );
+
+    blocTest<LandingCubit, LandingState>(
+      'emits [LandingInitialLoading, LandingError] when function is added.',
+      build: () {
+        when(mockGetBreedsUseCase.call(tPage, tLimit)).thenAnswer((_) async =>
+            Left(ExceptionFailure.decode(Exception('This is a test error'))));
+        return cubit;
+      },
+      act: (cubit) => cubit.init(),
+      expect: () => <LandingState>[
+        LandingInitialLoading(),
+        const LandingError('Exception: This is a test error'),
+        LandingInitialLoaded(),
+      ],
+      verify: (cubit) {
+        verify(mockGetBreedsUseCase.call(tPage, tLimit));
+        expect(cubit.breeds, []);
+      },
+    );
   });
 
   group('Method setQuery', () {
     const String tQuery = 'air';
     const tQueryInput = QueryInput.dirty(value: tQuery);
+    const tQueryInputEmpty = QueryInput.dirty(value: '');
     final List tBreedRawData = json.decode(
       JsonHelpers.readJson(DummyData.breedsSearchJson),
     );
@@ -101,6 +123,26 @@ void main() {
         verify(mockSearchBreedsUseCase.call(tQuery, null));
         expect(cubit.query, tQueryInput);
         expect(cubit.breeds, tBreedList);
+      },
+    );
+
+    blocTest<LandingCubit, LandingState>(
+      'emits [LandingInitialLoading, LandingInitialLoaded] when function is added and value is empty.',
+      build: () {
+        when(mockSearchBreedsUseCase.call('', null))
+            .thenAnswer((_) async => const Right([]));
+        return cubit;
+      },
+      act: (cubit) => cubit.setQuery(''),
+      wait: const Duration(seconds: 1),
+      expect: () => <LandingState>[
+        LandingInitialLoading(),
+        LandingInitialLoaded(),
+      ],
+      verify: (cubit) {
+        verifyNever(mockSearchBreedsUseCase.call('', null));
+        expect(cubit.query, tQueryInputEmpty);
+        expect(cubit.breeds, const []);
       },
     );
   });
@@ -209,6 +251,23 @@ void main() {
         expect(cubit.imageControllers.length, tImageControllers.length);
         expect(actualStream, emits(tImageBreed));
       },
+    );
+
+    test('Property ScrollController', () {
+      expect(cubit.scrollController, isA<ScrollController>());
+    });
+
+    blocTest<LandingCubit, LandingState>(
+      'Should return empty when call addListener function.',
+      build: () {
+        return cubit;
+      },
+      act: (cubit) {
+        return cubit..addListener();
+      },
+      wait: const Duration(seconds: 2),
+      expect: () => <LandingState>[],
+      verify: (cubit) {},
     );
   });
 }
