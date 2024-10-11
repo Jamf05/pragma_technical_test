@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-10-08 22:01:26</td>
+            <td class="headerValue">2024-10-10 22:31:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -65,12 +65,12 @@
 <a name="3"><span class="lineNum">       3 </span>            : import 'package:pragma_technical_test/presentation/design/design.dart';</a>
 <a name="4"><span class="lineNum">       4 </span>            : </a>
 <a name="5"><span class="lineNum">       5 </span>            : class ThemeCubit extends Cubit&lt;ThemeData&gt; {</a>
-<a name="6"><span class="lineNum">       6 </span><span class="lineCov">          6 :   ThemeCubit() : super(_initial);</span></a>
+<a name="6"><span class="lineNum">       6 </span><span class="lineCov">          9 :   ThemeCubit() : super(_initial);</span></a>
 <a name="7"><span class="lineNum">       7 </span>            : </a>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          4 :   static final ThemeData _initial =</span></a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          8 :       WidgetsBinding.instance.platformDispatcher.platformBrightness ==</span></a>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">          6 :   static final ThemeData _initial =</span></a>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">         12 :       WidgetsBinding.instance.platformDispatcher.platformBrightness ==</span></a>
 <a name="10"><span class="lineNum">      10 </span>            :               Brightness.light</a>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          1 :           ? ThemeFoundation.light</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          2 :           ? ThemeFoundation.light</span></a>
 <a name="12"><span class="lineNum">      12 </span><span class="lineCov">          1 :           : ThemeFoundation.dark;</span></a>
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <a name="14"><span class="lineNum">      14 </span><span class="lineCov">          2 :   ThemeData get selected =&gt; state;</span></a>
