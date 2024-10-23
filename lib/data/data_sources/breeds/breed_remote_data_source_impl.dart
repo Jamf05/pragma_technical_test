@@ -1,14 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:pragma_technical_test/core/error_handling/error.dart';
 import 'package:pragma_technical_test/core/error_handling/exception.dart';
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source.dart';
 import 'package:pragma_technical_test/data/models/breed_model.dart';
 import 'package:pragma_technical_test/data/models/image_breed_model.dart';
-
-abstract class BreedRemoteDataSource {
-  Future<List<BreedModel>> getBreeds({required int page, int? limit});
-  Future<List<BreedModel>> search({required String query, int? attachImage});
-  Future<ImageBreedModel> getImage(String referenceImageId);
-}
 
 class BreedRemoteDataSourceImpl implements BreedRemoteDataSource {
   final Dio client;

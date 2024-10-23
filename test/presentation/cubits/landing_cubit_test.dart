@@ -131,7 +131,6 @@ void main() {
   group('Method setQuery', () {
     const String tQuery = 'air';
     const tQueryInput = QueryInput.dirty(value: tQuery);
-    const tQueryInputEmpty = QueryInput.dirty(value: '');
     final List tBreedRawData = json.decode(
       JsonHelpers.readJson(DummyData.breedsSearchJson),
     );

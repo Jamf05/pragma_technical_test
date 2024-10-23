@@ -1,6 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/http/dio_http_client.dart';
-import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart';
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source.dart';
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source_impl.dart';
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source_mock_impl.dart';
 import 'package:pragma_technical_test/data/repositories/breed_repository_impl.dart';
 import 'package:pragma_technical_test/domain/repositories/breed_repository.dart';
 import 'package:pragma_technical_test/domain/use_cases/get_breeds_use_case.dart';
@@ -43,7 +46,10 @@ Future<void> init() async {
    */
 
   sl.registerLazySingleton<BreedRemoteDataSource>(
-      () => BreedRemoteDataSourceImpl(client: DioHttpClient()));
+    () => Env.isMock
+        ? BreedRemoteDataSourceMockImpl()
+        : BreedRemoteDataSourceImpl(client: DioHttpClient()),
+  );
 
   /**
    *  Http Client

@@ -7,12 +7,12 @@ import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/error_handling/exception.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 import 'package:pragma_technical_test/core/http/dio_http_client.dart';
-import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart';
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source_impl.dart';
 import 'package:pragma_technical_test/data/models/breed_model.dart';
 import 'package:pragma_technical_test/data/models/image_breed_model.dart';
 
-import '../../helpers/dummy_data.dart';
-import '../../helpers/json_reader.dart';
+import '../../../helpers/dummy_data.dart';
+import '../../../helpers/json_reader.dart';
 
 void main() {
   late Dio dioClient;

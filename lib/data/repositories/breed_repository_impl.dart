@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:pragma_technical_test/core/error_handling/failure.dart';
-import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart';
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source.dart';
 import 'package:pragma_technical_test/domain/entities/breed_entity.dart';
 import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/domain/repositories/breed_repository.dart';
