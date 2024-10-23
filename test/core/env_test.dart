@@ -4,7 +4,7 @@ import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 
 void main() {
   setUp(() async {
-    await Env.load(fileName: AssetsToken.env.aEnvDev);
+    await Env.load(fileName: AssetsToken.env.test.aEnv);
   });
 
   test('Try get property API_URL successful', () async {

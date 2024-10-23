@@ -32,7 +32,7 @@ class MockCacheManagerCubit extends MockCubit<BaseCacheManager>
 void main() {
   late CacheManagerCubit mockCacheManagerCubit;
   setUpAll(() async {
-    await Env.load(fileName: AssetsToken.env.aEnvDev);
+    await Env.load(fileName: AssetsToken.env.test.aEnv);
     mockCacheManagerCubit = MockCacheManagerCubit();
   });
 

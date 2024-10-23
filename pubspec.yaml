@@ -59,9 +59,12 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   http_mock_adapter: ^0.6.1
   mockito: ^5.4.4
   mocktail: ^1.0.3
+
 
 flutter_icons:
   image_path: "assets/icon.png"
@@ -77,7 +80,10 @@ flutter_icons:
 flutter:
   uses-material-design: true
   assets:
-    - .env/
+    - assets/env/dev/
+    - assets/env/mock/
+    - assets/env/prod/
+    - assets/env/test/
     - assets/fonts/
     - assets/color/
     - assets/illustrations/

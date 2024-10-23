@@ -64,7 +64,7 @@ void main() {
   const tListViewKey = Key('ptt_list_view_key');
 
   setUp(() async {
-    await Env.load(fileName: AssetsToken.env.aEnvDev);
+    await Env.load(fileName: AssetsToken.env.test.aEnv);
     tThemeCubit = ThemeCubit();
     mockCacheManagerCubit = MockCacheManagerCubit();
     cubit = LandingCubit(

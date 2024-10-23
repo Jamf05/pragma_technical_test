@@ -54,7 +54,7 @@ void main() {
   final Map<String, StreamController<ImageBreedEntity>> tImageControllers = {};
 
   setUpAll(() async {
-    await Env.load(fileName: AssetsToken.env.aEnvDev);
+    await Env.load(fileName: AssetsToken.env.test.aEnv);
     await di.init();
     tThemeCubit = ThemeCubit();
     mockLandingCubit = MockLandingCubit();

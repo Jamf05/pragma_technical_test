@@ -13,22 +13,6 @@ import 'package:flutter_svg/flutter_svg.dart' as _svg;
 import 'package:lottie/lottie.dart' as _lottie;
 import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
-class $EnvGen {
-  const $EnvGen();
-
-  /// File path: .env/.env.dev
-  String get aEnvDev => '.env/.env.dev';
-
-  /// File path: .env/.env.prod
-  String get aEnvProd => '.env/.env.prod';
-
-  /// File path: .env/.env.qa
-  String get aEnvQa => '.env/.env.qa';
-
-  /// List of all assets
-  List<String> get values => [aEnvDev, aEnvProd, aEnvQa];
-}
-
 class $AssetsAnimationsGen {
   const $AssetsAnimationsGen();
 
@@ -48,6 +32,22 @@ class $AssetsColorGen {
 
   /// List of all assets
   List<String> get values => [colors];
+}
+
+class $AssetsEnvGen {
+  const $AssetsEnvGen();
+
+  /// Directory path: assets/env/dev
+  $AssetsEnvDevGen get dev => const $AssetsEnvDevGen();
+
+  /// Directory path: assets/env/mock
+  $AssetsEnvMockGen get mock => const $AssetsEnvMockGen();
+
+  /// Directory path: assets/env/prod
+  $AssetsEnvProdGen get prod => const $AssetsEnvProdGen();
+
+  /// Directory path: assets/env/test
+  $AssetsEnvTestGen get test => const $AssetsEnvTestGen();
 }
 
 class $AssetsIconsGen {
@@ -86,12 +86,52 @@ class $AssetsIllustrationsGen {
   List<dynamic> get values => [cat, errorPage, noImage, nounSleepingCat];
 }
 
+class $AssetsEnvDevGen {
+  const $AssetsEnvDevGen();
+
+  /// File path: assets/env/dev/.env
+  String get aEnv => 'assets/env/dev/.env';
+
+  /// List of all assets
+  List<String> get values => [aEnv];
+}
+
+class $AssetsEnvMockGen {
+  const $AssetsEnvMockGen();
+
+  /// File path: assets/env/mock/.env
+  String get aEnv => 'assets/env/mock/.env';
+
+  /// List of all assets
+  List<String> get values => [aEnv];
+}
+
+class $AssetsEnvProdGen {
+  const $AssetsEnvProdGen();
+
+  /// File path: assets/env/prod/.env
+  String get aEnv => 'assets/env/prod/.env';
+
+  /// List of all assets
+  List<String> get values => [aEnv];
+}
+
+class $AssetsEnvTestGen {
+  const $AssetsEnvTestGen();
+
+  /// File path: assets/env/test/.env
+  String get aEnv => 'assets/env/test/.env';
+
+  /// List of all assets
+  List<String> get values => [aEnv];
+}
+
 class AssetsToken {
   AssetsToken._();
 
-  static const $EnvGen env = $EnvGen();
   static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
   static const $AssetsColorGen color = $AssetsColorGen();
+  static const $AssetsEnvGen env = $AssetsEnvGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsIllustrationsGen illustrations =
       $AssetsIllustrationsGen();

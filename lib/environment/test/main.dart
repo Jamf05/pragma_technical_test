@@ -10,7 +10,7 @@ import 'package:pragma_technical_test/presentation/shared/cubits/cache_manager_c
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
 
 Future<void> main() async {
-  await Env.load(fileName: AssetsToken.env.aEnvQa);
+  await Env.load(fileName: AssetsToken.env.test.aEnv);
   await di.init();
   Bloc.observer = CustomBlocObserver();
   await SystemChannels.textInput.invokeMethod('TextInput.hide');

@@ -20,7 +20,7 @@ void main() {
   late BreedRemoteDataSourceImpl dataSource;
 
   setUp(() async {
-    await Env.load(fileName: AssetsToken.env.aEnvProd);
+    await Env.load(fileName: AssetsToken.env.test.aEnv);
     dioClient = DioHttpClient();
     mockDioClient =
         DioAdapter(dio: dioClient, matcher: const UrlRequestMatcher());
