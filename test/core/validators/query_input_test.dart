@@ -8,7 +8,7 @@ void main() {
     // arrange
     const tQueryInput = QueryInput.pure();
     // act
-    final result = tQueryInput.isPure;
+    const result = tQueryInput.isPure;
     // assert
     expect(result, isA<bool>());
     expect(result, equals(true));
@@ -18,7 +18,7 @@ void main() {
     // arrange
     const tQueryInput = QueryInput.dirty(value: 'value');
     // act
-    final isPure = tQueryInput.isPure;
+    const isPure = tQueryInput.isPure;
     final result = tQueryInput.validator(tQueryInput.value);
     // assert
     expect(isPure, equals(false));
@@ -29,7 +29,7 @@ void main() {
     // arrange
     const tQueryInput = QueryInput.dirty();
     // act
-    final isPure = tQueryInput.isPure;
+    const isPure = tQueryInput.isPure;
     final result = tQueryInput.validator(tQueryInput.value);
     // assert
     expect(isPure, equals(false));
