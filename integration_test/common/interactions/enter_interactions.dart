@@ -8,4 +8,10 @@ final class EnterInteractions {
     await tester.enterText(finder, text);
     await tester.pumpAndSettle();
   }
+
+  static Future<void> tap(WidgetTester tester, Finder finder) async {
+    await tester.ensureVisible(finder);
+    await tester.tap(finder);
+    await tester.pumpAndSettle();
+  }
 }

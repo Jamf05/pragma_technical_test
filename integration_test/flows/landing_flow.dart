@@ -1,9 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import '../common/interactions/scroll_interactions.dart';
-import '../common/questions/validate_finds_one_widget.dart';
-import '../common/tasks/test.dart';
+import '../common/common.dart';
 import 'finders/cat_breeds_finders.dart';
 
 void main() {
@@ -75,6 +73,99 @@ void main() {
       await ValidateFindsOneWidget.validate(
         tester,
         CatBreedsFinders.lastBreedPage1,
+      );
+    },
+  );
+
+  testWidgets(
+    'IT_02_04: should be able to click on the first item',
+    (WidgetTester tester) async {
+      // arrange
+      await Test.initApp(tester);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // act
+      await EnterInteractions.tap(
+        tester,
+        CatBreedsFinders.textButtonFristBreedPage0,
+      );
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // assert
+      await ValidateFindsOneWidget.validate(
+        tester,
+        CatBreedsFinders.detailPage,
+      );
+    },
+  );
+
+  testWidgets(
+    'IT_02_05: should be able to type in the text field',
+    (WidgetTester tester) async {
+      // arrange
+      const tQuery = 'aegean';
+      await Test.initApp(tester);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // act
+      await EnterInteractions.textWith(
+        tester,
+        CatBreedsFinders.textField,
+        tQuery,
+      );
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // assert
+      await ValidateTextFindsOneWidget.validate(
+        tester,
+        tQuery,
+      );
+    },
+  );
+
+  testWidgets(
+    'IT_02_06: should be able to search for an item',
+    (WidgetTester tester) async {
+      // arrange
+      const tQuery = 'aegean';
+      await Test.initApp(tester);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // act
+      await EnterInteractions.textWith(
+        tester,
+        CatBreedsFinders.textField,
+        tQuery,
+      );
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // assert
+      await ValidateFindsOneWidget.validate(
+        tester,
+        CatBreedsFinders.aegeCatBreed,
+      );
+    },
+  );
+
+  testWidgets(
+    'IT_02_07: should be able to change theme',
+    (WidgetTester tester) async {
+      await Test.initApp(tester);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      await EnterInteractions.tap(
+        tester,
+        CatBreedsFinders.landingThemeButtonKey,
+      );
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      await ValidateFindsOneWidget.validate(
+        tester,
+        CatBreedsFinders.wbSunnyOutlinedIcon,
       );
     },
   );

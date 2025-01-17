@@ -1,8 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import '../common/questions/validate_finds_one_widget.dart';
-import '../common/tasks/test.dart';
+import '../common/common.dart';
 import 'finders/cat_breeds_finders.dart';
 
 void main() {

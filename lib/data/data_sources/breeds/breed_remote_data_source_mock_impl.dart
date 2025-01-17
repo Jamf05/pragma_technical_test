@@ -7,7 +7,6 @@ import 'package:pragma_technical_test/data/models/breed_model.dart';
 import 'package:pragma_technical_test/data/models/image_breed_model.dart';
 
 class BreedRemoteDataSourceMockImpl implements BreedRemoteDataSource {
-
   BreedRemoteDataSourceMockImpl();
   @override
   Future<List<BreedModel>> getBreeds(
@@ -30,7 +29,12 @@ class BreedRemoteDataSourceMockImpl implements BreedRemoteDataSource {
   Future<List<BreedModel>> search(
       {required String query, int? attachImage = 1}) async {
     try {
-      return breedsMockPage0;
+      final list = [...breedsMockPage0, ...breedsMockPage1];
+      return list
+          .where(
+            (element) => element.name.toString().toLowerCase().contains(query),
+          )
+          .toList();
     } on Error catch (error) {
       throw ErrorFailure.decode(error);
     } on Exception catch (error) {
