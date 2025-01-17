@@ -1,14 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../flows/finders/cat_breeds_finders.dart';
-
 final class ValidateExpectTheme {
-  static Future<void> validate(WidgetTester tester, {Brightness brightness = Brightness.dark}) async {
-    final context = tester.element(CatBreedsFinders.materialApp);
-    final updatedBrightness = Theme.of(context).brightness;
+  static Future<void> validate(WidgetTester tester, Finder finder,
+      {Brightness brightness = Brightness.dark}) async {
+    final state = tester.state(finder); // CatBreedsFinders.landingPage
+    final updatedBrightness = Theme.of(state.context).brightness;
     expect(updatedBrightness, brightness);
   }
 }

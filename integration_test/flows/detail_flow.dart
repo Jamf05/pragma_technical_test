@@ -40,7 +40,7 @@ void main() {
   );
 
   testWidgets(
-    'IT_03_03: should be able to return to the list of cat breeds',
+    'IT_03_03: should be able to return to landing page',
     (WidgetTester tester) async {
       await CatBreedsHelpers.goToDetailPage(tester);
 

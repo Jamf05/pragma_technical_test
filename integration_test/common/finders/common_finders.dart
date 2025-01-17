@@ -1,3 +1,1 @@
-final class CommonFinders {
-  
-}
+final class CommonFinders {}

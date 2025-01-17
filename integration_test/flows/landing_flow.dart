@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -19,7 +20,9 @@ void main() {
 
       // assert
       await ValidateFindsOneWidget.validate(
-          tester, CatBreedsFinders.landingPage);
+        tester,
+        CatBreedsFinders.landingPage,
+      );
     },
   );
 
@@ -46,7 +49,7 @@ void main() {
   );
 
   testWidgets(
-    'IT_02_03: should show the following page',
+    'IT_02_03: should show the next page',
     (WidgetTester tester) async {
       // arrange
       await Test.initApp(tester);
@@ -151,7 +154,7 @@ void main() {
   );
 
   testWidgets(
-    'IT_02_07: should be able to change theme',
+    'IT_02_07: should be able to change the theme to dark',
     (WidgetTester tester) async {
       await Test.initApp(tester);
       await tester.pumpAndSettle(const Duration(seconds: 2));
@@ -166,6 +169,43 @@ void main() {
       await ValidateFindsOneWidget.validate(
         tester,
         CatBreedsFinders.wbSunnyOutlinedIcon,
+      );
+
+      await ValidateExpectTheme.validate(
+        tester,
+        CatBreedsFinders.landingPage,
+        brightness: Brightness.dark,
+      );
+    },
+  );
+
+  testWidgets(
+    'IT_02_08: should be able to change the theme to light',
+    (WidgetTester tester) async {
+      await Test.initApp(tester);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      await EnterInteractions.tap(
+        tester,
+        CatBreedsFinders.landingThemeButtonKey,
+      );
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      await EnterInteractions.tap(
+        tester,
+        CatBreedsFinders.landingThemeButtonKey,
+      );
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      await ValidateFindsOneWidget.validate(
+        tester,
+        CatBreedsFinders.nightlightRoundIcon,
+      );
+
+      await ValidateExpectTheme.validate(
+        tester,
+        CatBreedsFinders.landingPage,
+        brightness: Brightness.light,
       );
     },
   );
