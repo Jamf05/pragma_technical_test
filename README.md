@@ -16,7 +16,6 @@ To download this app, click here to see the [codemagic builds](https://codemagic
 - Version summary:
 
     ```plain
-    Flutter (Channel stable, 3.22.3, on macOS 14.6.1 23G93 darwin-arm64, locale es-CO)
     • Flutter version 3.22.3 on channel stable at /Users/jamf-mac/fvm/versions/3.22.3
     • Upstream repository https://github.com/flutter/flutter.git
     • Framework revision b0850beeb2 (6 months ago), 2024-07-16 21:43:41 -0700
