@@ -13,8 +13,10 @@ class CustomOverlays {
     required String title,
     required String message,
     required Icon icon,
+    Key? key,
   }) async {
     await Flushbar(
+      key: key,
       margin: const EdgeInsets.all(8),
       borderRadius: BorderRadius.circular(8),
       title: title,

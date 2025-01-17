@@ -6,13 +6,25 @@
   "configurations": [
     {
       "name": "PROD",
-      "program": "lib/main_prod.dart",
+      "program": "lib/environment/prod/main.dart",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "TEST",
+      "program": "lib/environment/test/main.dart",
       "request": "launch",
       "type": "dart"
     },
     {
       "name": "DEV",
-      "program": "lib/main_dev.dart",
+      "program": "lib/environment/dev/main.dart",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "MOCK",
+      "program": "lib/environment/mock/main.dart",
       "request": "launch",
       "type": "dart"
     }

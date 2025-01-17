@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:pragma_technical_test/data/data_sources/breed_remote_data_source.dart'
+import 'package:pragma_technical_test/data/data_sources/breeds/breed_remote_data_source.dart'
     as _i3;
 import 'package:pragma_technical_test/data/models/breed_model.dart' as _i5;
 import 'package:pragma_technical_test/data/models/image_breed_model.dart'

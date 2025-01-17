@@ -28,8 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   another_flushbar: ^1.12.30
   bloc: ^8.1.4
   cached_network_image: ^3.3.1
@@ -40,6 +38,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
+  flutter_cache_manager: ^3.4.1
   flutter_dotenv: ^5.1.0
   flutter_localizations:
     sdk: flutter
@@ -48,17 +47,12 @@ dependencies:
   get_it: ^7.7.0
   intl: ^0.19.0
   lottie: ^3.1.2
-  package_info_plus: ^8.0.0
   rxdart: ^0.27.7
 
 dev_dependencies:
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   bloc_test: ^9.1.7
   build_runner: ^2.4.11
+  file: ^7.0.0
   flutter_gen: ^5.5.0+1
   flutter_gen_runner: ^5.5.0+1
   flutter_launcher_icons: ^0.13.1
@@ -66,8 +60,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   http_mock_adapter: ^0.6.1
+  integration_test:
+    sdk: flutter
   mockito: ^5.4.4
   mocktail: ^1.0.3
+
 
 flutter_icons:
   image_path: "assets/icon.png"
@@ -79,38 +76,40 @@ flutter_icons:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
   assets:
-    - .env/
+    - assets/env/dev/
+    - assets/env/mock/
+    - assets/env/prod/
+    - assets/env/test/
     - assets/fonts/
     - assets/color/
     - assets/illustrations/
     - assets/animations/
     - assets/icons/
   fonts:
-  - family: Poppins
-    fonts:
-      - asset: assets/fonts/poppins/Poppins-BlackItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-Black.ttf
-      - asset: assets/fonts/poppins/Poppins-BoldItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-Bold.ttf
-      - asset: assets/fonts/poppins/Poppins-ExtraBoldItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
-      - asset: assets/fonts/poppins/Poppins-ExtraLightItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-ExtraLight.ttf
-      - asset: assets/fonts/poppins/Poppins-Italic.ttf
-      - asset: assets/fonts/poppins/Poppins-LightItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-Light.ttf
-      - asset: assets/fonts/poppins/Poppins-MediumItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-Medium.ttf
-      - asset: assets/fonts/poppins/Poppins-Regular.ttf
-      - asset: assets/fonts/poppins/Poppins-SemiBoldItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
-      - asset: assets/fonts/poppins/Poppins-ThinItalic.ttf
-      - asset: assets/fonts/poppins/Poppins-Thin.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-BlackItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-Black.ttf
+        - asset: assets/fonts/poppins/Poppins-BoldItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraBoldItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraLightItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/poppins/Poppins-Italic.ttf
+        - asset: assets/fonts/poppins/Poppins-LightItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-Light.ttf
+        - asset: assets/fonts/poppins/Poppins-MediumItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-SemiBoldItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+        - asset: assets/fonts/poppins/Poppins-ThinItalic.ttf
+        - asset: assets/fonts/poppins/Poppins-Thin.ttf
 
 flutter_gen:
   output: lib/core/gen/

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pragma_technical_test/presentation/android/design/design.dart';
+import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 
 class ErrorInNetworkImageWidget extends StatelessWidget {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pragma_technical_test/presentation/android/design/design.dart';
-import 'package:pragma_technical_test/presentation/android/extensions/build_context.dart';
+import 'package:pragma_technical_test/presentation/design/design.dart';
+import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
+import 'package:pragma_technical_test/presentation/pages/landing/landing_page.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
 
 class SplashPage extends StatefulWidget {
@@ -19,11 +20,17 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
   }
 
+  Future<void> listener(BuildContext context, SplashState state) async {
+    if (state is SplashLoaded) {
+      await context.navigator.pushReplacementNamed(LandingPage.route);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SplashCubit, SplashState>(
       listener: (BuildContext context, SplashState state) async =>
-          context.read<SplashCubit>().listener(context, state),
+          listener(context, state),
       child: Scaffold(
         body: Row(
           children: <Widget>[
@@ -35,11 +42,13 @@ class _SplashPageState extends State<SplashPage> {
                 children: <Widget>[
                   const Spacer(),
                   Text(
+                    key: const Key('ptt_splash_catbreeds_key'),
                     context.l10n.catbreeds,
                     style: FontsFoundation.of(context.brightness).title.h1B36,
                   ),
                   const Spacer(),
                   AssetsToken.illustrations.cat.svg(
+                    key: const Key('ptt_splash_cat_illustration_key'),
                     width: 200,
                     height: 200,
                   ),
