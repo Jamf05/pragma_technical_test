@@ -16,10 +16,13 @@ To download this app, click here to see the [codemagic builds](https://codemagic
 - Version summary:
 
     ```plain
-    Flutter 3.22.1 • channel stable • https://github.com/flutter/flutter.git
-    Framework • revision a14f74ff3a (hace 3 semanas) • 2024-05-22 11:08:21 -0500
-    Engine • revision 55eae6864b
-    Tools • Dart 3.4.1 • DevTools 2.34.3
+    Flutter (Channel stable, 3.22.3, on macOS 14.6.1 23G93 darwin-arm64, locale es-CO)
+    • Flutter version 3.22.3 on channel stable at /Users/jamf-mac/fvm/versions/3.22.3
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision b0850beeb2 (6 months ago), 2024-07-16 21:43:41 -0700
+    • Engine revision 235db911ba
+    • Dart version 3.4.4
+    • DevTools version 2.34.3
     ```
 
 ## Project Structure
