@@ -14,8 +14,10 @@ class BreedRemoteDataSourceMockImpl implements BreedRemoteDataSource {
       {required int page, int? limit = 10}) async {
     try {
       if (page == 0) {
-        return breedsMock;
-      } 
+        return breedsMockPage0;
+      } else if (page == 1) {
+        return breedsMockPage1;
+      }
       return [];
     } on Error catch (error) {
       throw ErrorFailure.decode(error);
@@ -28,7 +30,7 @@ class BreedRemoteDataSourceMockImpl implements BreedRemoteDataSource {
   Future<List<BreedModel>> search(
       {required String query, int? attachImage = 1}) async {
     try {
-      return breedsMock;
+      return breedsMockPage0;
     } on Error catch (error) {
       throw ErrorFailure.decode(error);
     } on Exception catch (error) {

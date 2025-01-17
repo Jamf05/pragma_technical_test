@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import '../common/questions/validate_finds_one_widget.dart';
 import '../common/tasks/test.dart';
 import 'finders/cat_breeds_finders.dart';
 
@@ -10,11 +11,14 @@ void main() {
 
   setUp(() {});
 
-  testWidgets('IT_01_01: should go to the splash page', (WidgetTester tester) async {
-    // arrange
-    await Test.initApp(tester);
+  testWidgets(
+    'IT_01_01: should go to the splash page',
+    (WidgetTester tester) async {
+      // arrange
+      await Test.initApp(tester);
 
-    // assert
-    expect(CatBreedsFinders.splashPage, findsOneWidget);
-  });
+      // assert
+      await ValidateFindsOneWidget.validate(tester, CatBreedsFinders.splashPage);
+    },
+  );
 }
