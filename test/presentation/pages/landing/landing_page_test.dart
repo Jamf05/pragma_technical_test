@@ -8,6 +8,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 
@@ -426,7 +427,11 @@ class _BuildMaterialApp extends StatelessWidget {
             Locale('es'),
             Locale('en'),
           ],
-          home: const LandingPage(),
+          home: LandingPage(
+              a11YLandingPage: AccessibilityLocalizations.of(context)!
+                  .getJsonTranslate()
+                  .a11YLandingPage,
+          ),
           theme: state,
         );
       },

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
@@ -162,6 +163,9 @@ class _BuildMaterialApp extends StatelessWidget {
             CatBreedCard(
               breed: breed,
               imageUrl: imageUrl,
+              a11YLandingPage: AccessibilityLocalizations.of(context)!
+                  .getJsonTranslate()
+                  .a11YLandingPage,
             ),
           ],
         ),
@@ -171,6 +175,9 @@ class _BuildMaterialApp extends StatelessWidget {
         DetailPage.route: (BuildContext context) => DetailPage(
               breed: breed,
               imageUrl: imageUrl,
+              a11YDetailPage: AccessibilityLocalizations.of(context)!
+                  .getJsonTranslate()
+                  .a11YDetailPage,
             ),
       },
     );

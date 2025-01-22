@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pragma_technical_test/core/accessibility/accessibility_delegate.dart';
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
 import 'package:pragma_technical_test/presentation/routes/app_routes.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
@@ -21,6 +22,7 @@ class _AppState extends State<App> {
         return MaterialApp(
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             AppLocalizations.delegate,
+            AccessibilityDelegate.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,

@@ -12,6 +12,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/error_handling/exception.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
@@ -330,7 +331,7 @@ void main() {
 
     when(mockGetBreedsUseCase.call(0, 10))
         .thenAnswer((_) async => Right(tBreedList));
-    
+
     when(mockGetBreedsUseCase.call(1, 10))
         .thenAnswer((_) async => const Right([]));
 
@@ -427,7 +428,11 @@ class _BuildMaterialApp extends StatelessWidget {
             Locale('es'),
             Locale('en'),
           ],
-          home: const LandingPage(),
+          home: LandingPage(
+            a11YLandingPage: AccessibilityLocalizations.of(context)!
+                .getJsonTranslate()
+                .a11YLandingPage,
+          ),
           theme: state,
         );
       },

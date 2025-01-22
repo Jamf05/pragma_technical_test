@@ -5,6 +5,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
@@ -151,7 +152,11 @@ class _BuildMaterialApp extends StatelessWidget {
       ],
       home: const SplashPage(),
       routes: <String, WidgetBuilder>{
-        LandingPage.route: (BuildContext context) => const LandingPage(),
+        LandingPage.route: (BuildContext context) => LandingPage(
+              a11YLandingPage: AccessibilityLocalizations.of(context)!
+                  .getJsonTranslate()
+                  .a11YLandingPage,
+            ),
       },
       theme: ThemeFoundation.light,
     );
