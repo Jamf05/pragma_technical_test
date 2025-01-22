@@ -10,115 +10,115 @@
 
 <body>
 
-  <table width="100%" border=0 cellspacing=0 cellpadding=0>
-    <tr><td class="title">LCOV - code coverage report</td></tr>
-    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
 
-    <tr>
-      <td width="100%">
-        <table cellpadding=1 border=0 width="100%">
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">lib/core/error_handling</a> - exception.dart<span style="font-size: 80%;"> (source / <a href="exception.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="10%" class="headerValue"><a href="../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory lib/core/error_handling">lib/core/error_handling</a> - exception.dart</td>
             <td width="5%"></td>
-            <td width="15%"></td>
-            <td width="10%" class="headerCovTableHead">Hit</td>
-            <td width="10%" class="headerCovTableHead">Total</td>
-            <td width="15%" class="headerCovTableHead">Coverage</td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">15</td>
             <td class="headerCovTableEntry">15</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
-            <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-10-22 22:32:45</td>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-01-22 18:47:56</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
           </tr>
-          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
-        </table>
-      </td>
-    </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
 
-    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
-  </table>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
 
-  <table cellpadding=0 cellspacing=0 border=0>
-    <tr>
-      <td><br></td>
-    </tr>
-    <tr>
-      <td>
-<pre class="sourceHeading">          Line data    Source code</pre>
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>            : import 'dart:developer';</a>
-<a name="2"><span class="lineNum">       2 </span>            : import 'package:dio/dio.dart';</a>
-<a name="3"><span class="lineNum">       3 </span>            : </a>
-<a name="4"><span class="lineNum">       4 </span>            : import 'package:pragma_technical_test/core/error_handling/failure.dart';</a>
-<a name="5"><span class="lineNum">       5 </span>            : </a>
-<a name="6"><span class="lineNum">       6 </span>            : class ExceptionFailure extends Failure {</a>
-<a name="7"><span class="lineNum">       7 </span>            :   final Exception? error;</a>
-<a name="8"><span class="lineNum">       8 </span>            :   @override</a>
-<a name="9"><span class="lineNum">       9 </span>            :   final String message;</a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          2 :   ExceptionFailure._({</span></a>
-<a name="11"><span class="lineNum">      11 </span>            :     required this.message, this.error,</a>
-<a name="12"><span class="lineNum">      12 </span>            :   });</a>
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          2 :   factory ExceptionFailure.decode(Exception? error) {</span></a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          4 :     log(error.toString(), name: 'FAILURE[EXCEPTION]');</span></a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          2 :     return ExceptionFailure._(</span></a>
-<a name="16"><span class="lineNum">      16 </span>            :       error: error,</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          2 :       message: error.toString(),</span></a>
-<a name="18"><span class="lineNum">      18 </span>            :     );</a>
-<a name="19"><span class="lineNum">      19 </span>            :   }</a>
-<a name="20"><span class="lineNum">      20 </span>            : }</a>
-<a name="21"><span class="lineNum">      21 </span>            : </a>
-<a name="22"><span class="lineNum">      22 </span>            : class DioFailure extends Failure {</a>
-<a name="23"><span class="lineNum">      23 </span>            :   final int? statusCode;</a>
-<a name="24"><span class="lineNum">      24 </span>            :   final Map&lt;String, dynamic&gt;? data;</a>
-<a name="25"><span class="lineNum">      25 </span>            :   final DioException? error;</a>
-<a name="26"><span class="lineNum">      26 </span>            :   @override</a>
-<a name="27"><span class="lineNum">      27 </span>            :   final String message;</a>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          5 :   DioFailure._({</span></a>
-<a name="29"><span class="lineNum">      29 </span>            :     required this.message, this.statusCode,</a>
-<a name="30"><span class="lineNum">      30 </span>            :     this.data,</a>
-<a name="31"><span class="lineNum">      31 </span>            :     this.error,</a>
-<a name="32"><span class="lineNum">      32 </span>            :   });</a>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">          5 :   factory DioFailure.decode(</span></a>
-<a name="34"><span class="lineNum">      34 </span>            :     DioException? error,</a>
-<a name="35"><span class="lineNum">      35 </span>            :   ) {</a>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">         10 :     log(error.toString(), name: 'FAILURE[DIO]');</span></a>
-<a name="37"><span class="lineNum">      37 </span><span class="lineCov">         15 :     log((error?.response?.statusCode).toString(),</span></a>
-<a name="38"><span class="lineNum">      38 </span>            :         name: 'FAILURE[DIO][STATUSCODE]');</a>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">         15 :     log((error?.message).toString(), name: 'FAILURE[DIO][MESSAGE]');</span></a>
-<a name="40"><span class="lineNum">      40 </span><span class="lineCov">         15 :     log((error?.response?.data).toString(), name: 'FAILURE[DIO][DATA]');</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">          5 :     return DioFailure._(</span></a>
-<a name="42"><span class="lineNum">      42 </span>            :       error: error,</a>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">          5 :       statusCode: error?.response?.statusCode,</span></a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          5 :       message: error?.message ?? '',</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          5 :       data: error?.response?.data,</span></a>
-<a name="46"><span class="lineNum">      46 </span>            :     );</a>
-<a name="47"><span class="lineNum">      47 </span>            :   }</a>
-<a name="48"><span class="lineNum">      48 </span>            : }</a>
-</pre>
-      </td>
-    </tr>
-  </table>
-  <br>
+<span id="L1"><span class="lineNum">       1</span>              : import 'dart:developer';</span>
+<span id="L2"><span class="lineNum">       2</span>              : import 'package:dio/dio.dart';</span>
+<span id="L3"><span class="lineNum">       3</span>              : </span>
+<span id="L4"><span class="lineNum">       4</span>              : import 'package:pragma_technical_test/core/error_handling/failure.dart';</span>
+<span id="L5"><span class="lineNum">       5</span>              : </span>
+<span id="L6"><span class="lineNum">       6</span>              : class ExceptionFailure extends Failure {</span>
+<span id="L7"><span class="lineNum">       7</span>              :   final Exception? error;</span>
+<span id="L8"><span class="lineNum">       8</span>              :   @override</span>
+<span id="L9"><span class="lineNum">       9</span>              :   final String message;</span>
+<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">           2 :   ExceptionFailure._({</span></span>
+<span id="L11"><span class="lineNum">      11</span>              :     required this.message, this.error,</span>
+<span id="L12"><span class="lineNum">      12</span>              :   });</span>
+<span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC">           2 :   factory ExceptionFailure.decode(Exception? error) {</span></span>
+<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">           4 :     log(error.toString(), name: 'FAILURE[EXCEPTION]');</span></span>
+<span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">           2 :     return ExceptionFailure._(</span></span>
+<span id="L16"><span class="lineNum">      16</span>              :       error: error,</span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           2 :       message: error.toString(),</span></span>
+<span id="L18"><span class="lineNum">      18</span>              :     );</span>
+<span id="L19"><span class="lineNum">      19</span>              :   }</span>
+<span id="L20"><span class="lineNum">      20</span>              : }</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              : class DioFailure extends Failure {</span>
+<span id="L23"><span class="lineNum">      23</span>              :   final int? statusCode;</span>
+<span id="L24"><span class="lineNum">      24</span>              :   final Map&lt;String, dynamic&gt;? data;</span>
+<span id="L25"><span class="lineNum">      25</span>              :   final DioException? error;</span>
+<span id="L26"><span class="lineNum">      26</span>              :   @override</span>
+<span id="L27"><span class="lineNum">      27</span>              :   final String message;</span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           5 :   DioFailure._({</span></span>
+<span id="L29"><span class="lineNum">      29</span>              :     required this.message, this.statusCode,</span>
+<span id="L30"><span class="lineNum">      30</span>              :     this.data,</span>
+<span id="L31"><span class="lineNum">      31</span>              :     this.error,</span>
+<span id="L32"><span class="lineNum">      32</span>              :   });</span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           5 :   factory DioFailure.decode(</span></span>
+<span id="L34"><span class="lineNum">      34</span>              :     DioException? error,</span>
+<span id="L35"><span class="lineNum">      35</span>              :   ) {</span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">          10 :     log(error.toString(), name: 'FAILURE[DIO]');</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">          15 :     log((error?.response?.statusCode).toString(),</span></span>
+<span id="L38"><span class="lineNum">      38</span>              :         name: 'FAILURE[DIO][STATUSCODE]');</span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">          15 :     log((error?.message).toString(), name: 'FAILURE[DIO][MESSAGE]');</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">          15 :     log((error?.response?.data).toString(), name: 'FAILURE[DIO][DATA]');</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           5 :     return DioFailure._(</span></span>
+<span id="L42"><span class="lineNum">      42</span>              :       error: error,</span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           5 :       statusCode: error?.response?.statusCode,</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           5 :       message: error?.message ?? '',</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           5 :       data: error?.response?.data,</span></span>
+<span id="L46"><span class="lineNum">      46</span>              :     );</span>
+<span id="L47"><span class="lineNum">      47</span>              :   }</span>
+<span id="L48"><span class="lineNum">      48</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
 
-  <table width="100%" border=0 cellspacing=0 cellpadding=0>
-    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14</a></td></tr>
-  </table>
-  <br>
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.3-1</a></td></tr>
+          </table>
+          <br>
 
 </body>
 </html>
