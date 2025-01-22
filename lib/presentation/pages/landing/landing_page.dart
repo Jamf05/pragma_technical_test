@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 import 'package:pragma_technical_test/presentation/design/design.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
@@ -95,7 +93,7 @@ class _LandingPageState extends State<LandingPage> {
         builder: (BuildContext context, LandingState state) {
           return Stack(
             children: [
-              const _Body(),
+              _Body(widget.a11YLandingPage),
               if (state is LandingInitialLoading)
                 const Positioned.fill(
                   bottom: 10.0,
@@ -115,7 +113,8 @@ class _LandingPageState extends State<LandingPage> {
 }
 
 class _Body extends StatelessWidget {
-  const _Body();
+  final A11YLandingPage a11YLandingPage;
+  const _Body(this.a11YLandingPage);
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +173,7 @@ class _Body extends StatelessWidget {
                           return CatBreedCard(
                             key:
                                 Key('ptt_item_cat_breed_card_${breed.id!}_key'),
-                            a11YLandingPage:
-                                AccessibilityLocalizations.of(context)!
-                                    .getJsonTranslate()
-                                    .a11YLandingPage,
+                            a11YLandingPage: a11YLandingPage,
                             breed: breed,
                             imageUrl: snapshot.hasData
                                 ? snapshot.data?.url

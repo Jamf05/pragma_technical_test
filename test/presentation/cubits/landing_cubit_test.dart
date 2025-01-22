@@ -12,7 +12,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 import 'package:pragma_technical_test/core/env.dart';
 import 'package:pragma_technical_test/core/error_handling/exception.dart';
 import 'package:pragma_technical_test/core/gen/assets.gen.dart';
@@ -33,6 +32,7 @@ import 'package:rxdart/rxdart.dart';
 
 import '../../helpers/dummy_data.dart';
 import '../../helpers/json_reader.dart';
+import '../../mocks/accessibility_data_mock.dart';
 import '../../mocks/mock_cache_manager.dart';
 import 'landing_cubit_test.mocks.dart';
 
@@ -345,6 +345,7 @@ void main() {
 
     // act
     await tester.pumpWidget(tApp);
+    
     for (int i = 0; i < 5; i++) {
       await tester.pump(const Duration(seconds: 1));
     }
@@ -429,9 +430,7 @@ class _BuildMaterialApp extends StatelessWidget {
             Locale('en'),
           ],
           home: LandingPage(
-            a11YLandingPage: AccessibilityLocalizations.of(context)!
-                .getJsonTranslate()
-                .a11YLandingPage,
+            a11YLandingPage: AccessibilityDataMock.a11YLandingPageMock,
           ),
           theme: state,
         );
