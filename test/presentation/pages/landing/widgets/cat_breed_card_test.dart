@@ -19,6 +19,7 @@ import 'package:pragma_technical_test/presentation/shared/cubits/cache_manager_c
 
 import '../../../../helpers/dummy_data.dart';
 import '../../../../helpers/json_reader.dart';
+import '../../../../mocks/accessibility_data_mock.dart';
 import '../../../../mocks/mock_cache_manager.dart';
 
 class MockCacheManagerCubit extends MockCubit<BaseCacheManager>
@@ -162,6 +163,7 @@ class _BuildMaterialApp extends StatelessWidget {
             CatBreedCard(
               breed: breed,
               imageUrl: imageUrl,
+              a11YLandingPage: AccessibilityDataMock.a11YLandingPageMock,
             ),
           ],
         ),
@@ -171,6 +173,7 @@ class _BuildMaterialApp extends StatelessWidget {
         DetailPage.route: (BuildContext context) => DetailPage(
               breed: breed,
               imageUrl: imageUrl,
+              a11YDetailPage: AccessibilityDataMock.a11YDetailPageMock,
             ),
       },
     );

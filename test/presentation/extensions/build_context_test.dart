@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pragma_technical_test/core/accessibility/accessibility_localizations.dart';
 import 'package:pragma_technical_test/core/localization/app_localizations.dart';
 import 'package:pragma_technical_test/core/utils/custom_overlays.dart';
 import 'package:pragma_technical_test/presentation/extensions/build_context.dart';
@@ -13,6 +14,8 @@ void main() {
     const app = _BuildMaterialApp();
     // act
     await tester.pumpWidget(app);
+    await tester.pumpAndSettle();
+    
     final context = navigatorKey.currentContext!;
     // assert
     expect(context.mediaQuerySize, isA<Size>());
@@ -35,6 +38,7 @@ class _BuildMaterialApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
         AppLocalizations.delegate,
+        AccessibilityLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

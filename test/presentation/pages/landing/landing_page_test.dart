@@ -24,6 +24,7 @@ import 'package:pragma_technical_test/dependency_injection.dart' as di;
 
 import '../../../helpers/dummy_data.dart';
 import '../../../helpers/json_reader.dart';
+import '../../../mocks/accessibility_data_mock.dart';
 import '../../../mocks/mock_cache_manager.dart';
 
 class MockLandingCubit extends MockCubit<LandingState>
@@ -426,7 +427,9 @@ class _BuildMaterialApp extends StatelessWidget {
             Locale('es'),
             Locale('en'),
           ],
-          home: const LandingPage(),
+          home: LandingPage(
+            a11YLandingPage: AccessibilityDataMock.a11YLandingPageMock,
+          ),
           theme: state,
         );
       },

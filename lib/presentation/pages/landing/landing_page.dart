@@ -9,9 +9,12 @@ import 'package:pragma_technical_test/domain/entities/image_breed_entity.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/landing_cubit.dart';
 import 'package:pragma_technical_test/presentation/pages/landing/widgets/cat_breed_card.dart';
 import 'package:pragma_technical_test/presentation/shared/cubits/theme_cubit/theme_cubit.dart';
+import 'package:pragma_technical_test/presentation/shared/models/a_11_y_landing_page.dart';
 
 class LandingPage extends StatefulWidget {
+  final A11YLandingPage a11YLandingPage;
   const LandingPage({
+    required this.a11YLandingPage,
     super.key,
   });
 
@@ -49,23 +52,25 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   List<Widget> get actions => [
-        IconButton(
-            key: const Key('ptt_landing_theme_button_key'),
-            onPressed: () {
-              context.read<ThemeCubit>().setTheme(
-                    context.isBrightnessDark
-                        ? ThemeFoundation.light
-                        : ThemeFoundation.dark,
-                  );
-            },
-            icon: Icon(
-              context.isBrightnessDark
-                  ? Icons.wb_sunny_outlined
-                  : Icons.nightlight_round,
-              color: context.isBrightnessDark
-                  ? ColorsFoundation.background.white
-                  : ColorsFoundation.background.black,
-            ))
+        ExcludeSemantics(
+          child: IconButton(
+              key: const Key('ptt_landing_theme_button_key'),
+              onPressed: () {
+                context.read<ThemeCubit>().setTheme(
+                      context.isBrightnessDark
+                          ? ThemeFoundation.light
+                          : ThemeFoundation.dark,
+                    );
+              },
+              icon: Icon(
+                context.isBrightnessDark
+                    ? Icons.wb_sunny_outlined
+                    : Icons.nightlight_round,
+                color: context.isBrightnessDark
+                    ? ColorsFoundation.background.white
+                    : ColorsFoundation.background.black,
+              )),
+        )
       ];
 
   @override
@@ -73,7 +78,10 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       appBar: AppBar(
         key: const Key('ptt_landing_app_bar_key'),
-        title: Text(context.l10n.catbreeds),
+        title: Text(
+          context.l10n.catbreeds,
+          semanticsLabel: widget.a11YLandingPage.catbreeds,
+        ),
         actions: actions,
       ),
       body: BlocConsumer<LandingCubit, LandingState>(
@@ -85,7 +93,7 @@ class _LandingPageState extends State<LandingPage> {
         builder: (BuildContext context, LandingState state) {
           return Stack(
             children: [
-              const _Body(),
+              _Body(widget.a11YLandingPage),
               if (state is LandingInitialLoading)
                 const Positioned.fill(
                   bottom: 10.0,
@@ -105,7 +113,8 @@ class _LandingPageState extends State<LandingPage> {
 }
 
 class _Body extends StatelessWidget {
-  const _Body();
+  final A11YLandingPage a11YLandingPage;
+  const _Body(this.a11YLandingPage);
 
   @override
   Widget build(BuildContext context) {
@@ -117,20 +126,22 @@ class _Body extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          TextField(
-            controller: bloc.queryController,
-            onTapOutside: (_) => context.focus.unfocus(),
-            onChanged: (String value) => bloc.setQuery(value.trim()),
-            decoration: InputDecoration(
-              suffixIcon: IconButton(
-                key: const Key('ptt_search_button_key'),
-                onPressed: () async {
-                  context.focus.unfocus();
-                  await bloc.onSearch();
-                },
-                icon: AssetsToken.icons.search.svg(
-                  colorFilter: ColorFilter.mode(
-                      ColorsFoundation.text.grey, BlendMode.srcIn),
+          ExcludeSemantics(
+            child: TextField(
+              controller: bloc.queryController,
+              onTapOutside: (_) => context.focus.unfocus(),
+              onChanged: (String value) => bloc.setQuery(value.trim()),
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  key: const Key('ptt_search_button_key'),
+                  onPressed: () async {
+                    context.focus.unfocus();
+                    await bloc.onSearch();
+                  },
+                  icon: AssetsToken.icons.search.svg(
+                    colorFilter: ColorFilter.mode(
+                        ColorsFoundation.text.grey, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ),
@@ -162,6 +173,7 @@ class _Body extends StatelessWidget {
                           return CatBreedCard(
                             key:
                                 Key('ptt_item_cat_breed_card_${breed.id!}_key'),
+                            a11YLandingPage: a11YLandingPage,
                             breed: breed,
                             imageUrl: snapshot.hasData
                                 ? snapshot.data?.url

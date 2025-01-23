@@ -32,6 +32,7 @@ import 'package:rxdart/rxdart.dart';
 
 import '../../helpers/dummy_data.dart';
 import '../../helpers/json_reader.dart';
+import '../../mocks/accessibility_data_mock.dart';
 import '../../mocks/mock_cache_manager.dart';
 import 'landing_cubit_test.mocks.dart';
 
@@ -330,7 +331,7 @@ void main() {
 
     when(mockGetBreedsUseCase.call(0, 10))
         .thenAnswer((_) async => Right(tBreedList));
-    
+
     when(mockGetBreedsUseCase.call(1, 10))
         .thenAnswer((_) async => const Right([]));
 
@@ -344,6 +345,7 @@ void main() {
 
     // act
     await tester.pumpWidget(tApp);
+    
     for (int i = 0; i < 5; i++) {
       await tester.pump(const Duration(seconds: 1));
     }
@@ -427,7 +429,9 @@ class _BuildMaterialApp extends StatelessWidget {
             Locale('es'),
             Locale('en'),
           ],
-          home: const LandingPage(),
+          home: LandingPage(
+            a11YLandingPage: AccessibilityDataMock.a11YLandingPageMock,
+          ),
           theme: state,
         );
       },

@@ -1,0 +1,28 @@
+{
+  "landing-page": {
+    "catbreeds": "Catbreeds, titulo",
+    "breed-name": "Raza {{0}}",
+    "more-button": "Ver más detalles, botón",
+    "breed-origin": "Originario de {{0}}",
+    "breed-temperament": "De temperamento {{0}}"
+  },
+  "detail-page": {
+    "catbreeds": "Catbreeds, titulo",
+    "breed-origin": "Originario de {{0}}",
+    "breed-intelligence": "Nivel de inteligencia, {{0}} de {{1}}",
+    "breed-adaptability": "Adaptabilidad {{0}} de {{1}}",
+    "breed-temperament": "De temperamento {{0}}",
+    "breed-life-span": "Esperanza de vida de {{0}} a {{1}} años",
+    "breed-affection-level": "Nivel de afecto {{0}} de {{1}}",
+    "breed-child-friendly": "Nivel de amigable con los niños {{0}} de {{1}}",
+    "breed-dog-friendly": "Nivel de se admiten perros {{0}} de {{1}}",
+    "breed-energy-level": "Nivel de energía {{0}} de {{1}}",
+    "breed-grooming": "Nivel de aseo {{0}} de {{1}}",
+    "breed-health-issues": "Nivel de problemas de salud {{0}} de {{1}}",
+    "breed-shedding-level": "Nivel de derramamiento {{0}} de {{1}}",
+    "breed-social-needs": "Nivel de necesidades sociales {{0}} de {{1}}",
+    "breed-stranger-friendly": "Nivel de amigable con los extraños {{0}} de {{1}}",
+    "breed-vocalisation": "Nivel de vocalización {{0}} de {{1}}",
+    "breed-description": "Descripción, {{0}}"
+  }
+}

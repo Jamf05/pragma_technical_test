@@ -14,6 +14,7 @@ import 'package:pragma_technical_test/presentation/shared/cubits/landing_cubit/l
 import 'package:pragma_technical_test/presentation/shared/cubits/splash_cubit/splash_cubit.dart';
 import 'package:pragma_technical_test/presentation/shared/page/splash_page.dart';
 
+import '../../../mocks/accessibility_data_mock.dart';
 import '../../../mocks/mock_cache_manager.dart';
 
 class MockSplashCubit extends MockCubit<SplashState> implements SplashCubit {}
@@ -151,7 +152,9 @@ class _BuildMaterialApp extends StatelessWidget {
       ],
       home: const SplashPage(),
       routes: <String, WidgetBuilder>{
-        LandingPage.route: (BuildContext context) => const LandingPage(),
+        LandingPage.route: (BuildContext context) => LandingPage(
+              a11YLandingPage: AccessibilityDataMock.a11YLandingPageMock,
+            ),
       },
       theme: ThemeFoundation.light,
     );
