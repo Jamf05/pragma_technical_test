@@ -1,4 +1,6 @@
-final class A11YDetailPage {
+import 'package:equatable/equatable.dart';
+
+final class A11YDetailPage extends Equatable {
   final String catbreeds;
   final String breedOrigin;
   final String breedIntelligence;
@@ -17,7 +19,7 @@ final class A11YDetailPage {
   final String breedVocalisation;
   final String breedDescription;
 
-  A11YDetailPage({
+  const A11YDetailPage({
     required this.catbreeds,
     required this.breedOrigin,
     required this.breedIntelligence,
@@ -56,4 +58,25 @@ final class A11YDetailPage {
         breedVocalisation: json['breed-vocalisation'],
         breedDescription: json['breed-description'],
       );
+
+  @override
+  List<Object?> get props => [
+        catbreeds,
+        breedOrigin,
+        breedIntelligence,
+        breedAdaptability,
+        breedTemperament,
+        breedLifeSpan,
+        breedAffectionLevel,
+        breedChildFriendly,
+        breedDogFriendly,
+        breedEnergyLevel,
+        breedGrooming,
+        breedHealthIssues,
+        breedSheddingLevel,
+        breedSocialNeeds,
+        breedStrangerFriendly,
+        breedVocalisation,
+        breedDescription,
+      ];
 }
